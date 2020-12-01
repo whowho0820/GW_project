@@ -1,0 +1,528 @@
+@charset "UTF-8";
+
+/* topMenu */
+#topMenu {
+	width: 1200px;
+	margin: 10px auto;
+}
+
+.logoWrap {
+	width: 400px;
+	float: left;
+}
+
+.logoWrap img {
+	width: 100%;
+}
+
+.rankWrap {
+	float: left;
+	margin-top: 10px;
+	position: relative;
+	padding: 0 5px;
+	z-index: 1;
+}
+
+#rankUl {
+	display: none; 
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+	padding: 5px;
+	padding-top: 0;
+}
+
+.topMenuWrap {
+	float: right;
+	margin-top: 34px;
+}
+
+.topMenuWrap ul li {
+	float: left;
+	margin-left: 15px;
+}
+
+.topMenuWrap ul li a {
+	font-size: 14px;
+}
+
+/* mainManu */
+#mainMenuWrap {
+	background-color: #303A50;
+}
+
+.menuBox {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.mainMenu #mainMenuUl {
+	width: 70%;
+	float: left;
+}
+
+.mainMenu #mainMenuUl > li {
+	float: left;
+	margin-right: 85px;
+	text-align: center;
+	padding: 15px 0;
+	position: relative;
+}
+
+.mainMenu #mainMenuUl > li > a {
+	color: #fff;
+	position: relative;
+	padding-left: 30px;
+}
+
+.menuIcon {
+	width: 20px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.mainSearchBtn {
+	float: right;
+	line-height: 52px;
+}
+
+/* 서브메뉴 */
+
+
+#mainMenuUl .subMenuUl {
+	width: 150px;
+    position: absolute;
+    background-color: #303A50;
+    z-index: 5;
+    top: 55px;
+    left: -25px;
+    border: 2px solid #fff;
+    border-top: none;
+    display: none;
+}
+
+#mainMenuUl .subMenuUl li {
+	/* padding: 10px 0; */
+}
+
+#mainMenuUl .subMenuUl li a {
+	color: #fff;
+	display: block;
+	padding: 10px 0;
+}
+
+#mainMenuUl .subMenuUl li:hover a {
+	text-decoration: underline;
+	display: block;
+	background-color: #ED7D31;
+}
+
+/* 카페 검색 show 버튼 */
+.mainSearchBtn a {
+	color: #fff;
+	font-size: 20px;
+}
+
+#mainMenuWrap .cafeSearchBtn {
+	font-size: 16px;
+	padding: 10px;
+}
+
+/* mainSearch - keyword */
+.mainSearchBox {
+	border-top: 1px solid #fff;
+}
+
+.mainSearch {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.keysWrap {
+	position: relative;
+	padding: 30px 0;
+	z-index: 1;
+}
+
+.line {
+	width: 100%;
+	height: 3px;
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 80px;
+	z-index: -1
+}
+
+.keys {
+	overflow: hidden;
+}
+
+.keys li {
+	float: left;
+	text-align: center;
+	width: 16.6%;
+}
+
+.keyIcon {
+	width: 90px;
+	height: 90px;
+	background-color: #f2f2f2;
+	text-align: center;
+	border-radius: 100px;
+	position: relative;
+	margin: 0 auto;
+	cursor: pointer;
+	user-select: none;
+}
+.keyIcon img {
+	width: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.spot {
+	width: 20px;
+	height: 20px;
+	border-radius: 30px;
+	background-color: #f2f2f2;
+	margin: 30px auto;
+	margin-bottom: 15px;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.keyText {
+	font-size: 16px;
+	color: #fff;
+	font-weight: 400;
+	letter-spacing: 1px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.keyword {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+
+/* mainSearch - searchBar */
+.searchBarWrap {
+	padding-bottom: 30px;
+}
+
+.bar {
+	float: left;
+	font-size: 25px;
+	background-color: #fff;
+	position: relative;
+}
+
+.barBox {
+	padding: 10px;
+	position: relative;
+	padding-left: 50px;
+	color: #A2A1A1;
+	font-weight: 700;
+}
+
+.barBox img {
+	position: absolute;
+	width: 30px;
+	top: 50%;
+	left: 10px;
+	transform: translateY(-50%);
+}
+
+.zoneBar {
+	width: 25%;
+	border-radius: 5px 0 0 5px;
+	border-right: 1px solid #A2A1A1;
+}
+
+.zoneBarBox {
+	cursor: pointer;
+}
+
+.zoneList {
+	position: absolute;
+	left: 0;
+	background-color: #fff;
+	width: 100%;
+	box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+}
+
+.zoneList li {
+	position: relative;
+	padding: 10px;
+	padding-left: 50px;
+	font-size: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.zoneList li:hover span {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.zoneList li:first-child{
+	border-top: 1px solid #A2A1A1;
+}
+
+.zoneList img {
+	position: absolute;
+	width: 20px;
+	top: 50%;
+	left: 15px;
+	transform: translateY(-50%);
+}
+
+.themeBar {
+	width: 65%;
+	border-radius: 0 5px 5px 0;
+	border-right: 1px solid #A2A1A1;
+	margin-right: 20px;
+}
+
+.searchBtn {
+	float: right;
+	width: 80px;
+	height: 57px;
+	border-radius: 5px;
+	background-color: #ed7d31;
+	position: relative;
+}
+
+.searchBtn a {
+	display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.searchBtn img {
+	width: 35px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.themeKey {
+	display: inline-block;
+	padding: 0 5px;
+	background-color: #F46B45;
+	border-radius: 5px;
+	color: #fff;
+	margin-right: 5px;
+}
+
+.date {
+	background-color: #b038fa;
+}
+
+.view {
+	background-color: #528236;
+}
+
+.ame {
+	background-color: #96814c;
+}
+
+.dessert {
+	background-color: #f2486f;
+}
+
+.dog {
+	background-color: #FFB232;
+}
+
+.work {
+	background-color: #0170c2;
+}
+
+.on .keyItem{
+	background-color: #ed7d31;
+}
+
+.on .keyword {
+	color: #ed7d31;
+}
+
+/* header search box open */
+.open {
+	display: block;
+}
+
+.close {
+	display: none;
+}
+
+/***** footer ***************/
+.banerArea {
+	width: 100%;
+	height: 400px;
+	background: url('../images/footerBaner.png') no-repeat;
+	background-size: cover;
+}
+
+footer {
+	background-color: #303A50;
+}
+
+.infoArea {
+	width: 1200px;
+	margin: 0 auto;
+	padding: 30px 0;
+	color: #fff;
+	overflow: hidden;
+}
+
+.info {
+	float: left;
+}
+
+.footerSns {
+	float: right;
+}
+
+.footerSns a {
+	font-size: 20px;
+    color: #fff;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+}
+
+.footerSns a:first-child {
+	margin-right: 10px;
+}
+
+
+/***** active menu ***************/
+.activeMenus {
+	overflow: hidden;
+	padding: 15px 5px;
+	font-size: 18px;
+	color: #545454;
+	border-bottom: 2px solid #545454;
+	margin-bottom: 15px;
+}
+
+.activeMenu {
+	float: left;
+	font-weight: 700;
+}
+
+.activeTotalCnt {
+	float: right;
+}
+
+.actTotal {
+	font-weight: 700;
+	color: red;
+}
+
+/***** sub menu ***************/
+/* menu */
+aside {
+	width: 260px;
+	float: left;
+}
+
+.subTitleArea {
+	background-size: cover;
+	height: 180px;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.subTitleWrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -45%);
+	color: #fff;
+	text-align: center;
+}
+
+.subTitle {
+	font-weight: 700;
+	font-size: 25px;
+	padding-bottom: 10px;
+	border-bottom: 5px solid #fff;
+}
+
+.subText {
+	padding: 5px;
+	font-size: 12px;
+	font-weight: 300;
+}
+
+.subMenus {
+	margin-bottom: 10px;
+}
+
+.subMenus li a {
+	display: block;
+	background-color: #F6F6F6;
+	padding: 10px 0;
+	padding-left: 30px;
+	border-bottom: 1px solid #eee;
+}
+
+.subMenus li a span {
+	padding-bottom: 7px;
+	font-weight: 700;
+}
+
+.subMenus li:hover a span {
+	border-bottom: 3px solid #000;
+}
+
+/* sub board */
+.subBoardArea {
+	margin-bottom: 10px;
+	border: 1px solid #eee;
+}
+
+.subBoardTitle {
+	overflow: hidden;
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.subBoardTitle p {
+	font-weight: 700;
+}
+
+.subBoardTitle p:first-child {
+	float: left;
+}
+
+.subBoardTitle p:last-child {
+	float: right;
+}
+
+.subBoardTitle a:hover {
+	color: #ED7D31;
+}
+
+.subBoardList {
+	padding: 10px 20px;
+}
+
+.subBoardList a:hover {
+	text-decoration: underline;
+}

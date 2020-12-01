@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.UsersMapper">
+	<resultMap type="UsersVO" id="usersResult">
+		<id property="userNo" column="user_no"/>
+		<result property="userId" column="user_id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="nick" column="nick"/>
+		<result property="gender" column="gender"/>
+		<result property="birthday" column="birthday"/>
+		<result property="userJoinDate" column="user_join_date"/>
+		<result property="userLeaveCondition" column="user_leave_condition"/>
+		<result property="point" column="point"/>
+		<result property="tel" column="tel"/>
+		<result property="address" column="address"/>
+		<result property="detailAddress" column="detail_address"/>
+		<result property="email" column="email"/>
+		<result property="userType.userType" column="user_type"/>
+		<result property="userType.userTypeName" column="user_type_name"/>
+		<result property="userGrade.userGrade" column="user_grade"/>
+		<result property="userGrade.userGradeName" column="user_grade_name"/>
+		<result property="userGrade.userGradeImage" column="user_grade_image"/>
+		<result property="cafeName.cafeName" column="cafe_name"/>
+	</resultMap>
+	
+	<!-- 게시글 등록시 회원 등급 판단 및 수정 -->
+	<update id="updateUsersGrade">
+		update users 
+			set user_grade = #{gredeNo}
+			where user_no = #{userNo};
+	</update>
+	
+	<select id="readUsers" resultType="UsersVO">
+		select * from users where user_id = #{userId}
+	</select>
+	
+	<select id="selectUserPage" resultMap="usersResult">
+		select * from users u left join `type` t on u.user_type = t.user_type left join grade g on u.user_grade = g.user_grade 
+		where user_id =#{userId}
+	</select>
+	
+	<select id="findUsers" resultType="UsersVO">
+		select user_id from users where name = #{name} and email=#{email} and user_type=#{userType.userType}
+	</select>
+	
+	<update id="modifyUsersPass">
+		update users
+			set password = #{password}
+			where user_id = #{userId}
+	</update>
+	
+	<select id="duplCheckId" resultType="UsersVO">
+		select * from users where user_id=#{userId}
+	</select>
+	
+	<select id="duplCheckNick" resultType="UsersVO">
+		select * from users where nick=#{nick}
+	</select>
+	
+	<insert id="register" parameterType="UsersVO">
+		insert into users(user_id, password, name, nick, gender, birthday, user_leave_condition, tel, address, detail_address, email, user_type, user_grade)
+		values(#{userId}, #{password}, #{name}, #{nick}, #{gender}, #{birthday}, #{userLeaveCondition}, #{tel}, #{address}, #{detailAddress}, #{email}, #{userType.userType}, #{userGrade.userGrade})
+	</insert>
+	
+	<update id="modifyUsers">
+		update users
+			set nick = #{nick}, gender=#{gender}, birthday=#{birthday}, tel=#{tel}, address=#{address}, detail_address=#{detailAddress}, email=#{email}, user_type=#{userType.userType} 
+			where user_id = #{userId}
+	</update>
+	
+	<!-- 경진 추가 ******************************************************************************* -->
+	<!-- 게시글 등록 시 포인트 적립 -->
+	<update id="updatePoint" parameterType="map">
+		update users
+			set point = point + #{amount}
+			where user_no = #{userNo}
+	</update>
+	<!-- 어드민 회원 list -->
+	<select id="selectUserList" parameterType="map" resultMap="usersResult">
+		select u.*, c.cafe_name, g.* 
+			from users u left join cafe c on u.user_no = c.user_no
+						 left join grade g on u.user_grade = g.user_grade
+			where user_type = #{userType}
+			<if test="cri.keyword != '' and cri.keyword != null">
+				and user_id like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+			order by user_no desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectUserListTotalCnt" parameterType="map" resultType="int">
+		select count(*) from users
+			where user_type = #{userType}
+			<if test="cri.keyword != '' and cri.keyword != null">
+				and user_id like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+	</select>
+</mapper>

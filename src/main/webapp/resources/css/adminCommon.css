@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+/* 최소너비 지정 */
+body, nav {
+	min-width: 320px;
+}
+
+/* 폰트 */
+.fs25 {
+	font-size: 25px;
+}
+
+.fs18 {
+	font-size: 18px;
+}
+
+.tCenter {
+	text-align: center;
+}
+
+/******* 스타일 *******/
+/* text */
+#user .material-icons {
+	font-family: 'Roboto', sans-serif;
+}
+
+.subPageTitle {
+	font-weight: 700;
+}
+
+.taCenter {
+	text-align: center;
+}
+
+/* 테이블 */
+.tableWrap {
+	width: 99%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.pmd-table.table>tbody>tr>td, 
+.pmd-table.table>tbody>tr>th, 
+.pmd-table.table>tfoot>tr>td, 
+.pmd-table.table>tfoot>tr>th, 
+.pmd-table.table>thead>tr>td, 
+.pmd-table.table>thead>tr>th {
+	text-align: center;
+}
+
+/* 템플릿 커스터마이징 */
+#user {
+	margin-top: 12px;
+}
+
+#userName {
+	display: inline-block;
+	font-size: 18px;
+}
+
+.notification .dropdown-menu {
+	width: 160px;
+}
+
+
+@media (max-width: 767px) {
+	#user {
+		line-height: 54px;
+	}
+	
+	#userName {
+		display: none;
+	}
+}

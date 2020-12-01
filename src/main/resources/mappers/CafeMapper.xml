@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CafeMapper">
+	
+	<resultMap type="CafeVO" id="CafeListSelectResult">
+		<id property="cafeNo" column="cafe_no"/>
+		<result property="cafeName" column="cafe_name"/>
+		<result property="address" column="address"/>
+		<result property="detailAddress" column="detail_address"/>
+		<result property="tel" column="tel"/>
+		<result property="wkdOpentime" column="wkd_opentime"/>
+		<result property="wkndOpentime" column="wknd_opentime"/>
+		<result property="closedDay" column="closed_day"/>
+		<result property="sns" column="sns"/>
+		<result property="tableNumber" column="table_number"/>
+		<result property="socketNumber" column="socket_number"/>
+		<result property="toiletCdt" column="toilet_cdt"/>
+		<result property="mkdessertCdt" column="mkdessert_cdt"/>
+		<result property="terrasCdt" column="terras_cdt"/>
+		<result property="reservationCdt" column="reservation_cdt"/>
+		<result property="wondooBuyCdt" column="wondoo_buy_cdt"/>
+		<result property="bookCdt" column="book_cdt"/>
+		<result property="beerCdt" column="beer_cdt"/>
+		<result property="goodsCdt" column="goods_cdt"/>
+		<result property="wifiCdt" column="wifi_cdt"/>
+		<result property="puppyCdt" column="puppy_cdt"/>
+		<result property="reserveokCdt" column="reserveok_cdt"/>
+		<result property="parkingCdt" column="parking_cdt"/>
+		<result property="nokidsCdt" column="nokids_cdt"/>
+		<result property="registrationDate" column="registration_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="viewNumber" column="view_number"/>
+		<result property="content" column="content"/>
+		<result property="oneline" column="oneline"/>
+		<result property="voteNumber" column="vote_number"/>
+		<result property="powerlinkCdt" column="powerlink_cdt"/>
+		<result property="cafeCdt" column="cafe_cdt"/>
+		<result property="ownerLicenseNo" column="owner_license_no"/>
+		
+		<!-- usersVO -->
+		<result property="userNo.userNo" column="user_no"/>
+		<result property="userNo.userId" column="user_id"/>
+		<result property="userNo.name" column="name"/>
+		
+		<association javaType="ThemeVO" property="themeNo">
+			<id property="themeNo" column="theme_no"/>
+			<result property="themeName" column="theme_name"/>
+		</association>
+		
+		<association javaType="ZoneVO" property="zoneNo">
+			<id property="zoneNo" column="zone_no"/>
+			<result property="zoneName" column="zone_name"/>
+		</association>
+		
+		<!-- imageVo -->
+		<collection property="images" resultMap="mappers.ImageMapper.imageResult"/>
+		
+		<!-- starpoint -->
+		<collection property="starPoint" resultMap="mappers.StarPointMapper.starPointResult"/>
+	</resultMap>
+	
+	<resultMap type="ImageVO" id="selectImgResult">
+		<id property="imageNo" column="image_no"/>
+		<result property="imageName" column="image_name"/>
+		<result property="cafeNo.cafeNo" column="cafe_no"/>
+		<result property="boardNo.boardNo" column="board_no"/>		
+	</resultMap>
+	
+	<resultMap type="MenuVO" id="MenuListResult">
+		<id property="menuNo" column="menu_no"/>
+		<result property="menuName" column="menu_name"/>
+		<result property="hI" column="h_i"/>
+		<result property="price" column="price"/>
+		<result property="icedMenuPrice" column="iced_menu_price"/>
+		
+		<association javaType="MenuKindsVO" property="menukinds">
+			<id property="sortNo" column="sort_no"/>
+			<result property="sortName" column="sort_name"/>
+		</association>
+		
+		<association javaType="CafeVO" property="cafeNo">
+			<id property="cafeNo" column="cafe_no"/>
+			<result property="cafeName" column="cafe_name"/>
+		</association>
+		
+	</resultMap>
+	
+
+	
+	<insert id="createCafe" parameterType="CafeVO">
+		insert into cafe (cafe_name,
+		                  theme_no, 
+		                  zone_no, 
+		                  user_no, 
+		                  address, 
+		                  detail_address, 
+		                  tel, 
+		                  opentime, 
+		                  closed_day, 
+		                  sns, 
+		                  table_number, 
+		                  socket_number, 
+		                  toilet_cdt, 
+		                  mkdessert_cdt, 
+		                  terras_cdt, 
+		                  reservation_cdt, 
+		                  wondoo_buy_cdt, 
+		                  book_cdt, 
+		                  beer_cdt, 
+		                  goods_cdt, 
+		                  wifi_cdt, 
+		                  puppy_cdt,
+		                  reserveok_cdt, 
+		                  parking_cdt, 
+		                  nokids_cdt, 
+		                  registration_date, 
+		                  update_date, 
+		                  view_number, 
+		                  content, 
+		                  oneline, 
+		                  vote_number, 
+		                  powerlink_cdt, 
+		                  cafe_cdt)
+		values (#{cafeName}, 
+		        #{themeNo.themeNo}, 
+		        #{zoneNo.zoneNo}, 
+		        #{userNo.userNo}, 
+		        #{address}, 
+		        #{detailAddress}, 
+		        #{tel}, 
+		        #{opentime}, 
+		        #{closedDay}, 
+		        #{sns}, 
+		        #{tableNumber},
+		        #{socketNumber}, 
+		        #{toiletCdt}, 
+		        #{mkdessertCdt}, 
+		        #{terrasCdt}, 
+		        #{reservationCdt}, 
+		        #{wondooBuyCdt}, 
+		        #{bookCdt}, 
+		        #{beerCdt}, 
+		        #{goodsCdt},
+		        #{wifiCdt}, 
+		        #{puppyCdt}, 
+		        #{reserveokCdt}, 
+		        #{parkingCdt}, 
+		        #{nokidsCdt}, 
+		        #{registrationDate}, 
+		        #{updateDate}, 
+		        #{viewNumber}, 
+		        #{content},
+		        #{oneline}, 
+		        #{voteNumber}, 
+		        #{powerlinkCdt}, 
+		        #{cafeCdt})
+	</insert>
+	
+	<select id="readCafe" resultMap="CafeListSelectResult">
+		select c.*, z.*, t.* from cafe c 
+		left join theme t on c.theme_no = t.theme_no 
+		left join `zone` z on c.zone_no = z.zone_no
+		where c.cafe_no=#{cafeNo}
+	</select>
+	
+	<select id="list" resultType="CafeVO">
+		select * from cafe
+	</select>
+	
+	<update id="updateCafe" parameterType="CafeVO">
+		update cafe set cafe_name=#{cafeName}, 
+		                theme_no=#{themeNo.themeNo}, 
+		                zone_no=#{zoneNo.zoneNo}, 
+		                user_no=#{userNo.userNo}, 
+		                address=#{address}, 
+		                detail_address=#{detailAddress}, 
+		                tel=#{tel}, 
+		                opentime=#{opentime}, 
+		                closed_day=#{closedDay}, 
+		                sns=#{sns}, 
+		                table_number=#{tableNumber}, 
+		                socket_number=#{socketNumber}, 
+		                toilet_cdt=#{toiletCdt},
+		                mkdessert_cdt=#{mkdessertCdt}, 
+		                terras_cdt=#{terrasCdt}, 
+		                reservation_cdt=#{reservationCdt}, 
+		                wondoo_buy_cdt=#{wondooBuyCdt}, 
+		                book_cdt=#{bookCdt},
+		                beer_cdt=#{beerCdt}, 
+		                goods_cdt=#{goodsCdt}, 
+		                wifi_cdt=#{wifiCdt}, 
+		                puppy_cdt=#{puppyCdt}, 
+		                reserveok_cdt=#{reserveokCdt}, 
+		                parking_cdt=#{parkingCdt},
+		                nokids_cdt=#{nokidsCdt}, 
+		                registration_date=#{registrationDate}, 
+		                update_date=#{updateDate}, 
+		                view_number=#{viewNumber}, 
+		                content=#{content},
+		                oneline=#{oneline}, 
+		                vote_number=#{voteNumber}, 
+		                powerlink_cdt=#{powerlinkCdt}, 
+		                cafe_cdt=#{cafeCdt} 
+		where cafe_no=#{cafeNo}
+	</update>
+	
+	<!-- 대표 이미지 검색 -->
+	<select id="sumnailImg" resultMap="selectImgResult">
+		select i.cafe_no, i.image_name from image i left join cafe c on c.cafe_no = i.cafe_no where c.cafe_no =#{cafeNo} limit 1
+	</select>
+	
+	<!-- 카페 상세페이지 내부 이미지 검색 -->
+	<select id="imgList" resultMap="selectImgResult">
+		select i.cafe_no, i.image_name from image i left join cafe c on c.cafe_no = i.cafe_no where c.cafe_no =#{cafeNo}
+	</select>
+	
+	<!-- 별점 검색(정수) -->
+	<select id="pointSelect" resultType="int">
+		select round(sum(star_point)/count(*)) from starpoint where cafe_no =#{cafeNo} 
+	</select>
+	
+	<!-- 별점 검색(소수점) -->
+	<select id="starpoint" resultType="double">
+		select round(sum(star_point)/count(*),1) from starpoint where cafe_no =#{cafeNo} 
+	</select>
+	
+	<!-- 월별 별점 검색 -->
+	<select id="starpointByMonth" resultType="int">
+		select IFNULL(round(sum(star_point)/count(*), 1), 0) from starpoint where cafe_no = ${cafeNo} and registration_date between '2020-${month}-01' and '2020-${month}-30'
+	</select>
+	
+	<select id="starCnt" resultType="int">
+		select count(*) from starpoint where cafe_no = #{cafeNo}
+	</select>
+	
+	<!-- 테마 순위 검색 -->
+	<select id="rankTheme" resultType="ThemeVO">
+		select s.cafe_no , s.theme_no, t.theme_name, c.theme_no,count(s.theme_no) as cnt from starpoint s left join theme t on s.theme_no = t.theme_no 
+		left join cafe c on s.cafe_no = c.cafe_no where s.cafe_no = #{cafeNo} and s.theme_no != c.theme_no 
+		group by s.theme_no order by cnt desc, s.theme_no limit 2
+	</select>
+	
+	<!-- 카페별 메뉴 검색 -->
+	<select id="menuList" resultMap="MenuListResult">
+		select m.*, k.* from menu m left join menukinds k on m.menukinds = k.sort_no where cafe_no =#{cafeNo}
+	</select>
+	
+	<!-- 카페별 메뉴 분류 검색 -->
+	<select id="sortNameSelect" resultType="MenuKindsVO">
+		select distinct k.sort_no, k.sort_name from menu m left join menukinds k on m.menukinds = k.sort_no where cafe_no =#{cafeNo}
+	</select>	
+	
+	<!-- 카페 탐방기 숫자 검색 -->
+	<select id="countReviewNum" resultType="int">
+		select count(*), cafe_no from board where board_no2 =1 and cafe_no =#{cafeNo};
+	</select>
+	
+	<delete id="deleteCafe" parameterType="CafeVO">
+		delete from cafe where cafe_no=#{cafeNo}
+	</delete>
+	
+<!-- 키워드 이용 검색 가능한 페이징 처리 매퍼 --> 	
+	<sql id="search">
+		<if test="searchType=='n'.toString()">
+			<choose>
+				<when test="searchZone=='all'.toString() and searchTheme!='all'.toString()">
+					where c.theme_no=${searchTheme}
+				</when>
+				<when test="searchZone!='all'.toString() and searchTheme=='all'.toString()">
+					where c.zone_no=${searchZone}
+				</when>
+				<when test="searchZone!='all'.toString() and searchTheme!='all'.toString()">
+					where c.zone_no=${searchZone} and c.theme_no=${searchTheme}
+				</when>
+			</choose>
+		</if>
+		<if test="searchType=='cafeName'.toString()">
+			<choose>
+				<when test="searchZone=='all'.toString() and searchTheme!='all'.toString()">
+					where c.theme_no=${searchTheme} and cafe_name like CONCAT('%','${keyword}','%')
+				</when>
+				<when test="searchZone!='all'.toString() and searchTheme=='all'.toString()">
+					where c.zone_no=${searchZone} and cafe_name like CONCAT('%','${keyword}','%')
+				</when>
+				<when test="searchZone!='all'.toString() and searchTheme!='all'.toString()">
+					where c.zone_no=${searchZone} and c.theme_no=${searchTheme} and cafe_name like CONCAT('%','${keyword}','%')
+				</when>
+				<when test="searchZone=='all'.toString() and searchTheme=='all'.toString()">
+					where cafe_name like CONCAT('%','${keyword}','%')
+				</when>
+			</choose>
+		</if>
+	</sql>
+	
+	<select id="listSearchCriteria" resultMap="CafeListSelectResult">
+		select c.cafe_no, c.cafe_name, z.zone_name, t.theme_name, t.theme_no, c.registration_date, c.vote_number, c.view_number, c.oneline, c.address, c.detail_address from cafe c left join theme t on c.theme_no = t.theme_no 
+		left join `zone` z on c.zone_no = z.zone_no
+		<include refid="search"></include>
+		order by cafe_no asc limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="totalSearchCount" resultType="int">
+		select count(cafe_no) from cafe c 
+		<include refid="search"></include>
+	</select>
+	
+	<!-- 경진추가 (user) start ************************************************************************************* -->
+	<!-- 경진추가 : 이름에 의한 카페 검색 -->
+	<select id="searchCafeByName" resultType="CafeVO">
+		select * from cafe where cafe_name like CONCAT('%', #{cafeName}, '%')
+	</select>
+	<!-- 경진추가 : 메인메뉴 카페 검색 -->
+	<sql id="mainSearch">
+		<where>
+			<if test="zoneNo > 0 and zoneNo != null">
+				c.zone_no = #{zoneNo}
+			</if>
+			<if test="themeNums.size > 0 and themeNums != null">
+				and (c.theme_no in 
+				<foreach item="themeNo" collection="themeNums" separator=" , " index="index" open="(" close=")" >
+					#{themeNo}
+				</foreach>
+				)
+			</if>
+			<if test="cri.searchTheme != '' and cri.searchTheme != null">
+				AND t.theme_no = #{cri.searchTheme}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="cafeMainSearch" parameterType="map" resultMap="CafeListSelectResult">
+		select c.cafe_no, c.cafe_name, z.zone_no , z.zone_name, t.theme_name, t.theme_no, c.registration_date, c.vote_number, c.view_number, c.oneline, c.address, c.detail_address 
+			from cafe c left join theme t on c.theme_no = t.theme_no left join `zone` z on c.zone_no = z.zone_no
+			<include refid="mainSearch"/>
+			order by cafe_no desc limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="cafeMainSearchTotalCnt" parameterType="map" resultType="int">
+		select count(cafe_no) from cafe c left join theme t on c.theme_no = t.theme_no
+		<include refid="mainSearch"/>
+	</select>
+	
+	<!-- 경진추가 : 전월 별점 베스트 -->
+	<sql id="monthBestSql">
+		from starpoint s left join cafe c on s.cafe_no = c.cafe_no 
+						 left join image i on c.cafe_no = i.cafe_no
+						 left join zone z on c.zone_no = z.zone_no 
+					 	 left join theme t on c.theme_no = t.theme_no
+					 	 left join users u on s.user_no = u.user_no 
+			, (select cafe_no, round(avg(star_point), 1) as spoint, update_date from starpoint where month(update_date) = month(now())-1 group by cafe_no) spoint
+		where s.cafe_no = spoint.cafe_no and c.cafe_cdt = 1
+		group by s.cafe_no
+		order by spoint desc, spoint.update_date desc limit 10
+	</sql>
+	<!-- 별점 -->
+	<select id="monthBestSPoint" resultType="double">
+		select spoint
+		<include refid="monthBestSql"/>
+	</select>
+	<!-- 베스트 리스트 -->
+	<select id="monthBestCafe" resultMap="CafeListSelectResult">
+		select c.*, s.user_no, u.name, s.star_point_comment, i.image_name, z.zone_name, t.theme_name
+		<include refid="monthBestSql"/>
+	</select>
+	<!-- 위시리스트(찜) cnt -->
+	<select id="cafeWishCnt" resultType="int">
+		select count(*) from wishlist where cafe_no = #{cafeNo}
+	</select>
+	<!-- 카페 댓글 cnt -->
+	<select id="cafeCommentCnt" resultType="int">
+		select count(*) from starpoint where cafe_no = #{cafeNo}
+	</select>
+	<!-- 파워링크(월간카페) -->
+	<select id="monthlyCafeList" resultMap="CafeListSelectResult">
+		select c.*, i.image_name from cafe c left join image i on c.cafe_no = i.cafe_no where powerlink_cdt = 1 group by c.cafe_no
+	</select>
+	<!-- 파워링크(월간카페) 게시 상태 PowerLink데이터랑 동일하게 유지할 update문 -->
+	<update id="monthlyCafeUpdate">
+		update cafe c right join powerlink p on c.cafe_no = p.cafe_no 
+			set c.powerlink_cdt = p.pow_cdt
+	</update>
+	<!-- 경진추가 (user) end ************************************************************************************* -->
+	<!-- 경진추가 (admin) start ************************************************************************************* -->
+	<select id="cafeWaitingCnt" parameterType="CafeVO" resultType="int">
+		select count(*) from cafe where cafe_cdt = #{cafeCdt}
+	</select>
+	
+	<select id="cafeWaitingCntAndKeyword" parameterType="map" resultType="int">
+		select count(*) from cafe 
+			where cafe_cdt = #{vo.cafeCdt}
+		<if test="cri.keyword != '' and cri.keyword != null">
+			and cafe_name like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+	</select>
+	
+	<select id="adminNewCafeList" parameterType="map" resultMap="CafeListSelectResult">
+		select u.name, c.* 
+			from cafe c left join users u on c.user_no = u.user_no
+			where c.cafe_cdt = #{vo.cafeCdt}
+			<if test="cri.keyword != '' and cri.keyword != null">
+				and c.cafe_name like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="adminCafeList" parameterType="map" resultMap="CafeListSelectResult">
+		select u.name, c.* 
+			from cafe c left join users u on c.user_no = u.user_no
+			where c.cafe_cdt != #{vo.cafeCdt}
+			<if test="cri.keyword != '' and cri.keyword != null">
+				and c.cafe_name like CONCAT('%', #{cri.keyword}, '%')
+			</if>
+			order by registration_date desc 
+			limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="adminCafeCntChart" resultType="map">
+		select count(*) as cafe_cnt, month(registration_date) as month from cafe where month(registration_date) = month(now())-#{subNum} and cafe_cdt = 1;
+	</select>
+	
+	<select id="selectAdminCafeByOwnerNo" resultType="int">
+		select count(*) from cafe where owner_license_no = #{ownerNo}
+	</select>
+	
+	<update id="updateNewCafeCdt">
+		update cafe 
+			set cafe_cdt = 1, registration_date = now()
+			where cafe_no = #{cafeNo}
+	</update>
+	
+	<update id="updateCafeCdt" parameterType="CafeVO">
+		update cafe
+			set cafe_cdt = #{cafeCdt}
+			where cafe_no = #{cafeNo}
+	</update>
+	
+	<!-- 경진추가 (admin) end ************************************************************************************* -->
+	
+	<!-- 아름추가 : 카페추천 등록폼에 이용하기 위해 만듬 // 지역이름 + 카페이름 + 카페주소 -->
+	<select id="rcSearchCafeByName" resultMap="CafeListSelectResult">
+		select * from cafe c left join zone z on c.zone_no  = z.zone_no where c.cafe_name like CONCAT('%', #{cafeName}, '%')
+	</select>
+	
+	<!-- 아름추가 :  파워링크 -->
+	<select id="powerLinkCafeList" resultMap="CafeListSelectResult">
+		select * from cafe where powerlink_cdt = 1
+	</select>
+	
+	<!-- 아름추가 : 카페 리스트 3개 카페번호 기준 -->
+	<select id="newCafeList" resultMap="CafeListSelectResult">
+		select * from cafe c
+		left join zone z on c.zone_no = z.zone_no 
+		left join theme t on c.theme_no = t.theme_no where c.cafe_cdt = 1 order by cafe_no desc limit 3
+	</select>
+	
+	<!-- 아름추가 : 영업으로 등록된 카페번호 리스트-->
+   <select id="openCafeNoList" resultType="int">
+		select cafe_no from cafe where cafe_cdt = 1;
+	</select>
+	
+	<!-- 아름추가 : 영업으로 등록된 카페, 종합 조회수 리스트 -->
+	<select id="viewNumberCafeListAll" resultMap="CafeListSelectResult">
+		select c.*, z.*, t.* from cafe c 
+		left join theme t on c.theme_no = t.theme_no 
+		left join `zone` z on c.zone_no = z.zone_no order by c.view_number desc	limit 15
+	</select>
+	
+	<!-- 아름추가 : 영업으로 등록된 카페, 종합 별점순5 '정보' -->
+		<select id="starPointCafeBest5Info" resultMap="CafeListSelectResult">
+			select c.*, z.*, t.*
+			from cafe c
+			left join starpoint s on c.cafe_no = s.cafe_no
+			left join theme t on c.theme_no = t.theme_no
+			left join zone z on c.zone_no = z.zone_no
+			where c.cafe_cdt = 1 
+			group by c.cafe_name
+			order by round(sum(s.star_point)/count(s.star_point),1) desc limit 5	
+		</select>
+	<!-- 아름추가 : 영업으로 등록된 카페, 종합 별점순 5  '별점' -->
+		<select id="starPointCafeBest5" resultType="double">
+			select round(sum(s.star_point)/count(s.star_point),1)
+			from cafe c
+			left join starpoint s on c.cafe_no = s.cafe_no
+			left join theme t on c.theme_no = t.theme_no
+			left join zone z on c.zone_no = z.zone_no
+			where c.cafe_cdt = 1 
+			group by c.cafe_name
+			order by round(sum(s.star_point)/count(s.star_point),1) desc limit 5;		
+		</select>
+	<!-- 아름추가 : 영업으로 등록된 카페, 테마별 번호에 따라 카페번호 리스트뽑기 -->
+	<select id="openThemeCafeNoList" resultType="int">
+		select cafe_no from cafe where theme_no = #{themeNo} and cafe_cdt = 1
+	</select>
+	
+	<!-- 전체 영업으로 등록된 카페 숫자  -->
+	<select id="cafeOpenAllCnt" resultType="int">
+		select count(*) from cafe where cafe_cdt=1
+	</select>
+	
+	<!-- 테마별 카페 리스트 -->
+	<select id="themeCafeSearchListAll" resultMap="CafeListSelectResult">
+		select c.cafe_no, c.cafe_name, c.vote_number, c.registration_date, t.theme_no, t.theme_name from cafe c
+		left join theme t on c.theme_no = t.theme_no
+		<include refid="search"></include>
+		limit #{pageStart}, 16
+	</select>
+	
+	<select id="themeCafeListThemeName" resultMap="CafeListSelectResult">
+		select c.cafe_no, c.cafe_name, c.vote_number, c.registration_date, t.theme_no, t.theme_name from cafe c
+		left join theme t on c.theme_no = t.theme_no
+		<include refid="search"></include>
+	</select>	
+	
+	<select id="starPoint5Comment" resultMap="CafeListSelectResult">
+		select c.*, z.*, t.* , s.*, u.* from starpoint s
+		left join cafe c on s.cafe_no = c.cafe_no
+		left join zone z on c.zone_no = z.zone_no 
+		left join users u on s.user_no = u.user_no
+		left join theme t on s.theme_no = t.theme_no 
+		where c.cafe_cdt = 1 and s.star_point = 5 and left(DATE_SUB(curdate(), INTERVAL 1 month),7) = left(s.registration_date,7) group by c.cafe_name order by count(s.star_point) desc limit 5
+	</select>
+	<select id="starPoint5CommentCnt"  resultType="int">
+		select count(s.star_point) from starpoint s
+		left join cafe c on s.cafe_no = c.cafe_no
+		left join zone z on c.zone_no = z.zone_no 
+		left join users u on s.user_no = u.user_no
+		left join theme t on s.theme_no = t.theme_no 
+		where c.cafe_cdt = 1 and s.star_point = 5 and left(DATE_SUB(curdate(), INTERVAL 1 month),7) = left(s.registration_date,7) group by c.cafe_name order by count(s.star_point) desc limit 5
+	</select>									
+</mapper>
