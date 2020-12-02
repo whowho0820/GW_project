@@ -147,7 +147,7 @@
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<a href="javascript:void(0);" id="navIcon" data-target="basicSidebar" data-placement="left" data-position="slidepush" is-open="true" is-open-width="1200" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect pull-left margin-r8 pmd-sidebar-toggle"><i class="fas fa-bars fs25"></i></a>	
-				<a href="${pageContext.request.contextPath }/admin/" class="navbar-brand">Coffee Mukka</a>
+				<a href="${pageContext.request.contextPath }/admin/" class="navbar-brand">마음:TACT</a>
 			</div>
 		</div>
 	
@@ -178,14 +178,14 @@
 			<li> 
 				<a id="Dashboard" class="pmd-ripple-effect menu" href="${pageContext.request.contextPath }/admin/">	
 				<i class="fas fa-tachometer-alt fs18 media-left media-middle" ></i>
-				<span class="media-body">Dashboard</span>
+				<span class="media-body">Works</span>
 				</a> 
 			</li>
 			
 			<li class="dropdown pmd-dropdown"> 
 				<a id="cafeMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-store fs18 media-left media-middle"></i>
-					<span class="media-body">카페 관리</span>
+					<span class="media-body">근태관리</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
@@ -197,7 +197,7 @@
 			<li class="dropdown pmd-dropdown"> 
 				<a id="userMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-users fs18 media-left media-middle"></i>
-					<span class="media-body">회원 관리</span>
+					<span class="media-body">직원 관리</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
@@ -213,28 +213,16 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">생생 카페 탐방기 관리</a></li>
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">MuKKa人 추천 카페 관리</a></li>
-					<li><a class="boardMgrSub menu" href="#">사장님 고민 나눔 관리</a></li>
-					<li><a class="boardMgrSub menu" href="#">자유게시판 관리</a></li>
-					<li><a class="boardMgrSub menu" href="#">댓글 관리</a></li>
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">자료실 관리</a></li>
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">자유게시판 관리</a></li>
+					<li><a class="boardMgrSub menu" href="#">공지사항 관리</a></li>					
 				</ul>
 			</li>
-			
-			<li class="dropdown pmd-dropdown"> 
-				<a id="pointShop" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
-					<i class="fas fa-gifts fs18 media-left media-middle"></i>
-					<span class="media-body">포인트샵 관리</span>
-					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
-				</a> 
-				<ul class="dropdown-menu">
-					<li><a class="pointShopSub menu" href="#">상품 관리</a></li>
-				</ul>
-			</li>
+						
 			<li class="dropdown pmd-dropdown"> 
 				<a id="noticeMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-bullhorn fs18 media-left media-middle"></i>
-					<span class="media-body">공지사항</span>
+					<span class="media-body">일정 관리</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">

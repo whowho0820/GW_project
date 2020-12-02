@@ -11,7 +11,7 @@ body, html{ height:100%;}
 .pmd-navbar.navbar .btn.pmd-btn-fab:hover, .pmd-navbar.navbar .btn.pmd-btn-fab:focus, .pmd-navbar.navbar .btn.pmd-btn-fab.focus { color: #fff;}
 
 /*========================== header css ===========================*/
-.navbar-inverse{ background-color:#4285f4; border-color:#4285f4;}
+.navbar-inverse{ background-color:#85cc28; border-color:#85cc28;}
 .navbar-inverse .navbar-brand svg{ display:inline-block; float:left; vertical-align:top;}
 @media (max-width: 767px) {
 	.navbar-brand > svg{ height:40px; width:auto;}
@@ -277,22 +277,22 @@ h2.typo-fill-secondary{ color:rgba(77, 87, 93, 0.68); font-size:22px;}
 .pmd-sidebar .pmd-sidebar-nav li a { color:#c8c8c8; font-size:15px; font-family:"Roboto"; padding: 18px 24px; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease;}
 .pmd-sidebar .pmd-sidebar-nav li a i { min-width:44px; text-align:center;}
 .pmd-sidebar .pmd-sidebar-nav a i svg {display: block; margin: 0 auto;}
-.pmd-sidebar-left .nav > li > a:hover, .pmd-sidebar-left .nav > li > a:focus, .pmd-sidebar-left .nav > li > a:active, .pmd-sidebar-left .nav > li > a.active { background-color:#1a2940; color:#fff;}
+.pmd-sidebar-left .nav > li > a:hover, .pmd-sidebar-left .nav > li > a:focus, .pmd-sidebar-left .nav > li > a:active, .pmd-sidebar-left .nav > li > a.active { background-color:#ffffff; color:#393939; font-weight: bold;}
 .pmd-sidebar-left .nav > li > a:hover svg path, .pmd-sidebar-left .nav > li > a:focus svg path, .pmd-sidebar-left .nav > li > a:active svg path, .pmd-sidebar-left .nav > li > a.active svg path, .pmd-sidebar-left .nav > li > a:hover svg, .pmd-sidebar-left .nav > li > a:focus svg, .pmd-sidebar-left .nav > li > a:active svg, .pmd-sidebar-left .nav > li > a.active svg  { fill: #fff;}
 .pmd-sidebar.pmd-sidebar-open{ width:274px; min-width:274px;}
 .pmd-sidebar-slide-push.pmd-sidebar-open ~ .wrapper .constructor, .pmd-sidebar-slide-push.pmd-sidebar-open ~ .pmd-content { margin-left:274px;}
-.pmd-sidebar-left .nav > li.pmd-user-info > a { border-bottom:solid 1px #1a2940;  font-size:16px; color:#fff; padding-left:12px;}
-.pmd-sidebar-left .nav > li.pmd-user-info > a:hover, .pmd-sidebar-left .nav > li.pmd-user-info > a:focus, .pmd-sidebar-left .nav > li.pmd-user-info > a:active, .pmd-sidebar-left .nav > li.pmd-user-info > a.active { background:#1a2940;}
-.pmd-sidebar .pmd-sidebar-nav .dropdown-menu { background:#1a2940; padding:10px 0;}
+.pmd-sidebar-left .nav > li.pmd-user-info > a { border-bottom:solid 1px #ffffff;  font-size:18px; color:#90ce3f; padding-left: 60px; margin-top: 10px; font-weight: bold;}
+.pmd-sidebar-left .nav > li.pmd-user-info > a:hover, .pmd-sidebar-left .nav > li.pmd-user-info > a:focus, .pmd-sidebar-left .nav > li.pmd-user-info > a:active, .pmd-sidebar-left .nav > li.pmd-user-info > a.active { background:#ffffff;}
+.pmd-sidebar .pmd-sidebar-nav .dropdown-menu { background:#ffffff; padding:10px 0;}
 .pmd-sidebar .pmd-sidebar-nav li.entity-drop a { background:#2C343F;}
 .pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a { padding-left:65px; padding-top:10px; padding-bottom:10px; background-color: transparent;}
-.pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a:hover, .pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a:focus, .pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a.active { opacity:1; color:#fff;}
+.pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a:hover, .pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a:focus, .pmd-sidebar .pmd-sidebar-nav li .dropdown-menu li a.active { opacity:1; color:#828282;}
 .pmd-sidebar .pmd-sidebar-nav .dropdown-menu li a { padding-left:24px;  padding-top:15px; padding-bottom:15px;}
 .pmd-sidebar .dropdown-menu > li > a:hover, .pmd-sidebar .dropdown-menu > li > a:focus, .pmd-sidebar .dropdown-menu > li > a.active { color:#ffffff;}
 .pmd-content { margin-left: 64px;}
-.pmd-sidebar { width:64px; min-width:64px; transform:translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); background-color:#1f2f46;}
+.pmd-sidebar { width:64px; min-width:64px; transform:translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); background-color:#ffffff;}
 .pmd-sidebar.pmd-sidebar-open {min-width: 274px; width: 274px;}
-.pmd-sidebar .pmd-sidebar-nav li a { padding: 18px 20px 16px; color:#c8c8c8; background-color:transparent;}
+.pmd-sidebar .pmd-sidebar-nav li a { padding: 18px 20px 16px; color:#393939; background-color:transparent;}
 .pmd-sidebar-left .nav > li > a:hover svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:focus svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:active svg.stroke-fill path, .pmd-sidebar-left .nav > li > a.active svg.stroke-fill path {stroke: #fff; fill: none;}
 .pmd-sidebar-left .nav > li > a:hover svg circle, .pmd-sidebar-left .nav > li > a:focus svg circle, .pmd-sidebar-left .nav > li > a:active svg circle, .pmd-sidebar-left .nav > li > a.active svg circle {fill: #fff;}
 /*online order icon*/

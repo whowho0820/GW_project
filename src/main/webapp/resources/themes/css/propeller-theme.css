@@ -27,7 +27,7 @@ font-family: 'Roboto', sans-serif;
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto:100,300,400,500,700);
 
 html { height:100%;}
-body {font-family: 'Roboto', sans-serif; font-size:16px; line-height:1.6; color:#4d575d; background-color:#f5f5f5;}
+body {font-family: 'Roboto', sans-serif; font-size:16px; line-height:1.6; color:#ffffff; background-color:#f5f5f5;}
 
 /*======= Typography =======*/
 
@@ -100,8 +100,8 @@ form.theme-inverse .select2-container--default .select2-selection--single .selec
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active{background-color:#1e77d8; color:#fff;}
 
 /* Outline Button */
-.pmd-btn-outline{background-color:transparent;border:1px solid #4acc8e;color:#4acc8e;}
-.pmd-btn-outline:hover, .pmd-btn-outline:focus, .pmd-btn-outline:active{background-color:#4acc8e; color:#fff;}
+.pmd-btn-outline{background-color:transparent;border:1px solid #90ce3f;color:#90ce3f;}
+.pmd-btn-outline:hover, .pmd-btn-outline:focus, .pmd-btn-outline:active{background-color:#90ce3f; color:#fff;}
 
 /* Default Button */
 .btn-default{background-color:transparent;color:#333c4e;}
