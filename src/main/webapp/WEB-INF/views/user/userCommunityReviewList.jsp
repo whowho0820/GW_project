@@ -102,7 +102,7 @@
 	    position: absolute;
 	    top: 0;
 	    left: 0;
-	    background: rgba(0,0,0,0.4);
+	    background: rgba(0,0,0,0.15);
 	}
 	
 	.cafeReviewArea .cafeR_titleBox .cafeR_titleImg img {
@@ -314,20 +314,21 @@
 	<div class="contentArea">
 		<!-- 서브페이지 공통적인 타이틀 -->
 		<h2 class="subPageTitle">
-			<span class="title">생생 카페 탐방기</span>
-			<span class="subTit grayB"> | 여러분의 소중한 탐방기를 들려주세요!</span>
+			<span class="title">자료실</span>
+			<!-- <span class="subTit grayB"> | 여러분의 소중한 탐방기를 들려주세요!</span> -->
 		</h2>
 			
 		<!-- 게시판 베스트 -->
 		<div class="bestBoardBox">
 			<div class="boardTitle bottomLine2">
-				<p>베스트</p>
+				<p>베스트 자료</p>
 				<p><span class="orange preMonth"></span> 월 (월간)</p>
 			</div>
 			
 			<c:if test="${monthBestList.size() == 0 }">
-				<h3 style="text-align: center; padding: 20px 10px;"><span class="preMonth"></span>월의 베스트 카페 탐방기가 없습니다.</h3>
+				<h3 style="text-align: center; padding: 20px 10px;"><span class="preMonth"></span>월의 베스트 자료가 없습니다.</h3>
 			</c:if>
+			
 			<c:if test="${monthBestList.size() != 0 }">
 				<table class="post1-5">
 					<c:forEach var="bestItem" items="${monthBestList }" begin="0" end="2" varStatus="status">
@@ -366,7 +367,7 @@
 		
 		<!-- 선택 검색 -->
 		<div class="cafeReviewSearch bottomLine2 clearfix">
-			<div class="selectLeft">
+		<!--	<div class="selectLeft">
 				<select name="searchZone" id="searchZone">
 					<option value="" ${cri.searchZone == '' ? 'selected' : '' }>전체(위치별)</option>
 					<c:forEach var="zone" items="${zoneList }">
@@ -379,7 +380,7 @@
 						<option value="${theme.themeNo}" ${cri.searchTheme == theme.themeNo ? 'selected' : '' }>#${theme.themeName}</option>
 					</c:forEach>
 				</select>
-			</div>
+			</div> -->
 			<div class="selectRight">
 				<select name="searchType" id="searchType">
 					<option value="n" ${cri.searchType == null ? 'selected' : '' }>----</option>
@@ -398,15 +399,15 @@
 		<!-- 탐방기 -->
 		<div class="cafeReviewArea">
 			<div class="cafeR_titleWrap clearfix">				
-				<h3 class="cafeR_title">오늘의 탐방기 | <span class="red cafeRCnt">${todayCnt}개</span></h3>
+				<h3 class="cafeR_title">오늘의 자료 | <span class="red cafeRCnt">${todayCnt}개</span></h3>
 				<div class="cafeR_topBtns">
 					<div class="cafeR_topBtn cafeR_totalBtn grayLineBtn">
 						<a href="${pageContext.request.contextPath }/user/community/cafeReview?type=best">
-							<span class="red bold">베스트 글</span> 전체 보기
+							<span class="red bold">베스트 자료</span> 전체 보기
 						</a>
 					</div>
 					<div class="cafeR_topBtn cafeR_add navyBtn">
-						<a href="#" class="cafeR_addBtn">탐방기 쓰기</a>
+						<a href="#" class="cafeR_addBtn">자료 올리기</a>
 					</div>
 				</div>
 			</div>
@@ -419,15 +420,15 @@
 								<div class="cafeR_titleBox">
 									<div class="cafeR_titleImg">	
 										<div class="bg"></div>			
-										<img class="titleImg" src="${pageContext.request.contextPath }/user/displayFile?filename=${item.files[0].imageName}" alt="카페대표이미지" onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_sample41.jpg'"/>
+										<img class="titleImg" src="${pageContext.request.contextPath }/user/displayFile?filename=${item.files[0].imageName}" alt="카페대표이미지" onerror="this.src='${pageContext.request.contextPath}/resources/images/mm.jpg'"/>
 									</div>
 									<div class="cafeR_titleTop clearfix" >
 										<div class="cafeR_writer clearfix">
-											<img src="${pageContext.request.contextPath }/resources/images/${item.userNo.userGrade.userGradeImage }" alt="등급아이콘" />
+											<%-- <img src="${pageContext.request.contextPath }/resources/images/${item.userNo.userGrade.userGradeImage }" alt="등급아이콘" /> --%>
 											<span class="cafeR_name bold">${item.userNo.nick }</span>
 											<span class="cafeR_id bold">(${item.userNo.userId })</span>
 										</div>
-										<div class="cafeR_recomCnt bgRed">${item.voteNumber }</div>						
+										<%-- <div class="cafeR_recomCnt bgRed">${item.voteNumber }</div>		 --%>				
 									</div>
 									<h2 class="classSec cafe_title">${item.writingTitle }</h2>
 									<div class="cafeR_date bold"><fmt:formatDate value="${item.registrationDate }" pattern="yyyy/MM/dd"/></div>

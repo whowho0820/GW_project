@@ -112,18 +112,18 @@
 			<div>
 				<div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
-					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="자료실 번호 검색" name="keyword" >
+					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="자유게시판 번호 검색" name="keyword" >
 					</div>
 					<a href="#" id="searchBtn" class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>자료실 관리</span>
+					<span>자유게시판 관리</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
 				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
-				  <li class="active">자료실 관리</li>
+				  <li class="active">자유게시판 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
 			<!-- Table -->
@@ -151,7 +151,7 @@
 								<td><fmt:formatDate value="${item.updateDate }" pattern="yyyy/MM/dd"/></td>
 								<td>${item.boardDelCdt}</td>
 								<td>
-									<a class="btn pmd-btn-outline" href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${item.boardNo }" target="_blank">상세보기</a>
+									<a class="btn pmd-btn-outline" href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${item.boardNo }" target="_blank">상세보기</a>
 								</td>
 								<td>
 									<c:if test="${item.boardDelCdt == 'NO'}">
@@ -169,14 +169,14 @@
 			<!-- 페이징 -->
 			<div style="text-align: center;">
 			  	<ul class="pagination list-inline taCenter">
-				  	<c:if test="${pageMaker.prev == true }">
-						<li><a href="cafeReviewMgr?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
+				  <c:if test="${pageMaker.prev == true }">
+						<li><a href="cafeRecomMgr?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
 					</c:if>
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeReviewMgr?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
+						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeRecomMgr?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next == true }">
-						<li><a href="cafeReviewMgr?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
+						<li><a href="cafeRecomMgr?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
 					</c:if>
 			  	</ul>
 			</div>
@@ -192,11 +192,11 @@
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword == '') {
-			alert("자료실 번호를 작성해주세요.");
+			alert("자유게시판 번호를 작성해주세요.");
 			return false;
 		}
 		
-		location.href = "cafeReviewMgr?keyword="+keyword;
+		location.href = "noticeMgr?keyword="+keyword;
 		
 		return false;
 	})

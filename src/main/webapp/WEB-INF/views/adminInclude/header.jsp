@@ -215,7 +215,7 @@
 				<ul class="dropdown-menu">
 					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">자료실 관리</a></li>
 					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">자유게시판 관리</a></li>
-					<li><a class="boardMgrSub menu" href="#">공지사항 관리</a></li>					
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">공지사항 관리</a></li>					
 				</ul>
 			</li>
 						

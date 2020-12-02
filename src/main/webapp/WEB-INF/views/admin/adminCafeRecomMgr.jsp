@@ -112,18 +112,18 @@
 			<div>
 				<div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
-					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="추천글 번호 검색" name="keyword" >
+					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="자유게시판 번호 검색" name="keyword" >
 					</div>
-					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+					<a href="#" id="searchBtn" class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>MuKKa人 추천 카페 관리</span>
+					<span>자유게시판 관리</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
-				  <li><a href="${pageContext.request.contextPath }/admin/">Dashboard</a></li>
-				  <li class="active">MuKKa人 추천 카페 관리</li>
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자유게시판 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
 			<!-- Table -->
@@ -192,7 +192,7 @@
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword == '') {
-			alert("카페이름을 작성해주세요.");
+			alert("자유게시판 번호를 작성해주세요.");
 			return false;
 		}
 		
