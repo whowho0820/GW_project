@@ -118,12 +118,12 @@
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>공지사항 관리</span>
+					<span>일정관리2</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
 				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
-				  <li class="active">공지사항 관리</li>
+				  <li class="active">일정관리2</li>
 				</ol><!--breadcrum end-->
 			</div>
 			<!-- Table -->
@@ -196,7 +196,7 @@
 			return false;
 		}
 		
-		location.href = "noticeMgr?keyword="+keyword;
+		location.href = "calendarMgr2?keyword="+keyword;
 		
 		return false;
 	})

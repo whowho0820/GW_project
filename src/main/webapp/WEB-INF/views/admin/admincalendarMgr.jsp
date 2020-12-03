@@ -118,12 +118,12 @@
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>공지사항 관리</span>
+					<span>일정 관리</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
 				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
-				  <li class="active">공지사항 관리</li>
+				  <li class="active">일정 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
 			<!-- Table -->
@@ -192,11 +192,11 @@
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword == '') {
-			alert("공지사항 번호를 작성해주세요.");
+			alert("일정사항 번호를 작성해주세요.");
 			return false;
 		}
 		
-		location.href = "noticeMgr?keyword="+keyword;
+		location.href = "calendarMgr?keyword="+keyword;
 		
 		return false;
 	})

@@ -226,10 +226,8 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="noticeMgrSub menu" href="#">공지사항 관리</a></li>
-					<li><a class="noticeMgrSub menu" href="#">이벤트 관리</a></li>
-					<li><a class="noticeMgrSub menu" href="#">FAQ 관리</a></li>
-					<li><a class="noticeMgrSub menu" href="#">Q&A 관리</a></li>
+					<li><a class="noticeMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">전체 일정</a></li>
+					<li><a class="noticeMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">일정 리스트</a></li>
 				</ul>
 			</li>
 			<li> 
