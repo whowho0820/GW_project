@@ -64,6 +64,9 @@
 			<mapping path="/admin/boardMgr/"/>
 			<mapping path="/admin/boardMgr/cafeReviewMgr"/>
 			<mapping path="/admin/boardMgr/cafeRecomMgr"/>
+			<mapping path="/admin/boardMgr/noticeMgr"/>
+			<mapping path="/admin/noticeMgr/calendarMgr"/>
+			<mapping path="/admin/noticeMgr/calendarMgr2"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

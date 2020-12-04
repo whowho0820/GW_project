@@ -1,7 +1,5 @@
 package com.yi.service;
 
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,25 +23,19 @@ import com.google.api.services.calendar.model.CalendarList;
 
 import com.google.api.services.calendar.model.CalendarListEntry;
 
- 
-
 /**
  * @author lenovo
  *
  */
 public class GoogleCalendarService {
-
- 
-
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"),
-            "/");
-
+            System.getProperty("user.home"), ".credentials/sheets.googleapis.com-java-quickstart.json");
+    
     private static FileDataStoreFactory DATA_STORE_FACTORY;
     private static final JsonFactory JSON_FACTORY = JacksonFactory
             .getDefaultInstance();
-
+    
     private static HttpTransport HTTP_TRANSPORT;
     private static final List<String> SCOPES = Arrays
             .asList(CalendarScopes.CALENDAR);
@@ -55,60 +47,33 @@ public class GoogleCalendarService {
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
-
         }
-
     }
 
- 
-
-    public static Credential authorize() throws IOException {
-    	
-    	System.out.println(DATA_STORE_DIR.toURL()+"========================");
-
+    public static Credential authorize() throws IOException {    	
         InputStream in = GoogleCalendarService.class
-
                 .getResourceAsStream("/client_secret.json");
-
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(
-
                 JSON_FACTORY, new InputStreamReader(in));
 
- 
-
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-
                 .setDataStoreFactory(DATA_STORE_FACTORY)
-
                 .setAccessType("offline").build();
 
         Credential credential = new AuthorizationCodeInstalledApp(flow,
-
                 new LocalServerReceiver()).authorize("user");
-
+        
         System.out.println("Credentials saved to "
-
                 + DATA_STORE_DIR.getAbsolutePath());
-
         return credential;
-
     }
-
- 
 
     public static Calendar getCalendarService() throws IOException {
-
         Credential credential = authorize();
-
         return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
-
                 .setApplicationName(APPLICATION_NAME).build();
-
     }
-
- 
 
 //    public static void main(String[] args) throws IOException {
 //        com.google.api.services.calendar.Calendar service = getCalendarService();

@@ -77,6 +77,12 @@
 			$("#boardMgr").parent().addClass("open");
 		}
 		
+		if(menu == "noticeMgr") {
+			$("#noticeMgr").addClass("active");
+			$("#noticeMgr").parent().addClass("open");
+		}
+		
+		
 		// 서브메뉴 포커스
 		if(subMenu != null) {
 			if(subMenu.indexOf("newCafeManager") != -1){				
@@ -103,6 +109,15 @@
 			if(subMenu.indexOf("cafeRecomMgr") != -1) {
 				$(".boardMgrSub").eq(1).addClass("active");
 			}
+			if(subMenu.indexOf("noticeMgr") != -1) {
+				$(".boardMgrSub").eq(2).addClass("active");
+			}
+			if(subMenu.indexOf("calendarMgr") != -1) {
+				$(".calendarMgrSub").eq(0).addClass("active");
+			}
+			if(subMenu.indexOf("calendarMgr2") != -1) {
+				$(".calendarMgrSub").eq(0).addClass("active");
+			}		
 		}
 	})
 </script>
@@ -226,8 +241,8 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="noticeMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">전체 일정</a></li>
-					<li><a class="noticeMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">일정 리스트</a></li>
+					<li><a class="calendarMgrSub menu" href="${pageContext.request.contextPath}/admin/noticeMgr/calendarMgr">전체 일정</a></li>
+					<li><a class="calendarMgrSub menu" href="${pageContext.request.contextPath}/admin/noticeMgr/calendarMgr2">일정 리스트</a></li>
 				</ul>
 			</li>
 			<li> 

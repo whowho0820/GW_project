@@ -81,7 +81,7 @@ public class AdminBoardMgrControoler {
 	// 공지사항
 	@RequestMapping(value = "noticeMgr", method = RequestMethod.GET)
 	public String noticeMgr(SearchCriteria cri, Model model) throws Exception {
-		int cBoardNo = 2;
+		int cBoardNo = 3;
 		cri.setPerPageNum(10);
 		
 		List<BoardVO> list = service.adminBoardList(cBoardNo, cri);
@@ -93,42 +93,5 @@ public class AdminBoardMgrControoler {
 		model.addAttribute("cri", cri);
 		model.addAttribute("pageMaker", pageMaker);
 		return "/admin/adminnoticeMgr";
-	}
-	
-	// 일정관리1
-	@RequestMapping(value = "calendarMgr", method = RequestMethod.GET)
-	public String calendarMgr(SearchCriteria cri, Model model) throws Exception {
-		int cBoardNo = 2;
-		cri.setPerPageNum(10);
-		
-		List<BoardVO> list = service.adminBoardList(cBoardNo, cri);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.adminTotalSearchCountJoin(cBoardNo, cri));
-		
-		model.addAttribute("list", list);
-		model.addAttribute("cri", cri);
-		model.addAttribute("pageMaker", pageMaker);
-		return "/admin/admincalendarMgr";
-	}
-	
-	// 일정관리2
-	@RequestMapping(value = "calendarMgr2", method = RequestMethod.GET)
-	public String calendarMgr2(SearchCriteria cri, Model model) throws Exception {
-		int cBoardNo = 2;
-		cri.setPerPageNum(10);
-		
-		List<BoardVO> list = service.adminBoardList(cBoardNo, cri);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.adminTotalSearchCountJoin(cBoardNo, cri));
-		
-		model.addAttribute("list", list);
-		model.addAttribute("cri", cri);
-		model.addAttribute("pageMaker", pageMaker);
-		return "/admin/admincalendarMgr2";
-	}
-	
-	
-	
+	}	
 }

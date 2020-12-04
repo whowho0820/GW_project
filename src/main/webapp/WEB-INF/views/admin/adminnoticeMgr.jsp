@@ -118,7 +118,7 @@
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>공지사항 관리</span>
+					<span>공지사항</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
