@@ -1,202 +1,187 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <%@ include file="../adminInclude/header.jsp"%>
 
-<style>
-	/* 페이징 */
-	.pagination {
-		display: inline-block;
-	  	padding-left: 0;
-	  	margin: 20px 0;
-	  	border-radius: 4px;
-	}
-	.pagination > li {
-  		display: inline;
-	}
-	.pagination > li > a,
-	.pagination > li > span {
-		position: relative;
-		float: left;
-		padding: 6px 12px;
-		margin-left: -1px;
-		line-height: 1.42857143;
-		color: #303A50;
-		text-decoration: none;
-		background-color: #fff;
-		border: 1px solid #ddd;
-	}
-	.pagination > li:first-child > a,
-	.pagination > li:first-child > span {
-		margin-left: 0;
-		border-top-left-radius: 4px;
-		border-bottom-left-radius: 4px;
-	}
-	.pagination > li:last-child > a,
-	.pagination > li:last-child > span {
-		border-top-right-radius: 4px;
-		border-bottom-right-radius: 4px;
-	}
-	.pagination > li > a:hover,
-	.pagination > li > span:hover,
-	.pagination > li > a:focus,
-	.pagination > li > span:focus {
-		color: #23527c;
-		background-color: #eee;
-		border-color: #ddd;
-	}
-	.pagination > .active > a,
-	.pagination > .active > span,
-	.pagination > .active > a:hover,
-	.pagination > .active > span:hover,
-	.pagination > .active > a:focus,
-	.pagination > .active > span:focus {
-		z-index: 2;
-		color: #fff;
-		cursor: default;
-		background-color: #303A50;
-		border-color: #303A50;
-	}
-	.pagination > .disabled > span,
-	.pagination > .disabled > span:hover,
-	.pagination > .disabled > span:focus,
-	.pagination > .disabled > a,
-	.pagination > .disabled > a:hover,
-	.pagination > .disabled > a:focus {
-		color: #777;
-		cursor: not-allowed;
-		background-color: #fff;
-		border-color: #ddd;
-	}
-	.pagination-lg > li > a,
-	.pagination-lg > li > span {
-		padding: 10px 16px;
-		font-size: 18px;
-	}
-	.pagination-lg > li:first-child > a,
-	.pagination-lg > li:first-child > span {
-		border-top-left-radius: 6px;
-		border-bottom-left-radius: 6px;
-	}
-	.pagination-lg > li:last-child > a,
-	.pagination-lg > li:last-child > span {
-		border-top-right-radius: 6px;
-		border-bottom-right-radius: 6px;
-	}
-	.pagination-sm > li > a,
-	.pagination-sm > li > span {
-		padding: 5px 10px;
-		font-size: 12px;
-	}
-	.pagination-sm > li:first-child > a,
-	.pagination-sm > li:first-child > span {
-       border-top-left-radius: 3px;
-	   border-bottom-left-radius: 3px;
-	}
-	.pagination-sm > li:last-child > a,
-	.pagination-sm > li:last-child > span {
-		border-top-right-radius: 3px;
-		border-bottom-right-radius: 3px;
+
+<link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/metisMenu.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+<script src="/resources/assets/js/jquery-2.2.3.min.js"></script>
+<script src="/resources/assets/js/jquery-ui.js"></script>
+<script src="/resources/assets/js/bootstrap.min.js"></script>
+<script src="/resources/assets/js/metisMenu.min.js"></script>
+<script src="/resources/assets/js/sb-admin-2.js"></script>
+
+<script src="/resources/assets/js/dynatree/jquery.dynatree.js"></script>
+<link href="/resources/assets/js/dynatree/ui.dynatree.css" rel="stylesheet"/>
+
+<script src="/resources/assets/js/project9.js"></script>  
+
+<script>
+var selectedNode = null;
+
+$(function(){
+	$("#tree").dynatree({
+		children: <c:out value="${treeStr}" escapeXml="false"/>,
+		onActivate: TreenodeActivate
+	});
+    $("#tree").dynatree("getRoot").visit(function(node){
+        node.expand(true);
+    });
+	fn_groupNew();
+});
+function TreenodeActivate(node) {
+	selectedNode = node;
+	
+    if (selectedNode==null || selectedNode.data.key==0) return;
+    $.ajax({
+    	url: "adDepartmentRead",
+    	cache: false,
+    	data: { deptno : selectedNode.data.key }    	
+    }).done(receiveData);
+}
+
+function receiveData(data){
+    $("#deptno").val(data.deptno);
+    $("#deptnm").val(data.deptnm);
+}
+
+function fn_groupNew(){
+    $("#deptno").val("");
+    $("#deptnm").val("");
+}
+
+function fn_groupDelete(value){
+    if (selectedNode==null){
+    	alert("<s:message code="msg.err.boardDelete"/>");
+    	return;
+    }
+    if (selectedNode.childList){
+    	alert("<s:message code="msg.err.boardDelete4Child"/>");
+    	return;
+    }
+    
+    if(!confirm("<s:message code="ask.Delete"/>")) return;
+    $.ajax({
+    	url: "adDepartmentDelete",
+    	cache: false,
+    	data: { deptno : selectedNode.data.key }    	
+    }).done(receiveData4Delete);
+}
+
+function receiveData4Delete(data){
+	alert("<s:message code="msg.boardDelete"/>");
+	selectedNode.remove();		
+	selectedNode = null;
+	fn_groupNew();
+}
+
+function fn_groupSave(){
+	if ( ! chkInputValue("#deptnm", "<s:message code="common.deptName"/>")) return;
+
+	var pid=null;
+    if (selectedNode!=null) pid=selectedNode.data.key;
+
+    if (!confirm("<s:message code="ask.Save"/>")) return;
+
+    $.ajax({
+    	url: "adDepartmentSave",
+    	cache: false,
+    	type: "POST",
+    	data: { deptno:$("#deptno").val(), deptnm:$("#deptnm").val(), parentno: pid}    	
+    }).done(receiveData4Save);
+}
+
+function receiveData4Save(data){
+	if (selectedNode!==null && selectedNode.data.key===data.deptno) {
+		selectedNode.data.title=data.deptnm;
+		selectedNode.render();
+	} else {
+		addNode(data.deptno, data.deptnm);
 	}
 	
-	/* best list */
-	.bestBoardBox table td,
-	.bestBoardBox table th {
-		border: none;
-	}
-</style>
+	alert("<s:message code="msg.boardSave"/>");
+}
+
+function addNode(nodeNo, nodeTitle){
+	var node = $("#tree").dynatree("getActiveNode");
+	if (!node) node = $("#tree").dynatree("getRoot");
+	var childNode = node.addChild({key: nodeNo, title: nodeTitle});
+	node.expand() ;
+	node.data.isFolder=true;
+	node.tree.redraw();
+}
+</script>    
+
 	<!--content area start-->
 	<div id="content" class="pmd-content inner-page">
 	<!--tab start-->
 	    <div class="container-fluid full-width-container value-added-detail-page">
 			<div>
-				<div class="pull-right table-title-top-action">
+				<%-- <div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
 					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="카페 점주 ID 검색" name="keyword" >
 					</div>
 					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
-				</div>
+				</div> --%>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>카페 점주 관리</span>
+					<i class="fa fa-sitemap fa-fw "></i> <span>부서 관리</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
-				  <li><a href="${pageContext.request.contextPath }/admin/">Dashboard</a></li>
-				  <li class="active">카페 점주 관리</li>
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">부서 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
-			<!-- Table -->
-			<div class="table-responsive pmd-card pmd-z-depth">
-				<table class="table table-mc-red pmd-table">
-					<thead>
-						<tr>
-							<th>no</th>
-							<th>ID</th>
-							<th>점주명</th>
-							<th>카페명</th>
-							<th>e-mail</th>
-							<th>포인트</th>
-							<th>등급</th>
-							<th>탈퇴유무</th>
-							<th>탈퇴관리</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="item" items="${list }">
-							<tr>
-								<td>${item.userNo }</td>
-								<td>${item.userId}</td>
-								<td>${item.name }</td>
-								<td>${item.cafeName.cafeName}</td>
-								<td>${item.email }</td>
-								<td>${item.point }</td>	
-								<td>${item.userGrade.userGradeName}</td>
-								<td>
-									${item.userLeaveCondition}
-								</td>
-								<td>
-									<button class="btn btn-success">회원탈퇴</button>
-								</td>
-							</tr>
-						</c:forEach>
-				</tbody>
-			</table>
-			</div>
-			<!-- 페이징 -->
-			<div style="text-align: center;">
-			  	<ul class="pagination list-inline taCenter">
-				  	<c:if test="${pageMaker.prev == true }">
-						<li><a href="cafeUserManager?page=${pageMaker.startPage-1}&keyword=${cri.keyword}">&laquo;</a></li>
-					</c:if>
-					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeUserManager?page=${idx}&keyword=${cri.keyword}">${idx }</a></li>
-					</c:forEach>
-					<c:if test="${pageMaker.next == true }">
-						<li><a href="cafeUserManager?page=${pageMaker.endPage+1}&keyword=${cri.keyword}">&raquo;</a></li>
-					</c:if>
-			  	</ul>
-			</div>
-			<!-- 페이징 end -->
+			
+			<!-- /.row -->
+            <div class="row">
+            	<div class="panel panel-default col-lg-3" >
+                    <div style="max-height:400px; overflow:auto;" >
+				    	<div id="tree">
+						</div>
+					</div>
+				</div>
+                 
+            	<div class="panel panel-default col-lg-6" >
+                    <div class="panel-body">
+			            <div class="row form-group">
+			             <%--	<button class="btn btn-outline btn-primary" onclick="fn_groupNew()" ><s:message code="board.append"/></button> --%>
+						</div>
+					
+						<input name="deptno" id="deptno" type="hidden" value=""> 
+						
+			            <div class="row form-group">		          
+			            	<label class="col-lg-3" ><s:message code="common.deptName"/></label>
+			            	<div class="col-lg-9" >
+				 				<input name="deptnm" id="deptnm" style="width: 300px;" type="text" maxlength="100" value="" class="form-control">
+			            	</div>
+						</div>
+
+			            <div class="row form-group">			           
+			            	<button class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left" onclick="fn_groupSave()" ><s:message code="common.btnSave"/></button>
+			            	<button class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left" onclick="fn_groupDelete()" ><s:message code="common.btnDelete"/></button>
+						</div>
+				    </div>    
+				</div>	
+            </div>
+            <!-- /.row -->
+			
 		</div>
 	</div>
-	<!--tab start-->
-	
-	<!--content area end-->
 
-<script>
-	
-	$("#searchBtn").click(function(){
-		var keyword = $("input[name='keyword']").val();
-		
-		if(keyword == '') {
-			alert("회원ID을 작성해주세요.");
-			return false;
-		}
-		
-		location.href = "cafeUserManager?keyword="+keyword;
-		
-		return false;
-	})
-</script>
+
 <%@ include file="../adminInclude/footer.jsp"%>

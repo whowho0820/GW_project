@@ -3,201 +3,318 @@
 
 <%@ include file="../adminInclude/header.jsp"%>
 
-<style>
-	/* 페이징 */
-	.pagination {
-		display: inline-block;
-	  	padding-left: 0;
-	  	margin: 20px 0;
-	  	border-radius: 4px;
-	}
-	.pagination > li {
-  		display: inline;
-	}
-	.pagination > li > a,
-	.pagination > li > span {
-		position: relative;
-		float: left;
-		padding: 6px 12px;
-		margin-left: -1px;
-		line-height: 1.42857143;
-		color: #303A50;
-		text-decoration: none;
-		background-color: #fff;
-		border: 1px solid #ddd;
-	}
-	.pagination > li:first-child > a,
-	.pagination > li:first-child > span {
-		margin-left: 0;
-		border-top-left-radius: 4px;
-		border-bottom-left-radius: 4px;
-	}
-	.pagination > li:last-child > a,
-	.pagination > li:last-child > span {
-		border-top-right-radius: 4px;
-		border-bottom-right-radius: 4px;
-	}
-	.pagination > li > a:hover,
-	.pagination > li > span:hover,
-	.pagination > li > a:focus,
-	.pagination > li > span:focus {
-		color: #23527c;
-		background-color: #eee;
-		border-color: #ddd;
-	}
-	.pagination > .active > a,
-	.pagination > .active > span,
-	.pagination > .active > a:hover,
-	.pagination > .active > span:hover,
-	.pagination > .active > a:focus,
-	.pagination > .active > span:focus {
-		z-index: 2;
-		color: #fff;
-		cursor: default;
-		background-color: #303A50;
-		border-color: #303A50;
-	}
-	.pagination > .disabled > span,
-	.pagination > .disabled > span:hover,
-	.pagination > .disabled > span:focus,
-	.pagination > .disabled > a,
-	.pagination > .disabled > a:hover,
-	.pagination > .disabled > a:focus {
-		color: #777;
-		cursor: not-allowed;
-		background-color: #fff;
-		border-color: #ddd;
-	}
-	.pagination-lg > li > a,
-	.pagination-lg > li > span {
-		padding: 10px 16px;
-		font-size: 18px;
-	}
-	.pagination-lg > li:first-child > a,
-	.pagination-lg > li:first-child > span {
-		border-top-left-radius: 6px;
-		border-bottom-left-radius: 6px;
-	}
-	.pagination-lg > li:last-child > a,
-	.pagination-lg > li:last-child > span {
-		border-top-right-radius: 6px;
-		border-bottom-right-radius: 6px;
-	}
-	.pagination-sm > li > a,
-	.pagination-sm > li > span {
-		padding: 5px 10px;
-		font-size: 12px;
-	}
-	.pagination-sm > li:first-child > a,
-	.pagination-sm > li:first-child > span {
-       border-top-left-radius: 3px;
-	   border-bottom-left-radius: 3px;
-	}
-	.pagination-sm > li:last-child > a,
-	.pagination-sm > li:last-child > span {
-		border-top-right-radius: 3px;
-		border-bottom-right-radius: 3px;
+<link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/metisMenu.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+<script src="/resources/assets/js/jquery-2.2.3.min.js"></script>
+<script src="/resources/assets/js/jquery-ui.js"></script>
+<script src="/resources/assets/js/bootstrap.min.js"></script>
+<script src="/resources/assets/js/metisMenu.min.js"></script>
+<script src="/resources/assets/js/sb-admin-2.js"></script>
+
+<script src="/resources/assets/js/dynatree/jquery.dynatree.js"></script>
+<link href="/resources/assets/js/dynatree/ui.dynatree.css" rel="stylesheet"/>
+
+<script src="/resources/assets/js/project9.js"></script>  
+
+<script>
+var selectedNode = null;
+
+$(function(){
+	$("#tree").dynatree({
+		children: <c:out value="${treeStr}" escapeXml="false"/>,
+		onActivate: TreenodeActivate
+	});
+    $("#tree").dynatree("getRoot").visit(function(node){
+        node.expand(true);
+    });
+    $("#photofile").change(function(){
+    	readImage(this);
+    });
+});
+
+    function readImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#previewImg").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+function TreenodeActivate(node) {
+	selectedNode = node; 
+	
+    if (selectedNode==null || selectedNode.data.key==0) return;
+    
+    $.ajax({
+    	url: "adUserList",
+		type:"post", 
+    	data: { deptno : selectedNode.data.key }    	
+    }).success(function(result){
+    			$("#userlist").html(result);
+		}    		
+    );
+}
+
+function fn_addUser(){
+    if (selectedNode==null || selectedNode.data.key==0) {
+    	alert("<s:message code="msg.err.selectDept"/>");
+    	return;
+    }
+	$("#deptno").val("");	
+	$("#userno").val("");	
+	$("#userid").val("");
+    $("#userid").attr("readonly",false);
+	$("#usernm").val("");
+	$("#userpw").val("");
+	$("#userpw2").val("");
+	$('input:radio[name="userrole"][value="U"]').prop("checked", true);
+	$("#pwDiv").show("");
+	$("#photofile").val("");
+    $("#previewImg").attr("src","");
+	
+	$("#myModal").modal("show");	
+}
+
+function fn_addUserSave(){
+	if ( ! chkInputValue("#userid", "<s:message code="common.id"/>")) return false;
+	if ( ! chkInputValue("#usernm", "<s:message code="common.name"/>")) return false;
+	if ( $("#userno").val() === ""){
+		if ( ! chkInputValue("#userpw", "<s:message code="common.password"/>")) return false;
+		if ( ! chkInputValue("#userpw2", "<s:message code="common.passwordRe"/>")) return false;
+		if ( $("#userpw").val() !== $("#userpw2").val()){
+			alert("<s:message code="msg.err.noMatchPW"/>");
+			return false;
+		}
 	}
 	
-	/* best list */
-	.bestBoardBox table td,
-	.bestBoardBox table th {
-		border: none;
+	var file = $("input[type=file]")[0].files[0];
+	if (file) {
+		var formData = new FormData();
+		formData.append("userno", $("#userno").val());
+		formData.append("deptno", selectedNode.data.key);
+		formData.append("userid", $("#userid").val());
+		formData.append("usernm", $("#usernm").val());
+		formData.append("userpw", $("#userpw").val());
+		formData.append("userrole", $("#userrole").val());
+		formData.append("photofile", file); 
+		$.ajax({
+			url: "adUserSave",
+		    contentType: false,
+		    processData: false,		
+			type:"post", 
+			data : formData,
+		}).done(saveResult);
+	} else{
+		$("#deptno").val(selectedNode.data.key);	
+		var formData = $("#form1").serialize();
+		$.ajax({
+			url: "adUserSave",
+			type:"post", 
+			data : formData,
+		}).done(saveResult);
 	}
-</style>
+	$("#myModal").modal("hide");	
+}
+
+function saveResult(result){
+	if (result==="") {
+		alert("<s:message code="msg.err.usedID"/>");
+	} else{
+		$("#userlist").html(result);
+		alert("<s:message code="msg.boardSave"/>");
+	}	
+}
+
+function fn_chkUserid(){
+	if ( ! chkInputValue("#userid", "<s:message code="common.id"/>")) return false;
+	$.ajax({
+		url: "chkUserid", 
+		type:"post", 
+		data : {userid: $("#userid").val()},
+		success: function(result){
+			if (result) {
+				alert("<s:message code="msg.usedID"/>");
+			} else{
+				alert("<s:message code="msg.NoUsedID"/>");
+			}
+		}
+	})		
+}
+
+function fn_UserRead(userno){
+	$.ajax({
+		url: "adUserRead", 
+		type:"post", 
+		data : {userno:userno},
+		success: function(result){
+			$("#deptno").val(result.deptno);	
+			$("#userno").val(result.userno);
+			$("#userid").val(result.userid);	
+		    $("#userid").attr("readonly",true);
+			$("#usernm").val(result.usernm);
+			$('input:radio[name="userrole"][value="' + result.userrole + '"]').prop("checked", true);
+			$("#pwDiv").hide("");
+			$("#photofile").val("");
+			if (result.photo){
+		    	$("#previewImg").attr("src","fileDownload?downname="+result.photo);
+			} else {
+		    	$("#previewImg").attr("src","");
+			}
+
+			$("#myModal").modal("show");	
+		}
+	})		
+}
+
+function fn_UserDelete(userno){
+    if(!confirm("<s:message code="ask.Delete"/>")) return;
+
+	$.ajax({
+		url: "adUserDelete", 
+		type:"post", 
+		data : {userno:userno, deptno:selectedNode.data.key},
+		success: function(result){
+			$("#userlist").html(result);
+			alert("<s:message code="msg.boardDelete"/>");
+		}
+	})		
+}
+
+</script>    
+
 	<!--content area start-->
 	<div id="content" class="pmd-content inner-page">
 	<!--tab start-->
 	    <div class="container-fluid full-width-container value-added-detail-page">
 			<div>
-				<div class="pull-right table-title-top-action">
+				<%-- <div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
 					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="회원 ID 검색" name="keyword" >
 					</div>
 					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
-				</div>
+				</div> --%>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>회원 관리</span>
+					<i class="fa fa-sitemap fa-fw "></i> <span>사용자 관리</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
-				  <li><a href="${pageContext.request.contextPath }/admin/">Dashboard</a></li>
-				  <li class="active">회원 관리</li>
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">사용자 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
-			<!-- Table -->
-			<div class="table-responsive pmd-card pmd-z-depth">
-				<table class="table table-mc-red pmd-table">
-					<thead>
-						<tr>
-							<th>no</th>
-							<th>ID</th>
-							<th>회원명</th>
-							<th>e-mail</th>
-							<th>포인트</th>
-							<th>등급</th>
-							<th>탈퇴유무</th>
-							<th>탈퇴관리</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="item" items="${list }">
-							<tr>
-								<td>${item.userNo }</td>
-								<td>${item.userId}</td>
-								<td>${item.name }</td>
-								<td>${item.email }</td>
-								<td>${item.point }</td>	
-								<td>${item.userGrade.userGradeName}</td>
-								<td>
-									${item.userLeaveCondition}
-								</td>
-								<td>
-									<button class="btn btn-success">회원탈퇴</button>
-								</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-			<!-- 페이징 -->
-			<div style="text-align: center;">
-			  	<ul class="pagination list-inline taCenter">
-				  <!-- 페이징 숫자 버튼 자리 -->
-				  <!-- ex1 : cafeReview?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword} -->
-				  <!-- ex2 : <li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeReview?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li> -->
-				  <!-- ex3 : cafeReview?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword} -->
-				  	<c:if test="${pageMaker.prev == true }">
-						<li><a href="userManager?page=${pageMaker.startPage-1}&keyword=${cri.keyword}">&laquo;</a></li>
-					</c:if>
-					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="userManager?page=${idx}&keyword=${cri.keyword}">${idx }</a></li>
-					</c:forEach>
-					<c:if test="${pageMaker.next == true }">
-						<li><a href="userManager?page=${pageMaker.endPage+1}&keyword=${cri.keyword}">&raquo;</a></li>
-					</c:if>
-			  	</ul>
-			</div>
-			<!-- 페이징 end -->
-		</div>
-	</div>
-	<!--tab start-->
-	
-	<!--content area end-->
+			
+            <!-- /.row -->
+            <div class="row">
+            	<div class="col-lg-3" >
+	            	<div class="panel panel-default" >
+	            		<div class="panel-heading">
+	                            <s:message code="common.deptList"/>
+	                    </div>
+	                    <div style="max-height:400px; overflow:auto;" >
+					    	<div id="tree">
+							</div>
+						</div>
+					</div>
+                </div> 
+            	<div class="col-lg-6" >
+	            	<div class="panel panel-default" >
+	            		<div class="panel-heading">
+	            			<s:message code="common.userList"/>
+	            			<button class="btn btn-outline btn-primary pull-right" onclick="fn_addUser()" ><s:message code="board.append"/></button>	                            
+	                    </div>
+	                    <div class="panel-body" id="userlist">
+					    </div>    
+					</div>
+				</div>	
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
 
-<script>
-	$("#searchBtn").click(function(){
-		var keyword = $("input[name='keyword']").val();
+    </div>
+    <!-- /#wrapper -->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="closeX" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><s:message code="memu.user"/></h4>
+                </div>
+                <div class="modal-body">
+                	<form id="form1" name="form1">
+						<input type="hidden" name="userno" id="userno"> 
+						<input type="hidden" name="deptno" id="deptno"> 
+                    	<div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <label class="col-lg-2"><s:message code="common.id"/></label>
+                            <div class="col-lg-5">
+                            	<input type="text" class="form-control" id="userid" name="userid" maxlength="20">
+                            </div>
+                            <div class="col-lg-4">
+			                    <button type="button" class="btn btn-default" onclick="fn_chkUserid()"><s:message code="common.idchk"/></button>
+                            </div>
+                        </div>
+                    	<div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <label class="col-lg-2"><s:message code="common.name"/></label>
+                            <div class="col-lg-8">
+                            	<input type="text" class="form-control" id="usernm" name="usernm" maxlength="20">
+                            </div>
+                        </div>
+                    	<div class="row form-group" id="pwDiv">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-2"><label><s:message code="common.password"/></label></div>
+                            <div class="col-sm-4">
+                           		<input type="password" class="form-control" id="userpw" name="userpw" maxlength="20">
+                           	</div>
+                           	<div class="col-sm-4">
+                           		<input type="password" class="form-control" id="userpw2" name="userpw2" maxlength="20">
+                           	</div>
+                        </div>
+                    	<div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <label class="col-lg-2"><s:message code="common.role"/></label>
+                            <div class="col-lg-8 checkbox-inline">
+								 	<label><input name="userrole" id="userrole" type="radio" checked="checked" value="U"><s:message code="common.user"/></label>
+								 	<label><input name="userrole" id="userrole" type="radio" value="A"><s:message code="memu.admin"/></label>
+                            </div>
+                        </div>
+                    	<div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-2"><label><s:message code="common.photo"/></label></div>
+                            <div class="col-sm-3">
+                            	<img id="previewImg" style="width:100%; height: 120px; max-width: 100px;">
+                            </div>
+                            <div class="col-lg-5">
+								<input type="file" name="photofile" id="photofile" accept='image/*'/>
+                            </div>
+                        </div>  
+                	</form>        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close"><s:message code="common.btnClose"/></button>
+                    <button type="button" class="btn btn-primary" onclick="fn_addUserSave()"><s:message code="common.btnSave"/></button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->	
 		
-		if(keyword == '') {
-			alert("회원ID을 작성해주세요.");
-			return false;
-		}
-		
-		location.href = "userManager?keyword="+keyword;
-		
-		return false;
-	})
-</script>
 <%@ include file="../adminInclude/footer.jsp"%>

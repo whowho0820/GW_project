@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//script/coffeemukka_init.sql=UTF-8
 encoding//src/main/java=UTF-8
+encoding//src/main/resources/message/message.properties=UTF-8
+encoding//src/main/resources/message/message_en.properties=UTF-8
 encoding//src/test/java=UTF-8

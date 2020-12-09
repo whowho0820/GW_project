@@ -55,4 +55,8 @@ public class UsersService {
 	public int selectUserListTotalCnt(int userType, SearchCriteria cri) throws Exception {
 		return dao.selectUserListTotalCnt(userType, cri);
 	}
+	
+	
+	
+	
 }

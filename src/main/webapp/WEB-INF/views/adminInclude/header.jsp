@@ -216,8 +216,8 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/cafeUserManager">카페 점주 관리</a></li>
-					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/userManager">회원 관리</a></li>
+					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/cafeUserManager">부서 관리</a></li>
+					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/userManager">사용자 관리</a></li>
 					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/adminManager">관리자 관리</a></li>
 				</ul>
 			</li>

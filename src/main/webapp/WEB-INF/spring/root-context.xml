@@ -24,17 +24,20 @@
 	<!-- log 볼 수 있도록 설정된 곳, 커넥션을 사용할 때 log4jdbc를 거쳐서 가도록 하는 것 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-<!--    <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/coffeemukka?zeroDateTimeBehavior=convertTonull"></property>  -->
 		<!-- 서버용 -->
-		<property name="url" value="jdbc:log4jdbc:mariadb://java3-1.yi.or.kr:3306/coffeemukka?zeroDateTimeBehavior=convertTonull"></property> 
-<!--    
+<!-- 		<property name="url" value="jdbc:log4jdbc:mariadb://java3-1.yi.or.kr:3306/coffeemukka?zeroDateTimeBehavior=convertTonull"></property> 
+ -->
+    
+    	<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/coffeemukka?zeroDateTimeBehavior=convertTonull"></property> 
 		<property name="username" value="root"></property>
 		<property name="password" value="rootroot"></property>
--->		
+	
 		<!-- 서버에 올릴 때 아래의 내용으로 변경해야함 -->
-<!--    <property name="url" value="jdbc:log4jdbc:mariadb://java3-1.yi.or.kr:3306/coffeemukka?useUnicode=true&amp;characterEncoding=utf8"></property>   -->
+<!--    
+		<property name="url" value="jdbc:log4jdbc:mariadb://java3-1.yi.or.kr:3306/coffeemukka?useUnicode=true&amp;characterEncoding=utf8"></property> 
 		<property name="username" value="java3-1"></property>
 		<property name="password" value="java3-1333"></property>
+-->
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -56,6 +59,25 @@
 	<!-- 베이스패키지안에 있는 impl클래스를 다 빈으로 등록하겠다 -->
 	<context:component-scan base-package="com.yi.persistence"></context:component-scan>	
 	<context:component-scan base-package="com.yi.service"></context:component-scan>	
+	<context:component-scan base-package="gu.admin.organ"></context:component-scan>	
+	<context:component-scan base-package="gu.admin.board"></context:component-scan>	
+	<context:component-scan base-package="gu.board"></context:component-scan>	
+	<context:component-scan base-package="gu.common"></context:component-scan>	
+	<context:component-scan base-package="gu.etc"></context:component-scan>	
+	<context:component-scan base-package="gu.member"></context:component-scan>	
+	
+	
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" >
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:/message/message</value>
+			</list>
+		</property>
+		<property name="fallbackToSystemLocale" value="false" />
+		<property name="cacheSeconds" value="10"/>
+	</bean>	
 	
 	<!-- <context:component-scan base-package="com.yi.aop"></context:component-scan> -->
 	

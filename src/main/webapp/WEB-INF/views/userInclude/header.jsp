@@ -497,9 +497,9 @@
 		<!-- topMenu start -->
 		<div id="topMenu" class="clearfix">
 			<div class="logoWrap">
-				<a href="${pageContext.request.contextPath }/user/"><img src="${pageContext.request.contextPath }/resources/images/logo.png" alt="logo" id="logo" /></a>
+				<a href="${pageContext.request.contextPath }/user/"><img src="${pageContext.request.contextPath }/resources/images/logo2.png" alt="logo" id="logo" /></a>
 			</div>
-			<div class="rankWrap">
+			<%-- <div class="rankWrap">
 				<p><span id="preMonth"></span>월의 카페순위</p>
 				<p class="rankOne"><span class="red bold">1.</span> <a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${bestCafeNumFive[0].cafeNo }">${bestCafeNumFive[0].cafeName }</a> <span class="rankIcon"><i class="fas fa-angle-down"></i></span></p>
 				<ul id="rankUl">
@@ -508,10 +508,10 @@
 					<li><span class="red bold">4.</span> <a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${bestCafeNumFive[3].cafeNo }">${bestCafeNumFive[3].cafeName }</a></li>
 					<li><span class="red bold">5.</span> <a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${bestCafeNumFive[4].cafeNo }">${bestCafeNumFive[4].cafeName }</a></li>
 				</ul>
-			</div>
+			</div> --%>
 			<div class="topMenuWrap">
 				<ul>
-					<li><a href="#">ABOUT CMukka</a></li>
+			<!-- 		<li><a href="#">ABOUT CMukka</a></li> -->
 					<c:choose>
 						<c:when test="${Auth == null }">
 							<input type="hidden" value="0" name="AuthNo">

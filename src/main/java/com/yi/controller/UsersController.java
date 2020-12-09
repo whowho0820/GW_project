@@ -44,7 +44,9 @@ public class UsersController {
 					return "/user/userHome";
 				}
 				session.setAttribute("Auth","관리자");
+				session.setAttribute("userId", "admin");
 				session.setAttribute("adminId", adminResult.getAnoId());
+				session.setAttribute("AuthNo", "1");
 				return "redirect:/";
 			}
 		}else {
