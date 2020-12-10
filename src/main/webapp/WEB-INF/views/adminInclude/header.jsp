@@ -117,6 +117,9 @@
 			if(subMenu.indexOf("monthCafeManager") != -1) {
 				$(".cafeMgrSub").eq(2).addClass("active");
 			} 
+			if(subMenu.indexOf("monthCafeManager2") != -1) {
+				$(".cafeMgrSub").eq(3).addClass("active");
+			} 
 			if(subMenu.indexOf("cafeUserManager") != -1) {
 				$(".userMgrSub").eq(0).addClass("active");
 			} 
@@ -230,6 +233,7 @@
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager">결재받을 문서</a></li>
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/cafeManager">결재할 문서</a></li>
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager">기안하기</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager2">결재문서 양식</a></li>
 				</ul>
 			</li>
 			<li class="dropdown pmd-dropdown"> 

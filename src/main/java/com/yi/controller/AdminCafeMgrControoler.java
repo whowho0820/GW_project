@@ -110,6 +110,24 @@ public class AdminCafeMgrControoler {
 		return "/admin/adminMonthCafeMgr";
 	}
 	
+	//월간 카페 등록 및 관리
+		@RequestMapping(value = "monthCafeManager2", method = RequestMethod.GET)
+		public String monthCafeMgr2(SearchCriteria cri, Model model) throws Exception {
+			cri.setPerPageNum(20);
+			
+			List<PowerLinkVO> list = powerService.selectAdminMonCafeList(cri);
+			
+			PageMaker pageMater = new PageMaker();
+			pageMater.setCri(cri);
+			pageMater.setTotalCount(powerService.selectAdminMonCafeTotalCnt(cri));
+			
+			model.addAttribute("list", list);
+			model.addAttribute("cri", cri);
+			model.addAttribute("pageMaker", pageMater);
+			
+			return "/admin/adminMonthCafeMgr2";
+		}
+		
 	
 	// 월간 카페 게시일 등록
 	@RequestMapping(value = "monthCafeManager/modify", method = RequestMethod.GET)
