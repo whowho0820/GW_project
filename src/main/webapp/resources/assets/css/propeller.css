@@ -2621,7 +2621,7 @@ input[type="checkbox][disabled"]:checked + .pmd-switch-label::after {
   display: block;
   width: 280px;
   min-height: 100%;
-  padding-top: 64px;
+  padding-top: 120px;
   overflow-x: hidden;
   overflow-y: auto;
   background: #fff;

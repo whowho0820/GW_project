@@ -497,7 +497,7 @@
 		<!-- topMenu start -->
 		<div id="topMenu" class="clearfix">
 			<div class="logoWrap">
-				<a href="${pageContext.request.contextPath }/user/"><img src="${pageContext.request.contextPath }/resources/images/logo2.png" alt="logo" id="logo" /></a>
+				<a href="${pageContext.request.contextPath }/user/"><img src="${pageContext.request.contextPath }/resources/images/logo21.png" alt="logo" id="logo" /></a>
 			</div>
 			<%-- <div class="rankWrap">
 				<p><span id="preMonth"></span>월의 카페순위</p>
@@ -523,7 +523,7 @@
 							<input type="hidden" value="${AuthNo }" name="AuthNo">
 							<li>
 								<a href="${pageContext.request.contextPath }/admin/">
-									<button style="cursor: pointer;width: 70px;height: 30px;border: 1px;background: red;color: white;letter-spacing: 3px;font-weight: 500;">관리자</button>
+									<button style="cursor: pointer;width: 70px;height: 30px;border: 1px;background: #85cc28;color: white;letter-spacing: 3px;font-weight: 500;">관리자</button>
 								</a>
 							</li>
 							<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
@@ -550,18 +550,18 @@
 				    
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h3 class="modal-title">Coffee MuKKa 로그인하기</h3>
+						<h3 class="modal-title">로그인</h3>
 					</div>
 					
 					<!-- Modal body -->
 					<div class="modal-body">
 						<form id="loginForm" action="${pageContext.request.contextPath }/user/" method="post">
-							<img src="${pageContext.request.contextPath }/resources/images/login.png" style="width: 460px;">
-							<h3 style="color: #ed7d31;margin: 10px;">오늘은 어디서 커피한잔? '커 피 무 까'</h3>
+							<%-- <img src="${pageContext.request.contextPath }/resources/images/h.jpg" style="width: 460px;"> --%>
+							<h3 style="color: #85cc28;margin: 10px;"></h3>
 							<input class="inputRegi" type="text" name="userId" placeholder="아이디" style="margin-bottom: 20px;"><br>
 							<input class="inputRegi" type="password" name="password" autocomplete="on" placeholder="비밀번호" style="margin-bottom: 5px;"><br>
-							<a href="#" id="findId" style="color:#5B9BD5;margin-left: 150px;">아이디 찾기</a>
-							<a href="#" id="findPass" style="color:#5B9BD5;margin-left: 10px;">비밀번호 찾기</a><br>
+							<a href="#" id="findId" style="color:64CD3C;margin-left: 150px;">아이디 찾기</a>
+							<a href="#" id="findPass" style="color:64CD3C;margin-left: 10px;">비밀번호 찾기</a><br>
 							<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
 						</form>
 					</div>
@@ -569,7 +569,7 @@
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#ed7d31;">회원가입</a>
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
 						</div>
 					</div>
 				    
@@ -603,7 +603,7 @@
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#ed7d31;">회원가입</a>
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
 						</div>
 					</div>
 				    
@@ -637,7 +637,7 @@
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#ed7d31;">회원가입</a>
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
 						</div>
 					</div>
 				    
@@ -688,7 +688,7 @@
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#ed7d31;">로그인</a>
+							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#64CD3C;">로그인</a>
 						</div>
 					</div>
 				    
@@ -705,7 +705,7 @@
 						<li>
 							<a href="${pageContext.request.contextPath }/user/mukkaCafe" class="menuName">
 								<img src="${pageContext.request.contextPath }/resources/images/menu1.png" alt="menu" id="mukkCafe" class="menuIcon"/>
-								<span>커피무까</span>
+								<span>마음:TACT</span>
 							</a>
 							<ul class="subMenuUl">
 								<li><a href="${pageContext.request.contextPath}/user/mukkaCafe">커피무까</a></li>
@@ -718,17 +718,17 @@
 						<li>
 							<a href="${pageContext.request.contextPath }/user/community" class="menuName">
 								<img src="${pageContext.request.contextPath }/resources/images/menu2.png" alt="menu" id="community" class="menuIcon"/>
-								<span>커뮤니티</span>
+								<span>소통:TACT</span>
 							</a>
 							<ul class="subMenuUl">
-								<li><a href="${pageContext.request.contextPath}/user/community">MuKKa의 전당</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/community/cafeReview">생생 카페 탐방기</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/community/cafeRecommend">MuKKa人 추천 카페</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/community/#">사장님 고민 나눔</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/community/#">자유게시판</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/community">자료실</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/community/cafeReview">자유게시판</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/community/cafeRecommend">공지사항</a></li>
+<%-- 								<li><a href="${pageContext.request.contextPath}/user/community/#">사장님 고민 나눔</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/community/#">자유게시판</a></li> --%>
 							</ul>
 						</li>
-						<li>
+						<%-- <li>
 							<a href="#" class="menuName">
 								<img src="${pageContext.request.contextPath }/resources/images/menu3.png" alt="menu" id="pointShop" class="menuIcon"/>
 								<span>포인트샵</span>
@@ -739,7 +739,7 @@
 								<img src="${pageContext.request.contextPath }/resources/images/menu4.png" alt="menu" id="board" class="menuIcon"/>
 								<span>공지사항</span>
 							</a>
-						</li>
+						</li> --%>
 					</ul>
 					<div class="mainSearchBtn"><a href="#"></a></div>
 				</div>
@@ -834,7 +834,7 @@
 							<input type="hidden" name="themeName"/>
 							<div class="themeBarBox barBox">
 								<img src="${pageContext.request.contextPath }/resources/images/bar_search.png" alt="icon" />
-								<span class="themeSapn">커.피.무.까 ?</span>
+								<span class="themeSapn">마음:TACT</span>
 							</div>	
 						</div>
 						<div class="searchBtn">
@@ -855,7 +855,7 @@
 	<!-- container start -->
 	<div class="container">
 		<div class="activeMenus">
-			<p class="activeMenu">Coffee MuKKa <span class="activeTitle">> <span class="red">환영합니다!</span></span></p>
+			<p class="activeMenu">마음:TACT <span class="activeTitle">> <span class="red">환영합니다!</span></span></p>
 			<p class="activeTotalCnt"></p>
 		</div>
 	</div>

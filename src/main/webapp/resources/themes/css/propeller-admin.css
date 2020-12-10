@@ -51,7 +51,7 @@ nav .notification .notification-blank span.dic { display:block; font-size:58px; 
 }
 
 /*============================= content area =========================*/
-.pmd-content{padding-top: 63px; padding-bottom:90px; padding-left:0; padding-right:0;}
+.pmd-content{padding-top: 120px; padding-bottom:90px; padding-left:0; padding-right:0;}
 .pmd-content .container-fluid { max-width:1590px;}
 @media (max-width: 767px) {
 .pmd-content{padding-top: 63px; padding-left:0; padding-bottom:210px; padding-right:0;}

@@ -15,8 +15,8 @@ public class UserSvc {
     @Autowired
     private SqlSessionTemplate sqlSession;    
         
-    public List<?> selectUserList(String param) {
-        return sqlSession.selectList("selectUserList", param);
+    public List<?> ad_selectUserList(String param) {
+        return sqlSession.selectList("ad_selectUserList", param);
     }
     
     public List<?> selectUserListWithDept(SearchVO param) {

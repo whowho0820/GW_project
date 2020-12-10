@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <%@ include file="../adminInclude/header.jsp"%>
 
-<style>
+<%-- <style>
 	/* 페이징 */
 	.pagination {
 		display: inline-block;
@@ -104,29 +106,60 @@
 	.bestBoardBox table th {
 		border: none;
 	}
-</style>
+</style> --%>
 	<!--content area start-->
 	<div id="content" class="pmd-content inner-page">
 	<!--tab start-->
 	    <div class="container-fluid full-width-container value-added-detail-page">
 			<div>
 				<div class="pull-right table-title-top-action">
-					<div class="pmd-textfield pull-left">
+					<%-- <div class="pmd-textfield pull-left">
 					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="카페이름 검색" name="keyword" >
 					</div>
-					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a> --%>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>월간 카페 등록 및 관리</span>
+					<i class="fa fa-edit fa-fw"></i><span>기안하기</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
-				  <li><a href="${pageContext.request.contextPath }/admin/">Dashboard</a></li>
-				  <li class="active">월간 카페 등록 및 관리</li>
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">기안하기</li>
 				</ol><!--breadcrum end-->
 			</div>
-			<!-- Table -->
+			
+			            <!-- /.row -->
+            <div class="panel panel-default"> 
+            	<div class="panel-body">
+					<c:if test="${listview.size()==0}">
+						<div class="listBody height200">등록된 양식이 없습니다.<br/>결재문서양식이 등록되어야 합니다. 관리자에게  연락하세요.</div>
+					</c:if>
+					
+					<br/>
+					<c:forEach var="listview" items="${listview}" varStatus="status">
+						<c:url var="link" value="signDocForm">
+							<c:param name="dtno" value="${listview.dtno}" />
+						</c:url>
+					
+						<a href="${link}">
+				            <div class="panel panel-default" style="width: 150px; height: 200px; display:inline-block; overflow:hidden; "> 
+				            	<div class="panel-heading"><c:out value="${listview.dttitle}"/></div>
+				            	<div class="panel-body"><img src="images/if_survey_49353.png" style="margin: 30px 25px;"/></div>
+							</div>
+						</a>
+					</c:forEach>
+						
+            	</div>    
+            </div>
+            <!-- /.row --> 
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+			
+<%-- 			<!-- Table -->
 			<div class="table-responsive pmd-card pmd-z-depth">
 				<table class="table table-mc-red pmd-table">
 					<thead>
@@ -149,7 +182,7 @@
 									<fmt:formatDate value="${item.postDate }" pattern="yyyy/MM/dd" var="postDate"/>
 									<c:if test="${postDate != null }">${postDate }</c:if>
 									<c:if test="${postDate == null }"><strong style="font-size: 14px; color: #ff5722">게시일 미등록</strong></c:if>
-									<%-- <c:if test="${postDate == '0001/01/01' }"><strong style="font-size: 14px; color: #ff5722">게시일 미등록</strong></c:if> //로컬에서 작업할 때 --%>
+									<c:if test="${postDate == '0001/01/01' }"><strong style="font-size: 14px; color: #ff5722">게시일 미등록</strong></c:if> //로컬에서 작업할 때
 								</td>
 								<td>
 									<c:if test="${item.powCdt == 'WAITING' }"><span style="color:#03a9f4;">게시 대기중</span></c:if>
@@ -159,7 +192,7 @@
 								</td>
 								<td>
 									<c:if test="${postDate == null }">
-									<%-- <c:if test="${postDate == '0001/01/01'}"> // 로컬에서 작업할 때--%>
+									<c:if test="${postDate == '0001/01/01'}"> // 로컬에서 작업할 때
 										<button class="btn btn-success postDateAddBtn" data-powNo="${item.powNo }">게시일 등록</button>
 									</c:if>
 									<c:if test="${postDate != null && item.powCdt == 'WAITING'}">
@@ -220,5 +253,5 @@
 		
 		location.href = "${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager/cancelModify?powNo="+powNo+"&year="+postYear+"&month="+postMonth+"&page=${cri.page}&keyword=${cri.keyword}";
 	})
-</script>
+</script> --%>
 <%@ include file="../adminInclude/footer.jsp"%>

@@ -5,30 +5,6 @@
 <%@ include file="../adminInclude/header.jsp"%>
 
 
-<link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="/resources/assets/css/metisMenu.min.css" rel="stylesheet"/>
-<link href="/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
-<link href="/resources/assets/css/sb-admin/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-
-<script src="/resources/assets/js/jquery-2.2.3.min.js"></script>
-<script src="/resources/assets/js/jquery-ui.js"></script>
-<script src="/resources/assets/js/bootstrap.min.js"></script>
-<script src="/resources/assets/js/metisMenu.min.js"></script>
-<script src="/resources/assets/js/sb-admin-2.js"></script>
-
-<script src="/resources/assets/js/dynatree/jquery.dynatree.js"></script>
-<link href="/resources/assets/js/dynatree/ui.dynatree.css" rel="stylesheet"/>
-
-<script src="/resources/assets/js/project9.js"></script>  
-
 <script>
 var selectedNode = null;
 

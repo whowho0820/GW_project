@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+
+
 
 <%@ include file="../adminInclude/header.jsp"%>
 
-<style>
+<!-- <style>
 	/* 페이징 */
 	.pagination {
 		display: inline-block;
@@ -104,29 +109,109 @@
 	.bestBoardBox table th {
 		border: none;
 	}
-</style>
+</style> -->
 	<!--content area start-->
 	<div id="content" class="pmd-content inner-page">
 	<!--tab start-->
 	    <div class="container-fluid full-width-container value-added-detail-page">
 			<div>
 				<div class="pull-right table-title-top-action">
-					<div class="pmd-textfield pull-left">
+					<%-- <div class="pmd-textfield pull-left">
 					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="카페이름 검색" name="keyword" >
-					</div>
-					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+					</div> 
+					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a> --%>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
-					<span>신규 등록 카페 승인</span>
+					<i class="fa fa-edit fa-fw"></i><span>결재받을 문서</span>
 				</h1><!-- End Title -->
 				<!--breadcrum start-->
 				<ol class="breadcrumb text-left">
-				  <li><a href="${pageContext.request.contextPath }/admin/">Dashboard</a></li>
-				  <li class="active">신규 등록 카페 승인</li>
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">결재받을 문서</li>
 				</ol><!--breadcrum end-->
 			</div>
-			<!-- Table -->
+			
+			<div class="row">
+                <div class="col-lg-12">
+				 	<label><input name="searchExt1" id="searchExt1" type="radio" value="" onclick="fn_formSubmit()" <c:if test='${searchVO.searchExt1==""}'>checked</c:if>> 전체</label>
+				 	<label><input name="searchExt1" id="searchExt1" type="radio" value="0" onclick="fn_formSubmit()" <c:if test='${searchVO.searchExt1=="0"}'>checked</c:if>> 임시저장</label>
+				 	<label><input name="searchExt1" id="searchExt1" type="radio" value="2" onclick="fn_formSubmit()" <c:if test='${searchVO.searchExt1=="2"}'>checked</c:if>> 진행중</label>
+				 	<label><input name="searchExt1" id="searchExt1" type="radio" value="4" onclick="fn_formSubmit()" <c:if test='${searchVO.searchExt1=="4"}'>checked</c:if>> 완료</label>
+				 	<label><input name="searchExt1" id="searchExt1" type="radio" value="3" onclick="fn_formSubmit()" <c:if test='${searchVO.searchExt1=="3"}'>checked</c:if>> 반려</label>
+                </div>
+            </div>
+            
+            <!-- /.row -->
+            <div class="panel panel-default"> 
+            	<div class="panel-body">
+					<div class="listHead">
+						<div class="listHiddenField pull-left field60"><s:message code="board.no"/></div>
+						<div class="listHiddenField pull-right field100">종류</div>
+						<div class="listHiddenField pull-right field100"><s:message code="crud.crdate"/></div>
+						<div class="listHiddenField pull-right field100"><s:message code="crud.usernm"/></div>
+						<div class="listHiddenField pull-right field100">상태</div>
+						<div class="listTitle"><s:message code="crud.crtitle"/></div>
+					</div>
+					
+					<c:if test="${listview.size()==0}">
+						<div class="listBody height200">
+						</div>
+					</c:if>
+					
+					<c:forEach var="listview" items="${listview}" varStatus="status">
+						<c:url var="link" value="signDocRead">
+							<c:param name="docno" value="${listview.docno}" />
+						</c:url>
+					
+						<div class="listBody">
+							<div class="listHiddenField pull-left field60 textCenter"><c:out value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}"/></div>
+							<div class="listHiddenField pull-right field100 textCenter"><c:out value="${listview.dttitle}"/></div>
+							<div class="listHiddenField pull-right field100 textCenter"><c:out value="${listview.updatedate}"/></div>
+							<div class="listHiddenField pull-right field100 textCenter"><c:out value="${listview.usernm}"/></div>
+							<div class="listHiddenField pull-right field100 textCenter"><c:out value="${listview.docstatus}"/></div>
+							<div class="listTitle" title="<c:out value="${listview.doctitle}"/>">
+								<a href="${link}"><c:out value="${listview.doctitle}"/></a>
+							</div>
+						</div>
+					</c:forEach>	
+					
+					<br/>
+					    <jsp:include page="../common/pagingforSubmit.jsp" />
+				    
+						<div class="form-group">
+							<div class="checkbox col-lg-3 pull-left">
+							 	<label class="pull-right">
+							 		<input type="checkbox" name="searchType" value="doctitle" <c:if test="${fn:indexOf(searchVO.searchType, 'doctitle')!=-1}">checked="checked"</c:if>/>
+		                        	제목
+		                        </label>
+							 	<label class="pull-right">
+							 		<input type="checkbox" name="searchType" value="doccontents" <c:if test="${fn:indexOf(searchVO.searchType, 'doccontents')!=-1}">checked="checked"</c:if>/>
+		                        	내용
+		                        </label>
+		                   </div>
+		                   <div class="input-group custom-search-form col-lg-3">
+	                                <input class="form-control" placeholder="Search..." type="text" name="searchKeyword" 
+	                                	   value='<c:out value="${searchVO.searchKeyword}"/>' >
+	                                <span class="input-group-btn">
+	                                <button class="btn btn-default" onclick="fn_formSubmit()">
+	                                    <i class="fa fa-search"></i>
+	                                </button>
+	                            </span>
+	                       </div>
+						</div>
+            	</div>    
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+		</form>	
+
+    </div>
+    <!-- /#wrapper -->
+			
+			
+<%-- 			<!-- Table -->
 			<div class="table-responsive pmd-card pmd-z-depth">
 				<table class="table table-mc-red pmd-table">
 					<thead>
@@ -228,5 +313,5 @@
 		
 		location.href = "${pageContext.request.contextPath }/admin/cafeMgn/newCafeManager/modify?cafeNo="+cafeNo+"&page=${cri.page}&keyword=${cri.keyword}";
 	})
-</script>
+</script> --%>
 <%@ include file="../adminInclude/footer.jsp"%>

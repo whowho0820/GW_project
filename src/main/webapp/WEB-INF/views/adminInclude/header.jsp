@@ -38,8 +38,31 @@
 <!-- adminCommon css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/adminCommon.css" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/metisMenu.min.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
+<link href="/resources/assets/css/sb-admin/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+<script src="/resources/assets/js/jquery-2.2.3.min.js"></script>
+<script src="/resources/assets/js/jquery-ui.js"></script>
+<script src="/resources/assets/js/bootstrap.min.js"></script>
+<script src="/resources/assets/js/metisMenu.min.js"></script>
+<script src="/resources/assets/js/sb-admin-2.js"></script>
+
+<script src="/resources/assets/js/dynatree/jquery.dynatree.js"></script>
+<link href="/resources/assets/js/dynatree/ui.dynatree.css" rel="stylesheet"/>
+
+<script src="/resources/assets/js/project9.js"></script>  
 
 <!-- 구글 차트 api -->
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -204,9 +227,9 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager">신규 등록 카페 승인</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/cafeManager">카페 관리</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager">월간 카페 등록 및 관리</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager">결재받을 문서</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/cafeManager">결재할 문서</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager">기안하기</a></li>
 				</ul>
 			</li>
 			<li class="dropdown pmd-dropdown"> 

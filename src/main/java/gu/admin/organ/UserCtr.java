@@ -63,7 +63,7 @@ public class UserCtr {
      */
     public String common_UserList(ModelMap modelMap, String deptno) {
 
-        List<?> listview  = userSvc.selectUserList(deptno);
+        List<?> listview  = userSvc.ad_selectUserList(deptno);
         
         modelMap.addAttribute("listview", listview);
         

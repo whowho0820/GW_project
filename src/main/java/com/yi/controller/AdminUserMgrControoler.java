@@ -98,8 +98,11 @@ public class AdminUserMgrControoler {
     
     @RequestMapping(value = "/userManager")
     public String user(HttpServletRequest request, ModelMap modelMap) {
-     String userno = request.getSession().getAttribute("userno").toString();
-     
+    
+	 String auth = request.getSession().getAttribute("Auth").toString(); 
+	 String userno = request.getSession().getAttribute("userId").toString();
+	 String authno = request.getSession().getAttribute("AuthNo").toString(); 	
+         
      etcSvc.setCommonAttribute(userno, modelMap);
      
      List<?> listview   = deptSvc.selectDepartment();
@@ -127,11 +130,11 @@ public class AdminUserMgrControoler {
      
     public String common_UserList(ModelMap modelMap, String deptno) {
 
-        List<?> listview  = userSvc.selectUserList(deptno);
+        List<?> listview  = userSvc.ad_selectUserList(deptno);
         
         modelMap.addAttribute("listview", listview);
         
-        return "admin/organ/UserList";
+        return "admin/UserList";
     }
     
    

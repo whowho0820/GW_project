@@ -44,7 +44,7 @@
     }
    	.cafeMuKKaAdd .cafeMuKKaAddWrap2{
    		margin-top: 20px;
-	    background: url("${pageContext.request.contextPath }/resources/images/mainImg01.jpg") no-repeat;
+	    background: url("${pageContext.request.contextPath }/resources/images/mind.jpg") no-repeat;
 	    background-size: cover;
 		width: 100%;
 		height: 630px;
@@ -811,7 +811,7 @@
 		<div class="cafeMuKKaAdd">
 			<div class="cafeMuKKaAddWrap1">
 				<h1 class="typing-txt">
-					#키워드 중심의 카페검색 Coffee MuKKa
+					#언제든지, 소통할 수 있는 곳 마음:TACT
 				</h1>
 				<h1 class="typing"></h1>
 			</div>
@@ -819,22 +819,22 @@
 				<ul class="cafeMuKKaMainBoxs">
 					<li class="mainBox">
 						<a href="${pageContext.request.contextPath}/user/mukkaCafe">
-							<p class="mainInfoText"><i>나의 일상이 되는 또 다른 공간<br>커피 한 잔의 여유를 만나는 나만의 카페</i></p>
-							<h1 class="mainTitle"><i>Zone & Theme</i></h1>
+							<p class="mainInfoText"><i>코로나블루를 예방하기 위해<br>생애주기별 검사</i></p>
+							<h1 class="mainTitle"><i>mind:TACT</i></h1>
 							<span class="viewpoint-first"><img src="${pageContext.request.contextPath }/resources/images/viewpoint.png">　<i>view more</i></span>
 						</a>
 					</li>
 					<li class="mainBox">
 						<a href="${pageContext.request.contextPath}/user/community">
-							<p class="mainInfoText"><i>이제 어디 갈지 너무 고민하지 마세요</i></p>
+							<p class="mainInfoText"><i>언제 어디서든 소통할 수 있는 공간</i></p>
 							<h1 class="mainTitle"><i>Community</i></h1>
 							<span class="viewpoint-second"><i>view more</i>　<img src="${pageContext.request.contextPath }/resources/images/viewpoint.png" id="viewpoint_right"></span>
 						</a>
 					</li>
 					<li class="mainBox">
 						<a href="#">
-							<p class="mainInfoText"><i>우리 함께 찾아봐요</i></p>
-							<h1 class="mainTitle"><i>Point Shop</i></h1>
+							<p class="mainInfoText"><i>우리 함께 건강한 방법 찾아봐요</i></p>
+							<h1 class="mainTitle"><i>Health</i></h1>
 							<span class="viewpoint-third"><img src="${pageContext.request.contextPath }/resources/images/viewpoint.png">　<i>view more</i></span>
 						</a>
 					</li>
@@ -844,7 +844,7 @@
 		
 		<!-- 파워링크 : 해당카페번호꺼내서 해당이미지 1개씩 꺼내기 -->
 		<div class="powerLinkArea">
-			<h2><a href ="${pageContext.request.contextPath}/user/mukkaCafe/monthCafe" class="mainTitle">오늘 여기서 커피한잔 어때?</a></h2>
+			<h2><a href ="${pageContext.request.contextPath}/user/mukkaCafe/monthCafe" class="mainTitle">놀면 뭐하니?</a></h2>
 			<div class="powerLinkWrap">
 				<ul class="powerBanner" val="0" mx="4">
 				   <c:forEach var="powerList" items="${powerList}">
@@ -871,9 +871,9 @@
 						<a href="#">
 							<div class="noticeTitleWrap">
 								<img src="${pageContext.request.contextPath }/resources/images/notice03.png" class="noticeIcon">
-								<p class="smallTitle1">신규카페 등록 혜택</p>
-								<h2>月刊  카페 등록 이용권 3회부여</h2>
-								<p class="smallTitle2">신규 사장님 혜택</p>
+								<p class="smallTitle1">마음을 전해요</p>
+								<h2>심리검사 3회 무료</h2>
+								<p class="smallTitle2">신규가입자 혜택</p>
 								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
 							</div>
 						</a>
@@ -882,9 +882,9 @@
 						<a href="#">
 							<div class="noticeTitleWrap">
 								<img src="${pageContext.request.contextPath }/resources/images/notice02.png" class="noticeIcon">
-								<p class="smallTitle1">탐방기 작가 KING 누.구.나 쓸 수 있 다!</p>
-								<h2>최대 10만 Beans 증정</h2>
-								<p class="smallTitle2">매월 1번, 전월기준 1·2·3등 베스트 탐방기 선정</p>							
+								<p class="smallTitle1">놀면뭐하니</p>
+								<h2>맞춤 해결방법 제시</h2>
+								<p class="smallTitle2">매월 1번, 베스트 해결방법 선정</p>							
 								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
 							</div>
 						</a>
@@ -893,7 +893,7 @@
 						<a href="#">					
 							<div class="noticeTitleWrap">
 								<img src="${pageContext.request.contextPath }/resources/images/notice01.png" class="noticeIcon">
-								<p class="smallTitle1">MuKKa人이 되신걸 환영합니다!</p>
+								<p class="smallTitle1">마음:TACT人이 되신걸 환영합니다!</p>
 								<h2>최대 8,000 Beans 증정</h2>
 								<p class="smallTitle2">신규 회원 혜택</p>							
 								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
@@ -917,7 +917,7 @@
 		<!-- 카페 리스트 -->
 		<div class="cafeListArea">
 			<div class="newCafeList left">
-				<h2 class="newCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe" class="mainTitle"><i class="fas fa-mug-hot"></i> 반짝반짝 신상카페</a></h2>
+				<h2 class="newCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe" class="mainTitle"><i class="fas fa-mug-hot"></i> 생애주기별 심리검사</a></h2>
 				
 				<c:forEach var="newCafeList" items="${newCafeList}">
 					<div class="newCafeImgs">
@@ -977,7 +977,7 @@
 			</div>
 			
 			<div class="mukkaLikeCafeList right">
-				<h2 class="likeCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe/mukkaBest" class="mainTitle"><i class="fas fa-mug-hot"></i> MuKKa人이 애정하는 그카페</a> <span class="orange term"></span></span></h2>
+				<h2 class="likeCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe/mukkaBest" class="mainTitle"><i class="fas fa-mug-hot"></i> 마음:TACT人이 애정하는 solution</a> <span class="orange term"></span></span></h2>
 				<div class="likeCafeList">
 					<ul>
 						<c:forEach var="bestCafeList" items="${bestCafeList}">
@@ -1016,7 +1016,7 @@
 		
 		<!-- 베스트 카페탐방기 -->
 		<div class="baseCafeReview">
-			<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community/cafeReview" class="mainTitle"><i class="fas fa-mug-hot"></i> MuKKa人이 전하는 생생 카페탐방기</a> <span id="bestMark">BEST</span></h2>
+			<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community/cafeReview" class="mainTitle"><i class="fas fa-mug-hot"></i> 마음:TACT人이 전하는 후기</a> <span id="bestMark">BEST</span></h2>
 			<div class="baseList1-3 bottomLine">
 				<ul>
 					<!-- 2위 -->
@@ -1132,7 +1132,7 @@
 		<!-- 카페추천 / 추천 랭킹 -->
 		<div class="cafeRecommend">
 			<div class="newList left">
-				<h2 class="Title bottomLine"><a href ="${pageContext.request.contextPath}/user/community/cafeRecommend/" class="mainTitle"><i class="fas fa-mug-hot"></i> 실시간 카페 추천</a></h2>
+				<h2 class="Title bottomLine"><a href ="${pageContext.request.contextPath}/user/community/cafeRecommend/" class="mainTitle"><i class="fas fa-mug-hot"></i> 실시간 solution 추천</a></h2>
 				<div class="newListImgs">
 					<ul>
 						<c:forEach var="board" items="${rclist}">
@@ -1157,7 +1157,7 @@
 			</div>
 
 		<div class="bestRankList right">
-				<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community" class="mainTitle"><i class="fas fa-mug-hot"></i> 열혈 MuKKa人 </a><span class="bestRankList_info bestRankSubTitle">종합 베스트 10</span></h2>
+				<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community" class="mainTitle"><i class="fas fa-mug-hot"></i> 열혈 마음:TACT人 </a><span class="bestRankList_info bestRankSubTitle">종합 베스트 10</span></h2>
 			<!-- 베스트 리스트  -->
 			<div id="tabWrap">
 				<div id="tabs">
@@ -1338,7 +1338,7 @@
 	</div>
 	
 	<!-- infoBaner main에만 -->
-	<div class="banerArea"></div>
+<!-- 	<div class="banerArea"></div> -->
 <script>
 	//메인이미지
 	$(".cafeMuKKaAddWrap2").animate({"opacity":"1"},1500, function(){
