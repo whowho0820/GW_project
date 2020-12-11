@@ -49,8 +49,8 @@ public class AdminNoticMgrControoler {
     @RequestMapping(value = "/gwcalendarMgr")
     public String index(HttpServletRequest request, ModelMap modelMap) {
     	
-    	String auth = request.getSession().getAttribute("Auth").toString(); 
-    	String userno = request.getSession().getAttribute("userId").toString();
+		String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
 		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         
         etcSvc.setCommonAttribute(userno, modelMap);
@@ -75,8 +75,11 @@ public class AdminNoticMgrControoler {
      * Ajax.
      */
     @RequestMapping(value = "/moveDate")
-    public String moveDate(HttpServletRequest request, ModelMap modelMap) {
-        String userno = request.getSession().getAttribute("userno").toString();
+    public String moveDate(HttpServletRequest request, ModelMap modelMap) {    	
+    
+    	String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         String date = request.getParameter("date");
 
         Date today = Util4calen.getToday(date);
@@ -129,8 +132,8 @@ public class AdminNoticMgrControoler {
     @RequestMapping(value = "/schForm")
     public String schForm(HttpServletRequest request, SchVO schInfo, ModelMap modelMap) {
         // 페이지 공통: alert
-    	String auth = request.getSession().getAttribute("Auth").toString(); 
-    	String userno = request.getSession().getAttribute("userId").toString();
+		String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
 		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         
         etcSvc.setCommonAttribute(userno, modelMap);
@@ -165,14 +168,16 @@ public class AdminNoticMgrControoler {
      */
     @RequestMapping(value = "/schSave")
     public String schSave(HttpServletRequest request, SchVO schInfo, ModelMap modelMap) {
-    	String auth = request.getSession().getAttribute("Auth").toString(); 
-    	String userno = request.getSession().getAttribute("userId").toString();
+    	
+		String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
 		String authno = request.getSession().getAttribute("AuthNo").toString(); 
+		
     	schInfo.setUserno(userno);
     	
         schSvc.insertSch(schInfo);
 
-        return "redirect:/admin/cafeMgn/admingwcalendarMgr";
+        return "redirect:/admin/noticeMgr/gwcalendarMgr";
     }
 
     /**
@@ -193,8 +198,8 @@ public class AdminNoticMgrControoler {
     @RequestMapping(value = "/schRead")
     public String schRead(HttpServletRequest request, SchVO schVO, ModelMap modelMap) {
         // 페이지 공통: alert
-    	String auth = request.getSession().getAttribute("Auth").toString(); 
-    	String userno = request.getSession().getAttribute("userId").toString();
+		String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
 		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         
         etcSvc.setCommonAttribute(userno, modelMap);
@@ -215,7 +220,7 @@ public class AdminNoticMgrControoler {
 
         schSvc.deleteSch(schVO);
         
-        return "redirect:/admin/cafeMgn/admingwcalendarMgr";
+        return "redirect:/admin/noticeMgr/gwcalendarMgr";
     }
     
 	/*
