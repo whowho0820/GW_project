@@ -2,9 +2,12 @@ package com.yi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +19,12 @@ import com.yi.domain.SearchCriteria;
 import com.yi.service.CafeService;
 import com.yi.service.PowerLinkService;
 
+import gu.admin.sign.SignDocSvc;
+import gu.admin.sign.SignDocTypeVO;
+import gu.common.SearchVO;
+import gu.etc.EtcSvc;
+import gu.sign.SignSvc;
+
 @Controller
 @RequestMapping("/admin/cafeMgn/*")
 public class AdminCafeMgrControoler {
@@ -25,6 +34,15 @@ public class AdminCafeMgrControoler {
 	
 	@Autowired
 	private PowerLinkService powerService;
+	
+    @Autowired
+    private SignDocSvc signDocSvc;
+
+    @Autowired
+    private SignSvc signSvc;
+
+    @Autowired
+    private EtcSvc etcSvc; 
 	
 	//신규 등록 카페 승인
 	@RequestMapping(value = "newCafeManager", method = RequestMethod.GET)
@@ -112,22 +130,68 @@ public class AdminCafeMgrControoler {
 	
 	//월간 카페 등록 및 관리
 		@RequestMapping(value = "monthCafeManager2", method = RequestMethod.GET)
-		public String monthCafeMgr2(SearchCriteria cri, Model model) throws Exception {
-			cri.setPerPageNum(20);
+		public String monthCafeMgr2(HttpServletRequest request, SearchVO searchVO, ModelMap modelMap) throws Exception {
+
+	    	String userno = request.getSession().getAttribute("userno").toString();
+	        
+	    	etcSvc.setCommonAttribute(userno, modelMap);
+	    	
+	        // 
+	        searchVO.setUserno(userno);
+	        searchVO.pageCalculate( signSvc.selectSignDocTobeCount(searchVO) ); // startRow, endRow
+	        List<?> listview  = signSvc.selectSignDocTobeList(searchVO);
+	        
+	        modelMap.addAttribute("searchVO", searchVO);
+	        modelMap.addAttribute("listview", listview);			
 			
-			List<PowerLinkVO> list = powerService.selectAdminMonCafeList(cri);
-			
-			PageMaker pageMater = new PageMaker();
-			pageMater.setCri(cri);
-			pageMater.setTotalCount(powerService.selectAdminMonCafeTotalCnt(cri));
-			
-			model.addAttribute("list", list);
-			model.addAttribute("cri", cri);
-			model.addAttribute("pageMaker", pageMater);
 			
 			return "/admin/adminMonthCafeMgr2";
 		}
 		
+		 /** 
+	     * 쓰기. 
+	     */
+	    @RequestMapping(value = "/adSignDocTypeForm")
+	    public String signDocTypeForm(HttpServletRequest request, SignDocTypeVO signInfo, ModelMap modelMap) {
+	        // 페이지 공통: alert
+			String auth = request.getSession().getAttribute("Auth").toString(); 
+	    	String userno = request.getSession().getAttribute("userno").toString();
+			String authno = request.getSession().getAttribute("AuthNo").toString(); 
+	        
+	        etcSvc.setCommonAttribute(userno, modelMap);
+	    	
+	        // 개별 작업
+	        if (signInfo.getDtno() != null) {
+	            signInfo = signDocSvc.selectSignDocTypeOne(signInfo.getDtno());
+	        
+	            modelMap.addAttribute("signInfo", signInfo);
+	        }
+	        
+	        return "admin/SignDocTypeForm";
+	    }
+	    
+	    /**
+	     * 저장.
+	     */
+	    @RequestMapping(value = "/adSignDocTypeSave")
+	    public String signDocTypeSave(HttpServletRequest request, SignDocTypeVO signInfo, ModelMap modelMap) {
+	    	
+	        signDocSvc.insertSignDocType(signInfo);
+
+	        return "redirect:/admin/cafeMgn/monthCafeManager2";
+	    }
+
+	    /**
+	     * 삭제.
+	     */
+	    @RequestMapping(value = "/adSignDocTypeDelete")
+	    public String signDocTypeDelete(HttpServletRequest request, SignDocTypeVO signVO) {
+
+	        signDocSvc.deleteSignDocType(signVO);
+	        
+	        return "redirect:/monthCafeManager2";
+	    }
+	   				
 	
 	// 월간 카페 게시일 등록
 	@RequestMapping(value = "monthCafeManager/modify", method = RequestMethod.GET)

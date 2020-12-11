@@ -57,6 +57,8 @@
 			<mapping path="/admin/cafeMgn/newCafeManager"/>
 			<mapping path="/admin/cafeMgn/cafeManager"/>
 			<mapping path="/admin/cafeMgn/monthCafeManager"/>
+			<mapping path="/admin/cafeMgn/monthCafeManager2"/>
+			<mapping path="/admin/cafeMgn/adSignDocTypeForm"/>
 			<mapping path="/admin/userMgr"/>
 			<mapping path="/admin/userMgr/cafeUserManager"/>
 			<mapping path="/admin/userMgr/userManager"/>

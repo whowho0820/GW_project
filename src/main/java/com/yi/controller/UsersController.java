@@ -45,6 +45,7 @@ public class UsersController {
 				}
 				session.setAttribute("Auth","관리자");
 				session.setAttribute("userId", "admin");
+				session.setAttribute("userno", "1");
 				session.setAttribute("adminId", adminResult.getAnoId());
 				session.setAttribute("AuthNo", "1");
 				return "redirect:/";
@@ -61,6 +62,7 @@ public class UsersController {
 			}
 			session.setAttribute("Auth", dbVO.getNick());
 			session.setAttribute("userId", dbVO.getUserId());
+			session.setAttribute("userno", dbVO.getUserNo());
 			session.setAttribute("AuthNo", dbVO.getUserNo());
 			return "redirect:/";
 		}
