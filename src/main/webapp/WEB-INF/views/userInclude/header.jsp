@@ -490,6 +490,13 @@
 		font-size: 12px;
 		margin-left: 8px;	
 	}
+	.checkbox, .radio {
+	    position: relative;
+	    display: block;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+        margin-right: 250px;
+	}
 </style>
 </head>
 <body>
@@ -560,9 +567,16 @@
 							<h3 style="color: #85cc28;margin: 10px;"></h3>
 							<input class="inputRegi" type="text" name="userId" placeholder="아이디" style="margin-bottom: 20px;"><br>
 							<input class="inputRegi" type="password" name="password" autocomplete="on" placeholder="비밀번호" style="margin-bottom: 5px;"><br>
+							
+							<div class="checkbox">
+                              <label>
+                                  <input name="remember" type="checkbox" value="Y"  <c:if test='${userid != null && userid != ""}'>checked</c:if>> 로그인유지
+                              </label>
+                             </div>                             
+
+							<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
 							<a href="#" id="findId" style="color:64CD3C;margin-left: 150px;">아이디 찾기</a>
 							<a href="#" id="findPass" style="color:64CD3C;margin-left: 10px;">비밀번호 찾기</a><br>
-							<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
 						</form>
 					</div>
 					

@@ -136,45 +136,15 @@ function calendarDayMouseout(){
 				  <li class="active">전체 일정</li>
 				</ol><!--breadcrum end-->
 			</div>
-						
+        	
+        	<div class="col-lg-2">
+	         	<button class="btn btn-outline btn-primary" style="margin-top:20px;" onclick="fn_moveToURL('schForm', '')" >일정추가</button>
+		    </div>
+		    
             <div id="calenDiv" class="row">
-              <div class="col-lg-12">
-		         <h1 class="page-header">
-		         <a href="javascript: fn_moveDate('<c:out value="${preWeek}"/>')"><i class="fa fa-angle-left fa-fw"></i></a>
-		         
-		         <c:out value="${month}"/>월 <c:out value="${week}"/>째주
-		         <a href="javascript: fn_moveDate('<c:out value="${nextWeek}"/>')"><i class="fa fa-angle-right fa-fw"></i></a>
-		         </h1>
-     		 </div>
- 
-		     <div class="col-lg-12" id="weekDiv">
-		     	<c:forEach var="calenList" items="${calenList}" varStatus="status">    
-		             <div class="calendarColumn <c:if test="${calenList.istoday}">today</c:if>">
-		                 <div class="panel <c:if test="${calenList.istoday}">panel-red</c:if> <c:if test="${!calenList.istoday}">panel-default</c:if> height100">
-		                     <div class="panel-heading" style="text-align:center">
-		                     	<c:out value="${calenList.month}"/>월 <c:out value="${calenList.day}"/>일 (<c:out value="${calenList.week}"/>)
-		                     </div> 
-		                     <div class="panel-body">
-									<c:forEach var="items" items="${calenList.list}" varStatus="status"> 
-						             	<div class="calendarDay" onmouseover="calendarDayMouseover(event, '<c:out value="${items.ssno}"/>', '<c:out value="${calenList.date}"/>')" onmouseout="calendarDayMouseout()">
-							             	<c:if test='${items.userno==sessionScope.userno}'>
-							             		<a href="schForm?ssno=<c:out value="${items.ssno}"/>&sdseq=<c:out value="${items.sdseq}"/>"><c:out value="${items.sstitle}"/></a>
-						             		</c:if>
-							             	<c:if test='${items.ssno!=null and items.userno!=sessionScope.userno}'> 
-							              		<a href="schRead?ssno=<c:out value="${items.ssno}"/>&sdseq=<c:out value="${items.sdseq}"/>"><c:out value="${items.sstitle}"/></a>
-						             		</c:if>
-							             	<c:if test='${items.ssno==null}'> 
-							             		<span style="color:<c:out value="${items.fontcolor}"/>"><c:out value="${items.sstitle}"/></span>
-						             		</c:if>				             		
-						             	</div>
-						             </c:forEach>                     
-		                     </div> 
-		                 </div>
-		             </div>
-		        </c:forEach>
-				<div class="calenSlideButton calenSlideButton_left" onclick="ev_prevSlide()">&#10094;</div>
-				<div class="calenSlideButton calenSlideButton_right" onclick="ev_nextSlide()">&#10095;</div>
-		     </div>
+                <jsp:include page="indexCalen.jsp" />
             </div>
+          </div>
+       </div>            
 
 <%@ include file="../adminInclude/footer.jsp"%>

@@ -2711,7 +2711,7 @@ input[type="checkbox][disabled"]:checked + .pmd-switch-label::after {
 .pmd-sidebar-right-fixed,
 .pmd-sidebar-slide-push {
   position: fixed;
-  top: 0;
+  top: 50px;
   bottom: 0;
   z-index: 999;
 }

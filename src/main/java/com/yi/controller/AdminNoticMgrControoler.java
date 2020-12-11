@@ -27,6 +27,8 @@ import gu.common.Field3VO;
 import gu.common.Util4calen;
 import gu.etc.EtcSvc;
 import gu.main.IndexSvc;
+import gu.schedule.SchSvc;
+import gu.schedule.SchVO;
 
 @Controller
 @RequestMapping("/admin/noticeMgr/*")
@@ -34,6 +36,9 @@ public class AdminNoticMgrControoler {
 	
 	@Autowired
     private IndexSvc indexSvc;
+	
+	@Autowired
+    private SchSvc schSvc;
 	
     @Autowired
     private EtcSvc etcSvc;
@@ -78,7 +83,7 @@ public class AdminNoticMgrControoler {
         
         calCalen(userno, today, modelMap);
         
-        return "/admin/admingwcalendarMgr";
+        return "/admin/indexCalen";
     }
     
     private String calCalen(String userno, Date targetDay, ModelMap modelMap) {
@@ -118,6 +123,101 @@ public class AdminNoticMgrControoler {
         return "/admin/admingwcalendarMgr";
     }
 	
+    /** 
+     * 쓰기. 
+     */
+    @RequestMapping(value = "/schForm")
+    public String schForm(HttpServletRequest request, SchVO schInfo, ModelMap modelMap) {
+        // 페이지 공통: alert
+    	String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userId").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
+        
+        etcSvc.setCommonAttribute(userno, modelMap);
+    	
+        // 
+        if (schInfo.getSsno() != null) {
+            schInfo = schSvc.selectSchOne(schInfo);
+        
+        } else{
+        	schInfo.setSstype("1");
+        	schInfo.setSsisopen("Y");
+
+        	String cddate = request.getParameter("cddate");
+        	if (cddate==null || "".equals(cddate)) {
+        		cddate = Util4calen.date2Str(Util4calen.getToday());
+        	}
+    		schInfo.setSsstartdate(cddate);
+    		schInfo.setSsstarthour("09");
+    		schInfo.setSsenddate(cddate);
+    		schInfo.setSsendhour("18");
+        }
+        modelMap.addAttribute("schInfo", schInfo);
+        
+        List<?> sstypelist= etcSvc.selectClassCode("4");
+        modelMap.addAttribute("sstypelist", sstypelist);
+        
+        return "/admin/SchForm";
+    }
+    
+    /**
+     * 저장.
+     */
+    @RequestMapping(value = "/schSave")
+    public String schSave(HttpServletRequest request, SchVO schInfo, ModelMap modelMap) {
+    	String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userId").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
+    	schInfo.setUserno(userno);
+    	
+        schSvc.insertSch(schInfo);
+
+        return "redirect:/admin/cafeMgn/admingwcalendarMgr";
+    }
+
+    /**
+     * 읽기.
+     */
+    @RequestMapping(value = "/schRead4Ajax")
+    public String schRead4Ajax(HttpServletRequest request, SchVO schVO, String cddate, ModelMap modelMap) {
+        SchVO schInfo = schSvc.selectSchOne4Read(schVO);
+
+        modelMap.addAttribute("schInfo", schInfo);
+        modelMap.addAttribute("cddate", cddate);
+        
+        return "/admin/SchRead4Ajax";
+    }
+    /**
+     * 읽기.
+     */
+    @RequestMapping(value = "/schRead")
+    public String schRead(HttpServletRequest request, SchVO schVO, ModelMap modelMap) {
+        // 페이지 공통: alert
+    	String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userId").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
+        
+        etcSvc.setCommonAttribute(userno, modelMap);
+        // 
+        
+        SchVO schInfo = schSvc.selectSchOne4Read(schVO);
+
+        modelMap.addAttribute("schInfo", schInfo);
+        
+        return "/admin/SchRead";
+    }
+    
+    /**
+     * 삭제.
+     */
+    @RequestMapping(value = "/schDelete")
+    public String schDelete(HttpServletRequest request, SchVO schVO) {
+
+        schSvc.deleteSch(schVO);
+        
+        return "redirect:/admin/cafeMgn/admingwcalendarMgr";
+    }
+    
 	/*
 	 * private Logger logger =
 	 * LoggerFactory.getLogger(AdminNoticMgrControoler.class);
