@@ -290,7 +290,7 @@ h2.typo-fill-secondary{ color:rgba(77, 87, 93, 0.68); font-size:22px;}
 .pmd-sidebar .pmd-sidebar-nav .dropdown-menu li a { padding-left:24px;  padding-top:15px; padding-bottom:15px;}
 .pmd-sidebar .dropdown-menu > li > a:hover, .pmd-sidebar .dropdown-menu > li > a:focus, .pmd-sidebar .dropdown-menu > li > a.active { color:#ffffff;}
 .pmd-content { margin-left: 64px;}
-.pmd-sidebar { width:64px; min-width:64px; transform:translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); background-color:#ffffff;}
+.pmd-sidebar { width:64px; min-width:64px; transform:translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); background-color:#ffffff; padding-top: 120px;}
 .pmd-sidebar.pmd-sidebar-open {min-width: 274px; width: 274px;}
 .pmd-sidebar .pmd-sidebar-nav li a { padding: 18px 20px 16px; color:#393939; background-color:transparent;}
 .pmd-sidebar-left .nav > li > a:hover svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:focus svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:active svg.stroke-fill path, .pmd-sidebar-left .nav > li > a.active svg.stroke-fill path {stroke: #fff; fill: none;}

@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <%@ include file="../adminInclude/header.jsp"%>
+
 <script src="/resources/assets/js/ckeditor/ckeditor.js"></script>
+
 <script>
 window.onload =function() {
 	  CKEDITOR.replace( 'dtcontents', { 'filebrowserUploadUrl': 'upload4ckeditor'});

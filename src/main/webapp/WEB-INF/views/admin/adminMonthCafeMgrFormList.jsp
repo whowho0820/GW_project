@@ -145,7 +145,7 @@
 						<a href="${link}">
 				            <div class="panel panel-default" style="width: 150px; height: 200px; display:inline-block; overflow:hidden; "> 
 				            	<div class="panel-heading"><c:out value="${listview.dttitle}"/></div>
-				            	<div class="panel-body"><img src="images/if_survey_49353.png" style="margin: 30px 25px;"/></div>
+				            	<div class="panel-body"><img src="/resources/assets/images/if_survey_49353.png" style="margin: 30px 25px;"/></div>
 							</div>
 						</a>
 					</c:forEach>

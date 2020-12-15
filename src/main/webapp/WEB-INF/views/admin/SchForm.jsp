@@ -5,7 +5,7 @@
 
 <%@ include file="../adminInclude/header.jsp"%>
 <link href="/resources/assets/js/datepicker/datepicker.css" rel="stylesheet">
-<link href="/resources/assets/js/datepicker/bootstrap-datepicker.js" rel="stylesheet">
+<script src="/resources/assets/js/datepicker/bootstrap-datepicker.js"></script>
 
 <script>
 

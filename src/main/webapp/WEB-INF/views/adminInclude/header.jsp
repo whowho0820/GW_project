@@ -104,8 +104,7 @@
 			$("#noticeMgr").addClass("active");
 			$("#noticeMgr").parent().addClass("open");
 		}
-		
-		
+				
 		// 서브메뉴 포커스
 		if(subMenu != null) {
 			if(subMenu.indexOf("newCafeManager") != -1){				
@@ -164,7 +163,7 @@
 							<span id="userName">${adminId}</span>
 						</div>
 					</a>
-				
+									
 					<div class="dropdown-menu dropdown-menu-right pmd-card pmd-card-default pmd-z-depth" role="menu">
 						
 						<!-- Notifications list -->
@@ -178,8 +177,7 @@
 							<li class="list-group-item unread">
 								<a href="${pageContext.request.contextPath }/user/logout">로그아웃</a>
 							</li>
-						</ul><!-- End notifications list -->
-	
+						</ul><!-- End notifications list -->	
 					</div>
 					
 					
@@ -232,7 +230,7 @@
 				<ul class="dropdown-menu">
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager">결재받을 문서</a></li>
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/cafeManager">결재할 문서</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager">기안하기</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManagerFormList">기안하기</a></li>
 					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager2">결재문서 양식</a></li>
 				</ul>
 			</li>
