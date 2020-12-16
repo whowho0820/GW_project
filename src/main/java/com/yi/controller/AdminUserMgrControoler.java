@@ -7,8 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.yi.domain.AdminVO;
+import com.yi.domain.PageMaker;
+import com.yi.domain.SearchCriteria;
+import com.yi.service.AdminService;
 
 import gu.admin.organ.DepartmentVO;
 import gu.admin.organ.DeptSvc;
@@ -35,6 +42,7 @@ public class AdminUserMgrControoler {
     @Autowired
     private EtcSvc etcSvc;
 	
+    @Autowired private AdminService adminService;
     
      // 리스트
      
@@ -195,6 +203,23 @@ public class AdminUserMgrControoler {
         return common_UserList(modelMap, userInfo.getDeptno());
     }
 	
+	 
+	  // 관리자 관리
+	  
+	  @RequestMapping(value = "adminManager", method = RequestMethod.GET) public
+	  String adminMgr(SearchCriteria cri, Model model) throws Exception {
+	  
+	  List<AdminVO> list = adminService.selectAdminList(cri);
+	 
+	  PageMaker pageMaker = new PageMaker(); pageMaker.setCri(cri);
+	  pageMaker.setTotalCount(adminService.selectAdminTotalCnt(cri));
+	  
+	  model.addAttribute("list", list); model.addAttribute("cri", cri);
+	  model.addAttribute("pageMaker", pageMaker);
+	  
+	  return "/admin/adminAdmMgr"; 
+	  }
+    
 	/*
 	 * @Autowired private UsersService service;
 	 * 
@@ -226,21 +251,6 @@ public class AdminUserMgrControoler {
 	 * model.addAttribute("pageMaker", pageMaker);
 	 * 
 	 * return "/admin/adminUserMgr"; }
-	 * 
-	 * // 관리자 관리
-	 * 
-	 * @RequestMapping(value = "adminManager", method = RequestMethod.GET) public
-	 * String adminMgr(SearchCriteria cri, Model model) throws Exception {
-	 * 
-	 * List<AdminVO> list = adminService.selectAdminList(cri);
-	 * 
-	 * PageMaker pageMaker = new PageMaker(); pageMaker.setCri(cri);
-	 * pageMaker.setTotalCount(adminService.selectAdminTotalCnt(cri));
-	 * 
-	 * model.addAttribute("list", list); model.addAttribute("cri", cri);
-	 * model.addAttribute("pageMaker", pageMaker);
-	 * 
-	 * return "/admin/adminAdmMgr"; }
 	 */
 	 
 }

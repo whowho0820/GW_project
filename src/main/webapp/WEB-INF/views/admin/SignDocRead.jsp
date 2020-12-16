@@ -4,6 +4,12 @@
 
 <%@ include file="../adminInclude/header.jsp"%>
 
+<script src="/resources/assets/js/ckeditor/ckeditor.js"></script>
+<link href="/resources/assets/css/sign.css" rel="stylesheet"/>
+<script src="/resources/assets/css/sb-admin/bootstrap.min.js"></script>
+<script src="/resources/assets/css/sb-admin/metisMenu.min.js"></script>
+<script src="/resources/assets/css/sb-admin/sb-admin-2.js"></script>
+
 <script>
 function fn_sign(){
     $("#popupUser").modal("show");
@@ -40,21 +46,21 @@ function fn_signSave(){
 			</div>
 
     <div id="wrapper">			
-        <div id="page-wrapper">            
-            <c:set value="0" var="cnt"/>            
+<%--         <div id="page-wrapper">            
+            <c:set value="0" var="cnt"/>   --%>          
             <div class="row" style="margin-bottom: 10px">
 				<div id="signPath" class="signPath">
 					<c:forEach var="signlist" items="${signlist}" varStatus="status">
 					    <c:if test="${signlist.sstype ne '1'}">					
 							<div class="signArea">
 								<div class="signAreaTop"><c:out value="${signlist.userpos}"/></div>
-								<div class="signAreaCenter">
-									<c:choose>
-							        	<c:when test='${signlist.ssresult == "1"}'>승인</c:when>
-							        	<c:when test='${signlist.ssresult == "2"}'>반려</c:when>
-							         	<c:otherwise></c:otherwise>
-							      </c:choose>								
-								</div>
+									<div class="signAreaCenter">
+										<c:choose>
+								        	<c:when test='${signlist.ssresult == "1"}'>승인</c:when>
+								        	<c:when test='${signlist.ssresult == "2"}'>반려</c:when>
+								         	<c:otherwise></c:otherwise>
+								      	</c:choose>								
+									</div>
 								<div class="signAreaBottom"><c:out value="${signlist.usernm}"/> </div>
 							</div>
 						</c:if>
@@ -72,13 +78,13 @@ function fn_signSave(){
 						    <c:if test="${signlist.sstype eq '1'}">					
 								<div class="signArea">
 									<div class="signAreaTop"><c:out value="${signlist.userpos}"/></div>
-									<div class="signAreaCenter">
-										<c:choose>
-								        	<c:when test='${signlist.ssresult == "1"}'>승인</c:when>
-								        	<c:when test='${signlist.ssresult == "2"}'>반려</c:when>
-								         	<c:otherwise></c:otherwise>
-								      </c:choose>								
-									</div>
+										<div class="signAreaCenter">
+											<c:choose>
+									        	<c:when test='${signlist.ssresult == "1"}'>승인</c:when>
+									        	<c:when test='${signlist.ssresult == "2"}'>반려</c:when>
+									         	<c:otherwise></c:otherwise>
+									      	</c:choose>								
+										</div>
 									<div class="signAreaBottom"><c:out value="${signlist.usernm}"/> </div>
 								</div>
 							</c:if>
@@ -86,7 +92,8 @@ function fn_signSave(){
 					</div>
 					<div class="signTitle"><br>합<br><br>의</div>
 				</div>
-			</c:if>            
+			</c:if>     
+			       
             <!-- /.row -->
             <div class="row">
 				<div class="panel panel-default">
@@ -171,6 +178,7 @@ function fn_signSave(){
             <!-- /.modal-content --> 
         </div>
         <!-- /.modal-dialog -->		
-	</div>
+
+	
 
 <%@ include file="../adminInclude/footer.jsp"%>

@@ -48,8 +48,10 @@ public class BoardCtr {
             searchVO.setSearchKeyword(globalKeyword);
         }        
         
-        String userno = request.getSession().getAttribute("userno").toString();
-        
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
+                    
         etcSvc.setCommonAttribute(userno, modelMap);
         
         if (searchVO.getBgno() != null && !"".equals(searchVO.getBgno())) {
@@ -80,7 +82,9 @@ public class BoardCtr {
      */
     @RequestMapping(value = "/boardForm")
     public String boardForm(HttpServletRequest request, ModelMap modelMap) {
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         
         etcSvc.setCommonAttribute(userno, modelMap);
         
@@ -111,7 +115,9 @@ public class BoardCtr {
      */
     @RequestMapping(value = "/boardSave")
     public String boardSave(HttpServletRequest request, BoardVO boardInfo) {
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         boardInfo.setUserno(userno);
 
         if (boardInfo.getBrdno() != null && !"".equals(boardInfo.getBrdno())) {    // check auth for update
@@ -135,7 +141,9 @@ public class BoardCtr {
      */
     @RequestMapping(value = "/boardRead")
     public String boardRead(HttpServletRequest request, ModelMap modelMap) {
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         
         etcSvc.setCommonAttribute(userno, modelMap);
         
@@ -170,7 +178,9 @@ public class BoardCtr {
     public String boardDelete(HttpServletRequest request) {
         String brdno = request.getParameter("brdno");
         String bgno = request.getParameter("bgno");
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
 
         BoardVO boardInfo = new BoardVO();        // check auth for delete
         boardInfo.setBrdno(brdno);
@@ -211,7 +221,9 @@ public class BoardCtr {
     @RequestMapping(value = "/addBoardLike")
     public void addBoardLike(HttpServletRequest request, HttpServletResponse response) {
         String brdno = request.getParameter("brdno");
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
 
         boardSvc.insertBoardLike( new Field3VO(brdno, userno, null) );
 
@@ -225,7 +237,9 @@ public class BoardCtr {
      */
     @RequestMapping(value = "/boardReplySave")
     public String boardReplySave(HttpServletRequest request, HttpServletResponse response, BoardReplyVO boardReplyInfo, ModelMap modelMap) {
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         boardReplyInfo.setUserno(userno);
 
         if (boardReplyInfo.getReno() != null && !"".equals(boardReplyInfo.getReno())) {    // check auth for update
@@ -249,7 +263,9 @@ public class BoardCtr {
      */
     @RequestMapping(value = "/boardReplyDelete")
     public void boardReplyDelete(HttpServletRequest request, HttpServletResponse response, BoardReplyVO boardReplyInfo) {
-        String userno = request.getSession().getAttribute("userno").toString();
+        String auth = request.getSession().getAttribute("Auth").toString(); 
+    	String userno = request.getSession().getAttribute("userno").toString();
+		String authno = request.getSession().getAttribute("AuthNo").toString(); 
         boardReplyInfo.setUserno(userno);
 
         if (boardReplyInfo.getReno() != null && !"".equals(boardReplyInfo.getReno())) {    // check auth for update

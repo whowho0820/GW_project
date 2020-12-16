@@ -8,6 +8,12 @@
 
 <%@ include file="../adminInclude/header.jsp"%>
 
+<script>
+function fn_formSubmit(){
+	document.form1.submit();	
+}
+</script>
+
 <!-- <style>
 	/* 페이징 */
 	.pagination {
@@ -191,8 +197,7 @@
 		                        </label>
 		                   </div>
 		                   <div class="input-group custom-search-form col-lg-3">
-	                                <input class="form-control" placeholder="Search..." type="text" name="searchKeyword" 
-	                                	   value='<c:out value="${searchVO.searchKeyword}"/>' >
+	                                <input class="form-control" placeholder="Search..." type="text" name="searchKeyword" value='<c:out value="${searchVO.searchKeyword}"/>' >
 	                                <span class="input-group-btn">
 	                                <button class="btn btn-default" onclick="fn_formSubmit()">
 	                                    <i class="fa fa-search"></i>

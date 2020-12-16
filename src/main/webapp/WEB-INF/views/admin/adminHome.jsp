@@ -114,19 +114,19 @@ $(function(){
 			 <!-- 신규 현황 start -->
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager" class="quickBtn">신규카페승인대기 > </a></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager" class="quickBtn">결재받을 문서 > </a></div>
 			 		<div class="pmd-card-body pmd-display3 tCenter">${cafeWaitingCnt} <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>		
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="#" class="quickBtn">신규 탐방기(어제/오늘) > </a></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr" class="quickBtn">신규 게시글 > </a></div>
 			 		<div class="pmd-card-body pmd-display3 tCenter">${yesterDayCafeReviewCnt } <span class="smallFont">건</span> / ${todayCafeReviewCnt } <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>		
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="#" class="quickBtn">신규 추천글(어제/오늘) ></a></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}admin/noticeMgr/gwcalendarMgr" class="quickBtn">신규 일정 ></a></div>
 			 		<div class="pmd-card-body pmd-display3 tCenter">${yesterDayRecommendCnt} <span class="smallFont">건</span> / ${todayRecommendCnt} <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>	

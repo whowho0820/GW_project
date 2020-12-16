@@ -281,7 +281,7 @@ h2.typo-fill-secondary{ color:rgba(77, 87, 93, 0.68); font-size:22px;}
 .pmd-sidebar-left .nav > li > a:hover svg path, .pmd-sidebar-left .nav > li > a:focus svg path, .pmd-sidebar-left .nav > li > a:active svg path, .pmd-sidebar-left .nav > li > a.active svg path, .pmd-sidebar-left .nav > li > a:hover svg, .pmd-sidebar-left .nav > li > a:focus svg, .pmd-sidebar-left .nav > li > a:active svg, .pmd-sidebar-left .nav > li > a.active svg  { fill: #fff;}
 .pmd-sidebar.pmd-sidebar-open{ width:274px; min-width:274px;}
 .pmd-sidebar-slide-push.pmd-sidebar-open ~ .wrapper .constructor, .pmd-sidebar-slide-push.pmd-sidebar-open ~ .pmd-content { margin-left:274px;}
-.pmd-sidebar-left .nav > li.pmd-user-info > a { border-bottom:solid 1px #ffffff;  font-size:18px; color:#90ce3f; padding-left: 60px; margin-top: 10px; font-weight: bold;}
+.pmd-sidebar-left .nav > li.pmd-user-info > a { border-bottom:solid 1px #ffffff;  font-size:18px; color:#2dbda0; padding-left: 60px; margin-top: 10px; font-weight: bold;}
 .pmd-sidebar-left .nav > li.pmd-user-info > a:hover, .pmd-sidebar-left .nav > li.pmd-user-info > a:focus, .pmd-sidebar-left .nav > li.pmd-user-info > a:active, .pmd-sidebar-left .nav > li.pmd-user-info > a.active { background:#ffffff;}
 .pmd-sidebar .pmd-sidebar-nav .dropdown-menu { background:#ffffff; padding:10px 0;}
 .pmd-sidebar .pmd-sidebar-nav li.entity-drop a { background:#2C343F;}
