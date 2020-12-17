@@ -23,6 +23,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- 다음 주소검색 -->
 <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 별점 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/w3.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/fontawesome-stars.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.barrating.min.js"></script>
+<!-- 탭 -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/jquery-ui.css"> 
+<script src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
 
 <script>
 	/* 주소 검색 */
@@ -425,7 +433,7 @@
 				dataType:"text",
 				success:function(res){
 					if(res == "SUCCESS"){
-						alert("회원 가입이 되었습니다. 로그인하여 커피무까를 즐겨주세요.");
+						alert("회원 가입이 되었습니다. 로그인한 후 이용해주세요.");
 						$("input[name='duplCheckId']").val("");
 						$("#pass1").val("");
 						$("#pass2").val("");

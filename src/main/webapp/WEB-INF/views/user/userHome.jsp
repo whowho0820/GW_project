@@ -1,8 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>gw</title>
+<!-- user css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/userCommon.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/userHeaderFooterMenu.css" />
 
- <%@ include file="../userInclude/header.jsp" %> 
-
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/6f2f0f2d95.js"></script>
+<!-- handlebars -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<!-- 로그인, 회원가입 modal 관련 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modal.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- 다음 주소검색 -->
+<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <!-- 별점 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/w3.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -11,1550 +30,891 @@
 <!-- 탭 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/jquery-ui.css"> 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
-<style>
-	/* 타이틀 클릭시 해당페이지 이동*/
-	h2 a.mainTitle:hover{
-		color: #ED7D31;
-	}
-	/* 광고 */
-	.cafeMuKKaAdd{
-		margin-top: 25px;
-	}
-	.cafeMuKKaAdd .cafeMuKKaAddWrap1{
-	    /* background-color: #ddd; */
-		width: 100%;
-		height: 50px;
-	}
-	/* 테스트중입니다 */
-	h1.typing-txt{
-		display: none;
-	}
-	h1.typing {  
-	/*       position: absolute;*/ 
-     display: inline-block;
-      animation-name: cursor; 
-      animation-duration: 0.3s; 
-      animation-iteration-count: infinite;
-      margin-left: 300px;
-    } 
-    @keyframes cursor{ 
-      0%{border-right: 3px solid #fff} 
-      50%{border-right: 3px solid #000} 
-      100%{border-right: 3px solid #fff} 
-    }
-   	.cafeMuKKaAdd .cafeMuKKaAddWrap2{
-   		margin-top: 20px;
-	    background: url("${pageContext.request.contextPath }/resources/images/mind.jpg") no-repeat;
-	    background-size: cover;
-		width: 100%;
-		height: 630px;
-		opacity: 0;
+
+<script>
+	/* 주소 검색 */
+	function openDaumZipAddress() {
+		new daum.Postcode({
+			oncomplete:function(data) {
+				jQuery("#address").val(data.address);
+				jQuery("#detailAddress").focus();
+				console.log(data);
+			}
+		}).open();
 	}
 	
- 	ul.cafeMuKKaMainBoxs{
-		width: 100%;
+	/* 로그인 show */
+	function loginShow() {
+		$('#findIdModal').removeClass("fade");
+		$('#findPassModal').removeClass("fade");
+		$('#joinModal').removeClass("fade");
+		$('#loginModal').removeClass("fade");
+		$('#findIdModal').modal('hide');
+		$('#findPassModal').modal('hide');
+		$('#joinModal').modal('hide');
+		$('#loginModal').modal('show');
+		$('#findIdModal').addClass("fade");
+		$('#findPassModal').addClass("fade");
+		$('#joinModal').addClass("fade");
+		$('#loginModal').addClass("fade");
 	}
- 	li.mainBox{
-		height: 210px;
-		position: relative;
-		opacity: 0;
+		
+		/* 로그인, 아이디 찾기, 비번찾기, 회원가입 전환시 작동 */		
+		$(".login").click(function() {
+			loginShow();
+		})
+		
+		$("#findId").click(function() {
+			$('#findIdModal').removeClass("fade");
+			$('#loginModal').removeClass("fade");
+			$('#loginModal').modal('hide');
+			$('#findIdModal').modal('show');
+			$('#findIdModal').addClass("fade");
+			$('#loginModal').addClass("fade");
+		})
+		$("#findPass").click(function() {
+			$('#findIdModal').removeClass("fade");
+			$('#findPassModal').removeClass("fade");
+			$('#loginModal').removeClass("fade");
+			$('#loginModal').modal('hide');
+			$('#findIdModal').modal('hide');
+			$('#findPassModal').modal('show');
+			$('#findIdModal').addClass("fade");
+			$('#findPassModal').addClass("fade");
+			$('#loginModal').addClass("fade");
+		})
+		$(".join").click(function() {
+			$('#findIdModal').removeClass("fade");
+			$('#findPassModal').removeClass("fade");
+			$('#joinModal').removeClass("fade");
+			$('#loginModal').removeClass("fade");
+			$('#loginModal').modal('hide');
+			$('#findIdModal').modal('hide');
+			$('#findPassModal').modal('hide');
+			$('#joinModal').modal('show');
+			$('#joinModal').addClass("fade");
+			$('#findIdModal').addClass("fade");
+			$('#findPassModal').addClass("fade");
+			$('#loginModal').addClass("fade");
+		})
+		/* 로그인 처리 */
+		$("#loginForm").submit(function (e) {
+			var id = $("input[name='userId']").val();
+			var password = $("input[name='password']").val();
+			
+			if(id == "" || password == ""){
+				alert("사용자ID와 비밀번호를 정확히 입력해주세요.")
+				return false;
+			}
+		})
+		var result = $("#result").val();
+		if(result == 1){
+			alert("해당 아이디가 존재하지 않습니다. 회원가입을 해주세요.");
+			$("#logo").trigger("click");
+		}else if(result == 2){
+			alert("비밀번호가 틀렸습니다. 다시 확인해주세요.");
+			$("#logo").trigger("click");
+		}else if(result == 3){
+			alert("관리자 권한이 없습니다. 다시 확인해주세요.");
+			$("#logo").trigger("click");
+		}
+		
+		/* 아이디 찾기 */
+		$("#btnFindId").click(function() {
+			var userType = $("input[name='userType']").val();
+			var name = $("input[name='name']").val();
+			var email = $("input[name='email']").val();
+			
+			if(userType == "" || name == "" || email == ""){
+				alert("모든 항목을 선택/입력 해주세요.")
+				return false;
+			}
+			var json = JSON.stringify({"userType":{"userType":userType}, "name":name, "email":email});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath }/rest/findid/",
+				type:"post",
+				headers:{"Content-Type":"application/json"},
+				data:json,
+				dataType:"text",
+				success:function(res){
+					$("input[name='userType']").removeAttr("checked");
+					$("input[name='name']").val("");
+					$("input[name='email']").val("");
+					 
+					if(res == "NULL"){
+						alert("찾고 있는 아이디가 없습니다. 회원가입을 해주세요.");
+						return false;
+					}
+					
+					var con = confirm("회원님의 아이디는 "+res+"입니다. 비밀번호도 찾으시겠어요?");
+					if(con == true){
+						$("#findPass").trigger("click");	
+					}else{
+						$(".login").trigger("click");
+					}
+					
+				}
+			})
+		})
+		
+		/* 비번 찾기 */
+		$("#btnFindPass").click(function() {
+			var userType = $("input[name='userTypePw']").val();
+			var userId = $("input[name='userIdPw']").val();
+			var email = $("input[name='emailPw']").val();
+			
+			if(userType == "" || userId == "" || email == ""){
+				alert("모든 항목을 선택/입력 해주세요.")
+				return false;
+			}
+			var json = JSON.stringify({"userType":{"userType":userType}, "userId":userId, "email":email});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath }/rest/findpass/",
+				type:"post",
+				headers:{"Content-Type":"application/json"},
+				data:json,
+				dataType:"text",
+				success:function(res){
+					alert("회원님의 임시비밀번호를 발급하였습니다. 이메일을 확인하시고 로그인해주세요.");
+					$("input[name='userTypePw']").removeAttr("checked");
+					$("input[name='userIdPw']").val("");
+					$("input[name='emailPw']").val("");
+					$(".login").trigger("click");
+				}
+			})
+		})
+		
+		/* 아이디 중복 체크 */
+		$("#btnDuplCheckId").click(function() {
+			var userId = $("input[name='duplCheckId']").val();
+			
+			if(userId == ""){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}
+			
+			var json = JSON.stringify({"userId":userId});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath }/rest/duplcheckid/",
+				type:"post",
+				headers:{"Content-Type":"application/json"},
+				data:json,
+				dataType:"text",
+				success:function(res){
+					if(res == "duplicate"){
+						alert("이미 사용중이 아이디입니다.");
+						$("input[name='duplCheckId']").val("");
+					}else{
+						alert("사용 가능한 아이디입니다.");
+						$("#flagId").val("true");
+					}
+				}
+			})
+		})
+		
+		/* 비밀번호 정규표현식 체크 */
+		var passRules = /^(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,50}$/;
+		
+		$("#pass1").change(function() {
+			var pass1 = $("#pass1").val();
+			if(passRules.test(pass1)){
+				alert("사용가능한 비밀번호입니다.");
+			}else{
+				alert("사용 불가능한 비밀번호입니다.(숫자, 특수문자, 영문 1자리 이상 포함, 8자리 이상)")
+				$("#pass1").val('');
+			}
+		})
+		$("#pass2").change(function() {
+			var pass1 = $("#pass1").val();
+			var pass2 = $("#pass2").val();
+			if(pass1 == pass2){
+				alert("비밀번호가 일치합니다.");
+			}else{
+				alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+				$("#pass2").val('');
+			}
+		})
+		
+		/* 닉네임 중복 체크 */
+		$("#btnDuplCheckNick").click(function() {
+			var nick = $("input[name='duplCheckNick']").val();
+			
+			if(nick == ""){
+				alert("닉네임을 입력해주세요.");
+				return false;
+			}
+			
+			var json = JSON.stringify({"nick":nick});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath }/rest/duplchecknick/",
+				type:"post",
+				headers:{"Content-Type":"application/json"},
+				data:json,
+				dataType:"text",
+				success:function(res){
+					if(res == "duplicate"){
+						alert("이미 사용중인 닉네임입니다.");
+						$("input[name='duplCheckNick']").val("");
+					}else{
+						alert("사용 가능한 닉네임입니다.");
+						$("#flagNick").val("true");
+					}
+				}
+			})
+		})
+		/* 가입하기 */
+		$("#btnJoin").click(function() {
+			var userId = $("input[name='duplCheckId']").val();
+			var password = $("#pass2").val();
+			var name = $("#joinName").val();
+			var nick = $("input[name='duplCheckNick']").val();
+			var gender = $("select[name='gender']").val();
+			var birthday = $("#joinBirth").val();
+			var tel = $("#joinTel").val();
+			var address = $("input[name='address']").val();
+			var detailAddress = $("input[name='detailAddress']").val();
+			var email = $("#joinEmail").val();
+			var userType = $("input[name='joinUserType']").val();
+			
+			if(userId=="" || password=="" || name=="" || nick=="" || gender=="" || birthday=="" || tel=="" || address=="" || email=="" || userType==""){
+				alert("모든 항목을 작성해주세요.");
+				return false;
+			}
+			var flagId = $("#flagId").val();
+			var flagNick = $("#flagNick").val();
+			alert(flagId);
+			alert(flagNick);
+			if(flagId == "false" || flagNick == "false"){
+				alert("아이디 또는 닉네임 중복확인을 해주세요.");
+				return false;
+			}
+			
+			var json = JSON.stringify({"userId":userId, "password":password, "name":name, "nick":nick, 
+									   "gender": gender, "birthday":birthday, "tel":tel, "address":address, 
+									   "detailAddress":detailAddress, "email":email, "userType":{"userType":userType}});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath }/rest/register/",
+				type:"post",
+				headers:{"Content-Type":"application/json"},
+				data:json,
+				dataType:"text",
+				success:function(res){
+					if(res == "SUCCESS"){
+						alert("회원 가입이 되었습니다. 로그인한 후 이용해주세요.");
+						$("input[name='duplCheckId']").val("");
+						$("#pass1").val("");
+						$("#pass2").val("");
+						$("#joinName").val("");
+						$("input[name='duplCheckNick']").val("");
+						$("select[name='gender']").val("성별");
+						$("#joinBirth").val("");
+						$("#joinTel").val("");
+						$("input[name='address']").val("");
+						$("input[name='detailAddress']").val("");
+						$("#joinEmail").val("");
+						$("input[name='joinUserType']").removeAttr("checked");
+						$(".login").trigger("click");
+					}
+				}
+			})			
+		})	 
+</script>
+
+<style>
+	.container {
+	    width: 100%;
+	    height: 100%;
+	    margin: 0 auto;
+	    position: relative;
+	    z-index: 3;
+	    box-sizing: border-box;
+	    max-width: 600px;
 	}
-	li.mainBox:first-child{
-		text-align: left;
-		padding-left: 100px;
-		background-color: rgba(189, 189, 189, 0.4);
-		transition:2s all ease;
+	.inner{
+	    padding-top: 13.333em;
+	    margin: 0;
+	    padding: 0;
+	    border: 0;
+	    font-size: 100%;
+	    font: inherit;
+	    vertical-align: baseline;
+	    text-decoration: none;
 	}
-	li.mainBox:nth-child(2){
-		text-align: right;
-		padding-right: 100px;
-		background-color: rgba(189, 189, 189, 0.2);
-		transition:2s all ease;
+	.login_area{
+		overflow: hidden;
+	    overflow-x: hidden;
+	    overflow-y: hidden;
+	    text-align: center;	    
 	}
-	li.mainBox:last-child{
-		text-align: left;
-		padding-left: 100px;	
-	    background-color: rgba(189, 189, 189, 0.4);
-	    transition:2s all ease;
-	}
-	li.mainBox:first-child:hover{
-		background-color: rgba(76, 76, 76, 0.9);
-	}
-	li.mainBox:first-child:hover span.viewpoint-first{
-		opacity: 1;
-		right: 150px;
-	}
-	li.mainBox:nth-child(2):hover{
-		background-color: rgba(76, 76, 76, 0.9);
-	}
-	li.mainBox:nth-child(2):hover span.viewpoint-second{
-		opacity: 1;
-		left: 150px;
+	.swiper-container{
+	    margin-top: 200px;
+	    margin-right: auto;
+	    margin-bottom: 0px;
+	    margin-left: auto;
+	    position: relative;
+	    overflow: hidden;
+	    overflow-x: hidden;
+	    overflow-y: hidden;
+	    list-style: none;
+	    list-style-position: initial;
+	    list-style-image: initial;
+	    list-style-type: none;
+	    padding: 0;
+	    padding-top: 0px;
+	    padding-right: 0px;
+	    padding-bottom: 0px;
+	    padding-left: 0px;
+	    z-index: 1;
 	}	
-	li.mainBox:last-child:hover{
-		background-color: rgba(76, 76, 76, 0.9);
+
+	.swiper-wrapper{
+		position: relative;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 1;
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-transition-property: -webkit-transform;
+	    transition-property: -webkit-transform;
+	    -o-transition-property: transform;
+	    transition-property: transform;
+	    transition-property: transform, -webkit-transform;
+	    -webkit-box-sizing: content-box;
+	    box-sizing: content-box;
 	}
-	li.mainBox:last-child:hover span.viewpoint-third{
-		opacity: 1;
-		right: 150px;
-	}			
-	p.mainInfoText{
-		color: rgba(246, 246, 246, 0.8);
-		font-size: 18px;
-		font-weight: bold;
-		letter-spacing: 3px;
-		padding-top: 55px;
+	.login_area .green{
+		border: 1px solid #3eae95;
 	}
-	h1.mainTitle{
-		color: rgba(246, 246, 246, 0.8);
-		letter-spacing: 15px;
-		font-size: 50px;
+	.login_area .swiper-slide{
+		padding: 3.333em 1em 0;
+		padding-top: 3.333em;
+	    padding-right: 1em;
+	    padding-bottom: 0px;
+	    padding-left: 1em;
+	    background-color: #fff;
+	    box-sizing: border-box;
+	    border-radius: 0.8em;
+	    position: relative;
+	    height: 30em;
+	    overflow: hidden;
 	}
-	img#viewpoint_right{ /* 이미지 좌우 봔전 */
-		transform:rotate(0deg);
-   		-moz-transform: scaleX(-1); 
-     	-o-transform: scaleX(-1); 
-		-webkit-transform: scaleX(-1); 
-        transform: scaleX(-1); 
+	.logo {
+	    width: 18em;
+	    transition: 0.5s ease-in-out;
+	    transition-delay: 0.1s;
+	    padding-top: 1.8em;
+	    margin-bottom: 2.333em;
 	}
-	span.viewpoint-first{
-		position: absolute;
-		right: 200px;
-		top: 138px;
-		color: white;
-		font-weight: bold;
-		opacity: 0;
-		transition:1s all ease;
+	img {
+	    max-width: 100%;
+	    display: block;
+	    margin: 0 auto;
 	}
-	span.viewpoint-second{
-		position: absolute;
-		left: 200px;
-		top: 120px;
-		color: white;
-		font-weight: bold;
-		opacity: 0;
-		transition:1s all ease;
+	.swiper-slide{
+		-webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	    flex-shrink: 0;
+	    width: 100%;
+	    height: 100%;
+	    position: relative;
+	    -webkit-transition-property: -webkit-transform;
+	    transition-property: -webkit-transform;
+	    -o-transition-property: transform;
+	    transition-property: transform;
+	    transition-property: transform, -webkit-transform;
 	}
-	span.viewpoint-third{
-		position: absolute;
-		right: 200px;
-		top: 120px;
-		color: white;
-		font-weight: bold;
-		opacity: 0;
-		transition:1s all ease;
-	}					
-	/* 파워링크 */
-	.powerLinkArea {
-		margin-top: 45px;
-		margin-bottom: 45px;
+	#wrap {
+	    position: relative;
+	    overflow: hidden;
+	    overflow-x: hidden;
+	    overflow-y: hidden;
+	}
+	#site-main {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: url(/resources/images/bg_part_2.png) no-repeat bottom center;
+	    background-image: url(/resources/images/bg_part_2.png);
+	    background-position-x: center;
+	    background-position-y: bottom;
+	    background-size: cover;
+	    background-repeat-x: no-repeat;
+	    background-repeat-y: no-repeat;
+	    background-attachment: initial;
+	    background-origin: initial;
+	    background-clip: initial;
+	    background-color: initial;
+	    background-size: cover;
+	}
+	.color-green {
+	    color: #049db4;
+	}
+	#site-main .login_area .forward p {
+	    font-size: 1.2em;
+	    line-height: 1.667em;
+	    margin-bottom: 2.333em;
+	    letter-spacing: -0.02em;
+	    word-break: keep-all;
+    }
+	.weight-bold {
+	   font-weight: bold!important;
 	}
 
-	.powerLinkArea h2 {
-		text-align: center;
-		margin: 30px 0;
+	@media screen and (max-width: 1600px){
+	    .container.contant { width: 94%; padding-left: 250px; max-width: none; }
+		.site-header .site-title { width: 180px; }
+		.site-header .site-nav { width: auto; }
+		.site-header .site-util { width: 100px; }
+	    .site-header .site-util ul li{padding: 0.15em 0}
+	}
+	@media screen and (min-width:769px) and (max-width: 1200px){
+	/*    #site-main .login_area > div{width:49.5%;}*/
+	
+	}
+	@media screen and (max-width: 1200px){
+	/*    #site-main .login_area > div > div{width:100%;box-sizing:border-box;}*/
+	/*    #site-main .login_area .logo{width:55.7%;}*/
+	
+	    .session_graph li:first-child{padding-left:2.667em;}
+	    .session_graph li:last-child{padding-right:2.667em;}
+	
+	}
+	@media screen and (max-width: 1024px){
+		body { font-size: 14px; }
+	    .half > *:last-child{margin-bottom:0!important}
+	}
+	@media screen and (min-width: 769px) and (max-width: 1024px){
+	    .m-w100p > *{float:none!important}
+	    .m-w100p > *:not(img){width:100%!important;margin-left:0!important;margin-right:0!important;max-width:100%;display:block;}
+	
+	    .session_graph.graph-style-02 > li .inner{min-height:14em}
+	
+	    .bul-bluedotlist-small.half > li{margin-bottom:1em}
+	}
+	@media screen and (max-width: 768px){
+		body { font-size: 13px;}
+	    .site-header { height: 5.537em; position: fixed; top: 0; left: 0; z-index: 92; }
+		.site-header .site-title { width: 33.333%; }
+		.site-header .site-title a { font-size: 1.600em; }
+		.site-header .site-nav { width: 33.333%; }
+		.site-header .site-nav li:not(.active),
+		.site-header .site-nav li:before,
+		.site-header .site-nav li:after,
+		.site-header .site-nav li .txt { display: none; }
+	    .site-header .site-nav li{}
+	    .site-header .site-nav li .num{position: absolute;width:3.143em;height:3.143em;line-height:2.743em;left: 50%;display: block;margin-left: -1em;top:50%;margin-top: -1.45em;font-size:1em;border:0.3em solid #206ebd;}
+	    .site-header .site-util ul li.menu_btn .btn{position: absolute;right:3%;top:58%;margin-top: -1.33em}
+		.site-header .site-util { width: 33.333%; }
+		.site-header .site-util ul li { display: none; }
+		.site-header .site-util ul li.menu_btn { display: block; }
+	
+		.site-sidebar {padding-top: 4.5em;padding-bottom: 5.334em;position: fixed;left: -240px;z-index: 91;}
+		.site-sidebar.on { left: 0; }
+	
+		.m-site-util { display: block; }
+	
+		.site-session.on { display: block; }
+		.site-body { padding-top: 4.5em; }
+	
+		.container.contant { padding-left: 0; width:100%; }
+	
+	    .content-header{padding:0 3%;}
+		.content-header .location { display: none; }
+	
+		.content-body { padding: 1em 3%; }
+		.content-footer.btn_group { text-align: center; }
+		.content-footer.btn_group .btn { width: 48%; margin: 0 0.5%; border-radius: 0.2em; height: 4em; line-height: 4em; }
+	
+		.join_select .select .snsJoin .btn { height: 4em; line-height: 4em; }
+		.jon_input ul li .tit { display: block; line-height: 1; }
+		.jon_input ul li .cont { display: block; }
+	
+	    #site-main .login_area > div{width:100%;}
+	    .site-title img{width: 6.3em;margin-top: 0.1em;}
+	
+	    .table-survey thead tr th{line-height:1.2}
+	    #site-main .copyright_area .family li.mindspa img{margin-bottom: 3px;}
+	
 	}
 	
-	.powerLinkWrap ul {
-		overflow: hidden;
-		width: 1160px;
-		margin: 0 auto;
+	@media screen and (min-width: 641px) {
+	    .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{display:none;}
+	    #site-main .swiper-wrapper, #site-main .swiper-slide > *:not(.back){transform:translate3d(0px,0px,0px)!important;-webkit-transform:translate3d(0px,0px,0px)!important}
 	}
 	
-	.powerLinkWrap ul li {
-		/* 임시 표시 */
-		/* background-color: #ddd; */
-		
-		float: left;
-		width: 200px;
-		height: 260px;
-		margin: 15px;
-		position: relative;
+	@media screen and (max-width: 640px){
+	    .m-view{display:block}
+	    .m-intro{float:none;padding:0}
+	
+	    .fifths > *, .fourths > *{width:calc(50% - 0.55em);margin:0 0.55em}
+	    .fifths > *:nth-child(2n-1), .fourths > *:nth-child(2n-1){margin:0.55em 0.55em 0.55em 0;} /* odd */
+	    .fifths > *:nth-child(2n), .fourths > *:nth-child(2n){margin:0.55em 0 0.55em 0.55em;} /* even */
+	    .thirds > *{max-width:none;}
+	
+	    .m-w100p > *, m-w100p-2 > *{float:none!important}
+	    .m-w100p > *:not(img), .m-w100p-2 > *:not(img){width:100%!important;margin-left:0!important;margin-right:0!important;max-width:100%;display:block;}
+	
+	    .half.m-w100p.half-gap > :first-child, .half.m-w100p-2.half-gap > :first-child{margin:1em 0 0.55em}
+	    .half.m-w100p.half-gap > :last-child, .half.m-w100p-2.half-gap > :last-child{margin:0.55em 0 1em}
+	    .half > .bul-bluedotlist-small > li:last-child{margin-bottom:0.667em}
+	
+	    .bul-bluedotlist-small.half > li{margin-bottom:1em}
+	
+	    .btn-style-01-01{top:auto;right:auto;bottom:-1.333em;left:-2.1em;transform:rotate(125deg);-ms-transform:rotate(125deg);-webkit-transform:rotate(125deg);}
+	    .btn-style-01-02{top:auto;right:calc(50% - 1.8em);bottom:-1.333em;transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);}
+	
+	    .s1s4_goal.s4s8{width:100%;}
+	
+	    .covered{display:none;}
+	    #site-main{background:none;}
+	    #site-main:before{content:none;}
+	    #site-main .login_area, #site-main .inner{padding-top:0;height:100%;}
+	    #site-main .login_area .logo{max-width:72%;}
+	    #site-main .login_area .logo.on{width:50%;}
+	    #site-main .login_area .btn_area{padding:0;}
+	    #site-main .login_area .swiper-slide{background-color:transparent;border:none;padding:0 23%;min-height:30%;margin-top:15%;}
+	    #site-main .login_area .input_area{margin-top:1.667em;padding:0;}
+	    #site-main .login_area .btn-main-confirm{background-color:#fff;}
+	    #site-main .login_area .findpass{text-align:center;margin-top:2em;}
+	    #site-main .login_area .closeBtn-main{top:0;right:23%}
+	    #site-main .login_area .forward p{margin-bottom:1.333em}
+	    #site-main .swiper-container{height:100%;background-image:url('../images/main/bg_m_2.png');background-size:100%;}
+	    #site-main .copyright_area{position:absolute;bottom:0;left:0;width:100%;}
+	    #site-main .parallax-bg{position: absolute;left: 0;top: 0;width: 130%;background-image:url('../images/main/bg_m_1.png');height: 100%;-webkit-background-size: cover;background-size: 70%;background-position:left bottom;background-repeat:no-repeat;}
+	
+	    .br-w640{display:inline;}
+	}
+	@media screen and (min-width:481px) and (max-width:640px){
+	    .session_graph.graph-style-02 > * > .inner{min-height:13em}
+	}
+	@media screen and (max-width:480px){
+	    .session_graph li{padding:2.667em}
+	    .session_graph li:first-child{padding-top:0}
+	    .session_graph li:last-child{padding-bottom:0}
+	    .session_graph li:before{top:0;left:50%;}
+	    .session_graph.graph-style-02 > li{max-width:100%;}
+	    .session_graph.graph-style-02 > li:first-child:before{border-top:0;height:16em}
+	    .session_graph.graph-style-02 > li:last-child:before{display:none;}
+	
+	    .ipt_group.birthday .w100:nth-child(2), .ipt_group.birthday .w100:last-child{width:calc(50% - 50px - 0.667em)!important;min-width:auto}
+	    .ipt_group.school .w100{width:calc(100% - 200px - 0.667em)!important;min-width:auto;}
+	    .ipt_group .ipt_direct.w260{width:calc(100% - 7em)!important;}
+	
+	    .table-survey thead th:not(.th){padding:1.533em 0.333em}
+	    .table-survey tbody tr > *:first-child{text-align:center}
+	    .table-survey.table-score-white tbody tr .th{padding:1em;height:auto;line-height:1.2;padding:1em;}
 	}
 	
-	.powerLinkWrap ul li img{
-		width: 200px;
-		height: 250px;
+	@media screen and (max-width: 399px){
+		body { font-size: 12px; }
+	  #site-main .copyright_area .family li.mindspa img{margin-bottom: 0;}
 	}
- 	.powerLinkWrap ul li .powerDummy{
-		width: 100%;
-		height: 250px;
-		position: absolute;
-		left: 0;
-		top: 0;
-		background-color: rgba(0,0,0,.4);
+	
+	@media screen and (max-width: 360px){
+		body { font-size: 11px; }
+	  #site-main .copyright_area .family li.mindspa img{margin-bottom: -3px;}
+	
+	}
+/* 	버튼 */
+	#site-main .login_area .btn_area{padding:0 14%;box-sizing:border-box;}
+	#site-main .login_area .btn-main{vertical-align:middle;font-size:1.2em;line-height:2.889em;min-width:auto;border-radius:4px;}
+	#site-main .login_area .btn_area .btn-main-login{color:#fff;}
+	#site-main .login_area .green .btn-main-join{color:#0e9978;}
+	#site-main .login_area .green .btn-main-login{background-color:#0e9978;}
+	#site-main .login_area .btn-main-confirm{width:100%;border-radius:4px;border-color:#333!important;color:#333;margin-top:1.333em;}
+	#site-main .login_area .input_area{margin-top:1.667em;padding:0 15%;}
+	#site-main .login_area .input_area input{height:2.889em;border-color:#ccc;font-size:1.2em;padding:0 6%;font-family:'Nanum Square';}
+	#site-main .login_area .input_area input[type="password"]{font-family: sans-serif;}
+	#site-main .login_area .green .input_area .ipt:focus{border-color:#0e9978!important}
+	#site-main .login_area .forward p{font-size:1.2em;line-height:1.667em;margin-bottom:2.333em;letter-spacing:-0.02em;word-break:keep-all;}
+	#site-main .login_area .closeBtn-main{position:absolute;top:1.6em;right:1.6em;z-index:5;background-size:100%;color:transparent;border:none;outline-style:none;background-color:transparent;background-repeat:no-repeat;width:1.6em;height:1.6em;cursor:pointer;}
+	#site-main .login_area .green .closeBtn-main{background-image:url('../images/main/closebtn_green.png');}
+	#site-main .login_area .green .strong-txt{border-bottom:1px solid #049db4;color:#049db4;}
+	/*#site-main .login_area .findpass{text-align:left;font-size:0.933em;margin-top:0.667em;display:block}*/
+	#site-main .login_area .findpass{text-align:left;font-size:0.933em;display:inline-block;}
+	#site-main .login_area .findpass span{border-bottom:1px solid #333;}	
+	#site-main .swiper-button-next, #site-main .swiper-button-prev{width:12.5%;min-height:8em;top:calc(30% - 3.8em);background-size:100%;outline-style:none;background-position:center;}
+	#site-main .swiper-button-next{background-image:url('../images/main/slide_next.png');right:0.333em;}
+	#site-main .swiper-button-prev{background-image:url('../images/main/slide_prev.png');left:1em;}
+	#site-main .login_area .green .btn {
+	    border-color: #0e9978;
+	    border-top-color: rgb(14, 153, 120);
+	    border-right-color: rgb(14, 153, 120);
+	    border-bottom-color: rgb(14, 153, 120);
+	    border-left-color: rgb(14, 153, 120);
 	}	
-	.powerLinkEmphasis{ /* 파워링크 강조 */
-		width: 100%;
-		height: 250px;
-		position: absolute;
-		left: 0;
-		top: 0;
-		background-color: none;
-	  	border: 10px solid #ED7D31;
-	  	margin: -10px;			  	
-	}			
-	/* 공지사항 & 이벤트 */
-	.noticeAndevent{
-		margin-top: 45px;
-		margin-bottom: 45px;
+		.inputRegi{
+		width: 325px;
+	    height: 30px;
+	    margin-bottom: 15px;
+	    padding: 5px;
+	    border: 1px solid #949494;
 	}
-	.noticeAndevent .neWrap ul{
-		overflow: hidden;
-		width: 100%;
-		margin: 0 auto;
-		padding-left: 15px;
+	.inputRegi1{
+		width: 240px;
+	    height: 30px;
+	    margin-bottom: 15px;
+	    padding: 5px;
+	    border: 1px solid #949494;
 	}
-	.noticeAndevent .neWrap ul li{
-		width: 47%;
-		height: 155px;
-		float: left;
-		margin: 10px;
-		position: relative;
+	input::-webkit-input-placeholder {
+		color:#949494;
 	}
-	.noticeTitleWrap{
-		width: 89%;
-		height: 90px;
-		float: left;
-		margin: 33px;
+	.chgColorSpan{
+		color:#949494;
 	}
-	.neWrap li img.noticeIcon{
-		width: 90px;
-		height: 90px;
-		opacity: 0.8;
-    	filter: alpha(opacity=50);
-    	vertical-align: top;
-    	float: left;
-    	margin-right: 30px;
-    	margin-left: 10px;
+	.btnCheck{
+		height: 42px;
+	    width: 80px;
+	    border: 1px;
+	    background: #303A50;
+	    color: white;
 	}
-	.neWrap li img.btnNext{
-		width: 20px;
-		height: 30px;
-		float: right;
-		position: absolute;
-		right: 30px;
-		top:70px;
-	}
-	.neWrap li h2{
-		color: #212121;
-		font-size: 22px;
-	}
-	p.smallTitle1{
-		font-size: 17px;
-		color: #353535;
-	}
-	p.smallTitle2{
-		font-weight: bold;
-		margin-top: 9px;
-		color: #353535;
-		font-size: 14px;
-	}	
-	.noticeAndevent .neWrap ul li:first-child{
-		background-color: #FFD2D9;
-	}
-	.noticeAndevent .neWrap ul li:nth-child(2){
-		background-color: #E5E5E5;
-	}
-	.noticeAndevent .neWrap ul li:nth-child(3){
-		background-color: #F7E2DF;
-	}
-	.noticeAndevent .neWrap ul li:last-child{
-		background-color: #F6EBB3;
-	}			
-	/* 카페 리스트 */
-	.cafeListArea {
-		overflow: hidden;
-		margin-bottom: 30px;
-	}
-	
-	.newCafeImgs {
-		/* 임시 설정 */
-		/* background-color: #ddd; */
-		
-		width: 100%;
-		height: 485px;
-	}
-	.newCafeImgs img{
-		width: 100%;
-		height: 485px;
-	}	
-	
-	.newCafeTitleWrap {
-		margin: 10px;
-		overflow: hidden;
-	}
-	
-	.newCafeTitleWrap .zoneIcon{
-		margin-right: 10px;
-	}
-	.newCafeTitleWrap .newCafekeyword{
-		padding: 5px 10px;
-		color: #fff;
-		font-weight: 700;
-		float: left;
-		border-radius: 5px;
-	}
-	.newCafeTitleWrap .cafeName {
-		display: inline;
-		font-size: 23px;
-		font-weight: bold;
-		margin-left: 15px;
-		line-height: 34px;
-	}
-	.newCafeSmallImgs{
-		position: relative;
-		z-index: 0;
-	}
-	.newCafeSmallImgs ul{
-		/* overflow: hidden; */
-		
-	}
-	
-	.newCafeSmallImgs ul li {
-		/* 임시 설정 */
-		background-color: #ddd;
-		
-		float: left;
-		width: 31.5%;
-		height: 190px;
-		margin: 5px;
-		margin-top: 0;
-		
-	}
-	
-	.newCafeSmallImgs ul li img{
-		width: 100%;
-		height: 190px;
-	}
-	
-	.dron{
-		position: absolute;
-		z-index: 1;
-		width: 176px;
-		height: 190px;
-		border: 5px solid red;
-		margin: -5px;
-		margin-left: 0.5px;
-		cursor: pointer;
-	}
-	/* 전월기준 베스트 10 */
-	
-	.likeCafeTitle span {
-		font-size: 16px;
-		font-weight: 400;
-	}	
-	div.likeCafeList ul{
-		width: 100%;
-		
-	}
-	
-	div.likeCafeList ul li{
-		width: 49%;
-		height: 142px;
-		background-color: #ddd;
-		margin-bottom: 5px;
-		margin-left: 2.5px;
-		margin-right: 2.5px;
-		float: left;
-		position: relative;
-	}
-	img.bestCafeImg{
-		width: 100%;
-		height: 142px;
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	div.likeRank_no{
-		width: 13%;
-		font-weight: bold;
-		color: white;
-		text-align: center;
-		background-color: #FF5E00;
-		font-size: 20px;
-		position: absolute;
-		left: 5px;
-		top: 5px;
-		z-index: 2;			
-	}
-	span.bestCafeName{
-		color: white;
-		font-weight:bold;
-		background-color: rgba(0,0,0,.6);
-		border-radius: 5px;
-		padding: 2px 10px;
-		position: absolute;
-		left: 50px;
-		top: 5px;
-		z-index: 2;
-		transition: all .6s ease;			
-			
-	}
-	div.likeCafeList ul li:hover div.like_dummy{
-		opacity: 1;
-		cursor: pointer;
-	}
-	div.likeCafeList ul li:hover span.bestCafeName{
-		opacity: 0;
-	}	
-	div.like_dummy{
-		width: 100%;
-		height: 142px;
-		position: absolute;
-		left: 0;
-		top: 0;
-		opacity: 0;
-		background-color: rgba(0,0,0,.8);
-		transition:1s all ease;
-	}
-	.spComment{
-		width: 100%;
-		color: white;
-		font-weight: bold;
-		text-align: center;
-		margin-top: 10px;		
-	}
-	.yellow{
-		color: yellow;
-		text-decoration : underline;
-		letter-spacing: 3px;
-	}
-	.termMonth{
-		width: 100%;
-		color: white;
-		text-align: center;
-		margin-top: 10px;
-	}
-	.starPointWrap {
-		width: 250px;
-		height: 33px;
-		margin: 0 auto;
-		line-height: 50px;
-		position: absolute;
-		left: 65px;
-		top: 98px;		
-	}
-	.spoint{
-	    width: 150px;	
-		height: 33px;
-	    line-height: 33px;
-	    background-color: #f4f4f4;
-	    border-radius: 10px;
-	    float: left;
-	}
-	.br-theme-fontawesome-stars .br-readonly a {
-		font-size: 15px;		
-	}
-	.br-theme-fontawesome-stars .br-readonly a:first-child{
-		padding-left: 15px;
-	}	
-	.br-theme-fontawesome-stars .br-widget a.br-selected:after {
-		color: red;
-	}
-	.jumsu{
-		height: 33px;
-	    line-height: 33px;
-	    float: left;
-	    margin-left: -51px;
-	    /* margin-bottom: 20px; */
-		font-size: 15px;
-	}			
-	
-	/* 베스트 카페탐방기 */
-	.baseCafeReview {
-		margin-bottom: 30px;	
-	}
-	span#bestMark{
+	span.hotPlace{
 		color: white;
 		background: #FF007F;
 		border-radius: 5px;
 		padding: 0 8px;
-		font-weight: bold;
 		letter-spacing: 2px;
-		font-size: 20px;
-		margin-left: 8px;
+		font-size: 12px;
+		margin-left: 8px;	
 	}
-	.baseCafeReview .baseList1-3 {
-		text-align: center;
-		padding: 15px;
+	.checkbox, .radio {
+	    position: relative;
+	    display: block;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+        margin-right: 250px;
 	}
-	
-	.baseCafeReview .baseList1-3 ul {
-		overflow: hidden;
-		width: 80%;
-		margin: 0 auto;
-	}
-	
-	.baseCafeReview .baseList1-3 ul li {
-		/* 임시설정 */
-		/* background-color: #ddd; */
-		
-		float: left;
-		width: 31%;
-		height: 290px;
-		margin: 9px;
-		margin-top: 30px;
-		border: 1px solid #A6A6A6;
-	}
-	.bestImgWrap{
-		overflow: hidden;
-		position: relative;
-	}
-	.baseCafeReview .baseList1-3 ul li img.thumbNailImg:nth-child(2n-1){
-		width: 100%;
-		height: 200px;
-		transition: all 1s;
-		transform-origin:left-top;
-	}
-	.baseCafeReview .baseList1-3 ul li img.thumbNailImg:nth-child(2n-1):hover{
-		transform:scale(1.2);
-	} 
-	
-	.baseCafeReview .baseList1-3 ul li.best1 {
-		height: 320px;
-		margin-top: 0;
-	}
-	.baseCafeReview .baseList1-3 ul li.best1 img.thumbNailImg{
-		width: 100%;
-		height: 230px;
-		transition: all 1s;
-		transform-origin:left-top;
-		
-	}
-	.baseCafeReview .baseList1-3 ul li.best1 img.thumbNailImg:hover{
-		transform:scale(1.2);
-	}
-	.rvRank_no{
-		position: absolute;
-		left: 0;
-		top:0;
-		width: 35px;
-		height: 32px;
-		background-color: #FF2424;
-		color: white;
-		font-weight: bold;
-		font-size: 20px;
-	}
-	.bestTitleInfo{
-		border-bottom: 1px solid #A6A6A6;
-		padding-bottom: 8px; 
-	}
-	.bestTitleInfo p{
-		font-size: 13px;
-		letter-spacing: 1px;
-	}
-	.bestUser{
-		width: 100%;
-		font-weight: bold;
-		font-size: 13px;
-		padding: 5px;
-	}
-	.bestUser img{
-		width: 20px;
-		height: 20px;
-		vertical-align: top;
-	}
-	p.rvBestTitleAll{
-		font-weight: bold;
-		letter-spacing: 2px;
-		color: black;
-		font-size: 18px;
-	}
-	.baseCafeReview .bestLists ul{
-		overflow: hidden;
-	}
-	
-	.baseCafeReview .bestLists ul li {
-		/* 임시설정 */
-		background-color: #ddd;
-		
-		float: left;
-		width: 31.6%;
-		height: 180px;
-		margin: 10px;
-		position: relative;
-	}
-	.baseCafeReview .bestLists ul li img{
-		width: 100%;
-		height: 180px;
-	}
-	.bestDummy{
-		width: 100%;
-		height: 180px;
-		position: absolute;
-		left: 0;
-		top: 0;
-		background-color: rgba(0,0,0,.3);
-		text-align: center;
-		color: white;
-	}
-	.bestDummy .reviewInfoWrap{
-		width: 100%;
-		margin-top: 65px;
-	}
-	.bestDummy h3:hover{
-		text-decoration: underline;
-	}
-	.bestDummy p.reviewInfo{
-		font-size: 13px;
-		letter-spacing: 1px;
-	}
-	.rvRank{
-		width: 35px;
-		height: 28px;
-		background-color: #ED7D31;
-		color: white;
-		font-weight: bold;
-		text-align: center;
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	
-	/* 카페추천 / 추천 랭킹 */
-	.cafeRecommend {
-		overflow: hidden;
-		margin-bottom: 150px;
-	}
-	
-	.cafeRecommend .newListImgs ul{
-		overflow: hidden;
-	}
-	.cafeRecommend .RC_listImgWrap{
-		width: 180px;
-		height: 175px;
-		overflow: hidden;
-	}
-	.cafeRecommend .newListImgs ul li {
-		/* 임시설정 */
-		/* background-color: #ddd; */
-		
-		float: left;
-		width: 31.5%;
-		height: 175px;
-		margin: 5px;
-	}
-	
-	.cafeRecommend .newListImgs ul li:nth-of-type(n+4) {
-		margin-top: 5px;
-	}
-	.cafeRecommend .newListImgs ul li img{
-		width: 180px;
-		height: 175px;
-		transition:all 1s;
-		transform-origin:left-top;
-	}
-	
-	.cafeRecommend .newListImgs ul li img:hover{
-		transform:scale(1.2);
-	}
-	.bestRankList_info{
-		border-radius: 5px;
-		background-color: yellow;
-		margin-left: 10px;
-		padding: 2px 10px;
-		font-size: 20px;
-		color: black;
-		letter-spacing: 2px;
-	}
-	.bestRankUserTerm{
-		border-radius: 5px;
-		background-color: #FF2424;
-		margin-left: 10px;
-		padding: 2px 10px;
-		font-size: 15px;
-		color: white;
-		letter-spacing: 1px;	
-	}
-	ul#tabs-ul li,a:focus{
-		outline: none;
-	}
-	div#tabWrap{ /* 탭전체 */
-		width: 99%;
-		/* background-color: red; */
-	}
-	div#tabs{ /* 탭 */
-		width: 100%;
-	}
-	ul#tabs-ul{ /* 탭 제목-ul */
-		width: 100%;
-	}
-	 li.tabs-li:first-child{ /* 탭 제목-li */
-	 	width: 26%;
-	 }
- 	 li.tabs-li{ /* 탭 제목-li */
-	 	width: 13.5%;
-	 }
-	 a#ui-id-1.tabName2.ui-tabs-anchor{
-	 	padding: 0.5em 0.9em;
-	 }
-	 a#ui-id-2.tabName2.ui-tabs-anchor{
-	 	padding: 0.5em 0.6em;
-	 } 	
-	 a#ui-id-3.tabName2.ui-tabs-anchor{
-	 	padding: 0.5em 0.6em;
-	 } 	
-	 a#ui-id-4.tabName2.ui-tabs-anchor{
-		 padding: 0.5em 0.6em;
-	 } 	
-	 a#ui-id-5.tabName2.ui-tabs-anchor{
-		 padding: 0.5em 0.6em;
-	 }
-	 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{
-	 	color: white;
-	 }
-	.ui-state-active,
-	.ui-widget-content .ui-state-active,
-	.ui-widget-header .ui-state-active,
-	a.ui-button:active,
-	.ui-button:active,
-	.ui-button.ui-state-active:hover {
-		border: 1px solid #eeeeee;
-		background: #ED7D31;
-		font-weight: bold;
-		color: white;
-	}	 
-	 
-	.ui-state-active,
-	.ui-widget-content .ui-state-active,
-	.ui-widget-header .ui-state-active,
-	a.ui-button:active,
-	.ui-button:active,
-	.ui-button.ui-state-active:hover {
-		border: 1px solid #eeeeee;
-		background: #ED7D31;
-		font-weight: bold;
-		color: white;
-	}
-
-    /* 첫번째 탭만 red */
-	.ui-widget-header .ui-state-active:first-child,
-	a.ui-button:active,
-	.ui-button:active,
-	.ui-button.ui-state-active:hover {
-		border: 1px solid #eeeeee;
-		background: red;
-		font-weight: bold;
-		color: white;
-	}
-
-	.ui-tabs .ui-tabs-panel{
-		padding: 0.8em 0.5em;
-	}
-	table{
-		width: 100%;
-		height: 487px;
-	}
-    tr, td{
-		border: none;
-	}
-	table tr.rank_wrap{
-		border-bottom: 1px solid #BDBDBD;
-		padding-top: 7.7px;
-	}
-	ol li.rank_wrap div{
-		display: inline;
-	}	
-	table tr.rank_wrap td.rank_num{
-		width: 8%;
-		font-size: 23px;
-		font-weight: bold;
-		color: #FF7171;
-		text-align: left;
-	}
-	.bestRankUserAll{
-		color: red;
-	}
-	table tr.rank_wrap td.medal{
-		width: 7%;
-		text-align: center;
-	}
-	table tr.rank_wrap td.medal img.mini_medal{
-		width: 27px;
-		vertical-align: top;
-	}	
-	table tr.rank_wrap td.grade_img{
-		width: 10%;
-		text-align: center;	
-	}
-	table tr.rank_wrap td.grade_img img.gradeImg{
-		width: 36px;
-		vertical-align: top;
-	}
-	table tr.rank_wrap td.user_name{
-		width: 60%;
-		font-size: 15px;
-		font-weight: bold;
-		color: black;
-		text-align: left;
-		padding-left: 15px;
-	}
-	.blue2{
-		color: blue;
-	}
-	table tr.rank_wrap td.board_cntImg{
-		text-align: center;
-	}
-	table tr.rank_wrap td.board_cntImg img.boardImg{
-		 vertical-align: middle;
-	}	
-	table tr.rank_wrap td.board_cnt{
-		width: 16%;
-		font-size: 15px;
-		text-align: right;		
-	}
-			 	  		 	 	 	  	 	
 </style>
-
+</head>
+<body>
+<div id="wrap">
+ <section id="site-main"> 
 	<div class="content container">
-		<div class="cafeMuKKaAdd">
-			<div class="cafeMuKKaAddWrap1">
-				<h1 class="typing-txt">
-					#언제든지, 소통할 수 있는 곳 마음:TACT
-				</h1>
-				<h1 class="typing"></h1>
-			</div>
-			<div class="cafeMuKKaAddWrap2">
-				<ul class="cafeMuKKaMainBoxs">
-					<li class="mainBox">
-						<a href="${pageContext.request.contextPath}/user/mukkaCafe">
-							<p class="mainInfoText"><i>코로나블루를 예방하기 위해<br>생애주기별 검사</i></p>
-							<h1 class="mainTitle"><i>mind:TACT</i></h1>
-							<span class="viewpoint-first"><img src="${pageContext.request.contextPath }/resources/images/viewpoint.png">　<i>view more</i></span>
-						</a>
-					</li>
-					<li class="mainBox">
-						<a href="${pageContext.request.contextPath}/user/community">
-							<p class="mainInfoText"><i>언제 어디서든 소통할 수 있는 공간</i></p>
-							<h1 class="mainTitle"><i>Community</i></h1>
-							<span class="viewpoint-second"><i>view more</i>　<img src="${pageContext.request.contextPath }/resources/images/viewpoint.png" id="viewpoint_right"></span>
-						</a>
-					</li>
-					<li class="mainBox">
-						<a href="#">
-							<p class="mainInfoText"><i>우리 함께 건강한 방법 찾아봐요</i></p>
-							<h1 class="mainTitle"><i>Health</i></h1>
-							<span class="viewpoint-third"><img src="${pageContext.request.contextPath }/resources/images/viewpoint.png">　<i>view more</i></span>
-						</a>
-					</li>
-				</ul>
-			</div>			
-		</div>
-		
-		<!-- 파워링크 : 해당카페번호꺼내서 해당이미지 1개씩 꺼내기 -->
-		<div class="powerLinkArea">
-			<h2><a href ="${pageContext.request.contextPath}/user/mukkaCafe/monthCafe" class="mainTitle">놀면 뭐하니?</a></h2>
-			<div class="powerLinkWrap">
-				<ul class="powerBanner" val="0" mx="4">
-				   <c:forEach var="powerList" items="${powerList}">
-	 					<c:forEach var="powerImg" items="${powerImg}">		
-							<c:if test="${powerImg.cafeNo.cafeNo == powerList.cafeNo }">
-								<li>
-									<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${powerList.cafeNo}">
-										<img src="${pageContext.request.contextPath }/resources/images/sumnail/${powerImg.imageName}">
-										<div class="powerDummy"></div>
-									</a>
-								</li>
-							</c:if>
-						</c:forEach>				
-					</c:forEach>
-				</ul>
-				
-			</div>
-		</div>
-		<!-- 공지사항 -->
-		<div class="noticeAndevent">
-			<div class="neWrap">
-				<ul>
-					<li>
-						<a href="#">
-							<div class="noticeTitleWrap">
-								<img src="${pageContext.request.contextPath }/resources/images/notice03.png" class="noticeIcon">
-								<p class="smallTitle1">마음을 전해요</p>
-								<h2>심리검사 3회 무료</h2>
-								<p class="smallTitle2">신규가입자 혜택</p>
-								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="noticeTitleWrap">
-								<img src="${pageContext.request.contextPath }/resources/images/notice02.png" class="noticeIcon">
-								<p class="smallTitle1">놀면뭐하니</p>
-								<h2>맞춤 해결방법 제시</h2>
-								<p class="smallTitle2">매월 1번, 베스트 해결방법 선정</p>							
-								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">					
-							<div class="noticeTitleWrap">
-								<img src="${pageContext.request.contextPath }/resources/images/notice01.png" class="noticeIcon">
-								<p class="smallTitle1">마음:TACT人이 되신걸 환영합니다!</p>
-								<h2>최대 8,000 Beans 증정</h2>
-								<p class="smallTitle2">신규 회원 혜택</p>							
-								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">					
-							<div class="noticeTitleWrap">
-								<img src="${pageContext.request.contextPath }/resources/images/notice04.png" class="noticeIcon">
-								<p class="smallTitle1">신속하고 편리한 카카오 채널 상담</p>
-								<h2>카카오 채널 추가 이벤트</h2>
-								<p class="smallTitle2">편리한 1:1 상담톡을 이용해보세요</p>							
-								<img src="${pageContext.request.contextPath }/resources/images/btn_next_arr.png" class="btnNext">
-							</div>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- 카페 리스트 -->
-		<div class="cafeListArea">
-			<div class="newCafeList left">
-				<h2 class="newCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe" class="mainTitle"><i class="fas fa-mug-hot"></i> 생애주기별 심리검사</a></h2>
-				
-				<c:forEach var="newCafeList" items="${newCafeList}">
-					<div class="newCafeImgs">
-						<c:forEach var="newCafeImg" items="${newCafeImg}">
-							<c:if test="${newCafeImg.cafeNo.cafeNo == newCafeList.cafeNo }">
-								<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${newCafeList.cafeNo}">
-									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${newCafeImg.imageName}">					
-								</a>
-							</c:if>
-						</c:forEach>
-					</div>
-					<div class="newCafeTitleWrap">
-	                    <!-- 위치 -->				
-						<div class="zoneIcon zoneOrangeIcon">${newCafeList.zoneNo.zoneName}</div>
-						<!-- 키워드 -->
-						<c:choose>
-							<c:when test="${newCafeList.themeNo.themeNo == 1}">
-								<div class="date themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>
-							</c:when>
-							<c:when test="${newCafeList.themeNo.themeNo == 2}">
-								<div class="view themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>
-							</c:when>
-							<c:when test="${newCafeList.themeNo.themeNo == 3}">
-								<div class="ame themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>
-							</c:when>
-							<c:when test="${newCafeList.themeNo.themeNo == 4}">
-								<div class="dessert themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>
-							</c:when>
-							<c:when test="${newCafeList.themeNo.themeNo == 5}">
-								<div class="dog themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>
-							</c:when>																																								
-							<c:otherwise>
-								<div class="work themeKeySmall newCafekeyword">#${newCafeList.themeNo.themeName}</div>		
-							</c:otherwise>
-						</c:choose>
-						<p class="cafeName">${newCafeList.cafeName}</p>
-					</div>
-				</c:forEach>
-				
-				<div class="newCafeSmallImgs">
-					<ul>
-						<c:forEach var="newCafeList" items="${newCafeList}">
-							<c:forEach var="newCafeImg" items="${newCafeImg}">
-							<c:if test="${newCafeImg.cafeNo.cafeNo == newCafeList.cafeNo }">
-								<li>
-									<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${newCafeList.cafeNo}">
-									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${newCafeImg.imageName}">				
-									</a>
-								</li>
-							</c:if>
-						</c:forEach>
-						</c:forEach>
-					</ul>
-				</div>
-				<div class="dron"></div>
-				
-			</div>
-			
-			<div class="mukkaLikeCafeList right">
-				<h2 class="likeCafeTitle bottomLine"><a href="${pageContext.request.contextPath}/user/mukkaCafe/mukkaBest" class="mainTitle"><i class="fas fa-mug-hot"></i> 마음:TACT人이 애정하는 solution</a> <span class="orange term"></span></span></h2>
-				<div class="likeCafeList">
-					<ul>
-						<c:forEach var="bestCafeList" items="${bestCafeList}">
-							<c:forEach var="bestCafeImg" items="${bestCafeImg}">
-							<c:if test="${bestCafeImg.cafeNo.cafeNo == bestCafeList.cafeNo}">
-								<li>
-								<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${bestCafeList.cafeNo}">
-										<div class="likeRank_no"></div>				
-										<img src="${pageContext.request.contextPath }/resources/images/sumnail/${bestCafeImg.imageName}" class="bestCafeImg">
-										<span class="bestCafeName"><i class="fa fa-coffee" aria-hidden="true"></i> ${bestCafeList.cafeName}</span>							
-										<div class="like_dummy">
-											<p class="spComment">"<i><span class="orange bold">${bestCafeList.userNo.name}</span>님 의 평가<br><span class="yellow">${bestCafeList.starPoint.starPointComment}</span></i>"</p>
-											<p class="termMonth">(<span class="termMonthText"></span>월 평균 별점)</p>
-											<div class="starPointWrap clearfix">
-												<div class="star spoint">
-													<select class="starPoint"> 
-														<option value="1">1</option> 
-														<option value="2">2</option> 
-														<option value="3">3</option> 
-														<option value="4">4</option> 
-														<option value="5">5</option> 
-													</select>										
-												</div>
-											<div class="jumsu"><span class="spointNum"></span><span class="gray">/ 5</span></div>
-											</div>																				
-										</div>					
-									</a>
-								</li>
-							</c:if>
-							</c:forEach>
-						</c:forEach>			
-					</ul>
-				</div>
-			</div>
-		</div>
-		
-		<!-- 베스트 카페탐방기 -->
-		<div class="baseCafeReview">
-			<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community/cafeReview" class="mainTitle"><i class="fas fa-mug-hot"></i> 마음:TACT人이 전하는 후기</a> <span id="bestMark">BEST</span></h2>
-			<div class="baseList1-3 bottomLine">
-				<ul>
-					<!-- 2위 -->
-					<c:forEach var="rvlist" items="${rvlist}" begin="1" end="1" varStatus="status">
-						<c:forEach var="rvlistImg" items="${rvlistImg}" begin="1" end="1"
-							varStatus="status">
-							<c:if test="${rvlistImg.boardNo.boardNo == rvlist.boardNo }">
-								<li>
-								<a href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${rvlist.boardNo}">
-								<div class="bestImgWrap">
-										<img src="${pageContext.request.contextPath }/user/displayFile?filename=${rvlistImg.imageName}" class="thumbNailImg" alt="탐방기대표이미지" class="reviewBestImg" onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'">
-										<div class="rvRank_no">2</div>
-								</div>
-								<div class="bestTitleInfo">
-									<h3>${rvlist.writingTitle}</h3>
-									<p><b><span class="orange">${rvlist.zoneNo.zoneName}</span> · <span style="color:navy">#${rvlist.themeNo.themeName}</span> · 추천수 <span class="red">${rvlist.voteNumber}</span></b></p>
-								</div>
-								<div class="bestUser">
-									<p>
-										<img src="${pageContext.request.contextPath }/resources/images/${rvlist.userNo.userGrade.userGradeImage}" alt="등급아이콘">
-										${rvlist.userNo.nick}(${rvlist.userNo.userId})
+		<div class="inner">
+			<div class="login_area">
+				<form name="logFrm" id="logFrm" method="post" action="">
+				  <div class="swiper-container swiper-container-horizontal">
+					   <div class="parallax-bg"></div>					   
+						    <div class="swiper-wrapper" >				
+								<div class="swiper-slide green swiper-slide-active">				
+									<img src="${pageContext.request.contextPath }/resources/images/logo_green.png" alt="logo" id="logo" class="logo" data-swiper-parallax="-100"/>
+									<div class="forward">
+									<p class="weight-bold">
+										<strong class="color-green">마음:TACT</strong>
+										은
+										<strong class="color-green">코로나블루</strong>
+										를 <br>예방하기 위해
+										<strong class="color-green">언제 어디서든 소통</strong>
+										<br>할 수 있는 공간입니다.
 									</p>
-								</div>								
-								</a>
-								</li>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-					<!-- 1위 -->
-					<c:forEach var="rvlist" items="${rvlist}" begin="0" end="0" varStatus="status">
-						<c:forEach var="rvlistImg" items="${rvlistImg}" begin="0" end="0"
-							varStatus="status">
-							<c:if test="${rvlistImg.boardNo.boardNo == rvlist.boardNo }">
-								<li class="best1">
-									<a href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${rvlist.boardNo}">
-									<div class="bestImgWrap">
-										<img src="${pageContext.request.contextPath }/user/displayFile?filename=${rvlistImg.imageName}" class="thumbNailImg" alt="탐방기대표이미지" class="reviewBestImg" onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'">										
-										<div class="rvRank_no">1</div>														
-									</div>
-									<%-- <img src="${pageContext.request.contextPath }/resources/images/review_best_icon.png" class="bestIcon"> --%>
-									<div class="bestTitleInfo">
-										<h3>${rvlist.writingTitle}</h3>
-										<p><b><span class="orange">${rvlist.zoneNo.zoneName}</span> · <span style="color:navy">#${rvlist.themeNo.themeName}</span> · 추천수 <span class="red">${rvlist.voteNumber}</span></b></p>
-									</div>
-									<div class="bestUser">
-										<p>
-											<img src="${pageContext.request.contextPath }/resources/images/${rvlist.userNo.userGrade.userGradeImage}" alt="등급아이콘">
-											${rvlist.userNo.nick}(${rvlist.userNo.userId})
-										</p>
-									</div>
-									</a>
-								</li>
-									
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-					<!-- 3위 -->
-					<c:forEach var="rvlist" items="${rvlist}" begin="2" end="2"
-						varStatus="status">
-						<c:forEach var="rvlistImg" items="${rvlistImg}" begin="2" end="2"
-							varStatus="status">
-							<c:if test="${rvlistImg.boardNo.boardNo == rvlist.boardNo }">
-								<li>
-								<a href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${rvlist.boardNo}">
-								<div class="bestImgWrap">
-									<img src="${pageContext.request.contextPath }/user/displayFile?filename=${rvlistImg.imageName}" class="thumbNailImg" alt="탐방기대표이미지"  class="reviewBestImg" onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'">
-									<div class="rvRank_no">3</div>								
+									<div class="btn_area half half-gap2 m-w100p-2">
+									<c:choose>
+										<c:when test="${Auth == null }">
+											<input type="hidden" value="0" name="AuthNo">										
+											<a class="btn btn-main btn-main-join shadow" href="#" data-toggle="modal" data-target="#joinModal">신규회원</a>
+											<button class="btn btn-main btn-main-login shadow" href="#" data-toggle="modal" data-target="#loginModal">기존회원</button>
+											<input type="hidden" value="${error }" id="result">
+										</c:when>
+										<c:when test="${Auth == '관리자' }">
+											<input type="hidden" value="${AuthNo }" name="AuthNo">
+											<li>
+												<a href="${pageContext.request.contextPath }/admin/">
+													<button style="cursor: pointer;width: 70px;height: 30px;border: 1px;background: #85cc28;color: white;letter-spacing: 3px;font-weight: 500;">관리자</button>
+												</a>
+											</li>
+											<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
+										</c:when>
+										<c:when test="${Auth != '관리자' }">
+											<input type="hidden" value="${AuthNo }" name="AuthNo">
+											<input type="hidden" value="${userId }">
+											<li><a href="${pageContext.request.contextPath }/user/mypage?userId=${userId}">${Auth}님</a></li>
+											<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
+										</c:when>
+									</c:choose>
+									</div>										
 								</div>
-								<div class="bestTitleInfo">
-									<h3>${rvlist.writingTitle}</h3>
-									<p><b><span class="orange">${rvlist.zoneNo.zoneName}</span> · <span style="color:navy">#${rvlist.themeNo.themeName}</span> · 추천수 <span class="red">${rvlist.voteNumber}</span></b></p>
-								</div>
-								<div class="bestUser">
-									<p>
-										<img src="${pageContext.request.contextPath }/resources/images/${rvlist.userNo.userGrade.userGradeImage}" alt="등급아이콘">
-										${rvlist.userNo.nick}(${rvlist.userNo.userId})
-									</p>
-								</div>								
-								</a>								
-								</li>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-				</ul>
-				<p class="rvBestTitleAll"><i class="fas fa-crown"></i><em> 월간 BEST TOP3</em></p>
-			</div>
-			<div class="bestLists">
-				<!-- 4위~15위 -->
-				<ul>
-					<c:forEach var="rvlist" items="${rvlist}" begin="3" end="14" varStatus="status">
-						<c:forEach var="rvlistImg" items="${rvlistImg}" begin="3" end="14" varStatus="status">
-						<c:if test="${rvlistImg.boardNo.boardNo == rvlist.boardNo }">
-							<li>
-								<a href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${rvlist.boardNo}">
-									<img src="${pageContext.request.contextPath }/user/displayFile?filename=${rvlistImg.imageName}" class="thumbNailImg" alt="탐방기대표이미지" 
-									          onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'">
-									<div class="bestDummy">
-										<div class ="reviewInfoWrap">
-											<h3>${rvlist.writingTitle}</h3>
-											<p class="reviewInfo">${rvlist.zoneNo.zoneName} · #${rvlist.themeNo.themeName} · 추천수 <b>${rvlist.voteNumber}</b></p>
-										</div>
-									</div>
-									<div class="rvRank"></div>					
-								</a>
-							</li>
-						</c:if>
-						</c:forEach>
-					</c:forEach>
-				</ul>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		
-		<!-- 카페추천 / 추천 랭킹 -->
-		<div class="cafeRecommend">
-			<div class="newList left">
-				<h2 class="Title bottomLine"><a href ="${pageContext.request.contextPath}/user/community/cafeRecommend/" class="mainTitle"><i class="fas fa-mug-hot"></i> 실시간 solution 추천</a></h2>
-				<div class="newListImgs">
-					<ul>
-						<c:forEach var="board" items="${rclist}">
-						<li>
-							<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${board.boardNo}">
-									<div class="RC_listImgWrap">
-										<div class="RC_listImgContainer">
-											<!-- 이미지 이름 꺼내서 삽입하기 -->
-											<c:forEach var="img" items="${rclistImg}">
-												<c:if test="${img.boardNo.boardNo == board.boardNo }">
-													<img src="${pageContext.request.contextPath }/user/displayFile?filename=${img.imageName}" class="thumbNailImg" alt="카페대표이미지"
-														onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'">
-												</c:if>
-											</c:forEach>
-										</div>
-									</div>						
-								</a>
-							</li>
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
-
-		<div class="bestRankList right">
-				<h2 class="Title bottomLine"><a href="${pageContext.request.contextPath}/user/community" class="mainTitle"><i class="fas fa-mug-hot"></i> 열혈 마음:TACT人 </a><span class="bestRankList_info bestRankSubTitle">종합 베스트 10</span></h2>
-			<!-- 베스트 리스트  -->
-			<div id="tabWrap">
-				<div id="tabs">
-					<ul id="tabs-ul">
-						<!-- 전체 베스트 10 -->
-						<li class="tabs-li" id="tabs_firstClick"><a href="#tabs-1" id="tabName1">열혈 MuKKa人 </a></li>
-						<!-- 전월기준 1-50 --> 
-						<li class="tabs-li"><a href="#tabs-2" class="tabName2">1 - 10</a></li> 
-						<li class="tabs-li"><a href="#tabs-3" class="tabName2">11 - 20</a></li> 
-						<li class="tabs-li"><a href="#tabs-4" class="tabName2">21 - 30</a></li> 
-						<li class="tabs-li"><a href="#tabs-5" class="tabName2">31 - 40</a></li> 
-						<li class="tabs-li"><a href="#tabs-6" class="tabName2">41 - 50</a></li> 
-					</ul>
-					
-					<!-- 전체 베스트 10 -->
-					<div id="tabs-1">
-						<table>
-							<c:forEach var="bestUserAll" items="${bestUserAll}" begin="0" end="9" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num1"></span>
-									</td>
-									<td class="medal">
-									</td>
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUserAll.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold nickname">${bestUserAll.userNo.nick}</span>(${bestUserAll.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num1"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-					
-					<!-- 전월기준 1-50 --> 
-					<div id="tabs-2">
-						<table>
-							<c:forEach var="bestUser" items="${bestUser}" begin="0" end="9" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num2"></span>
-									</td>
-									<td class="medal">
-									</td>									
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUser.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold">${bestUser.userNo.nick}</span>(${bestUser.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>									
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num2"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>							
-					</div>
-					
-					<div id="tabs-3">
-						<table>
-							<c:forEach var="bestUser" items="${bestUser}" begin="10" end="19" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num3"></span>
-									</td>
-									<td class="medal">
-									</td>									
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUser.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold">${bestUser.userNo.nick}</span>(${bestUser.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>									
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num2"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>							
-					</div>
-					
-					
- 					<div id="tabs-4">
-						<table>
-							<c:forEach var="bestUser" items="${bestUser}" begin="20" end="29" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num3"></span>
-									</td>
-									<td class="medal">
-									</td>									
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUser.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold">${bestUser.userNo.nick}</span>(${bestUser.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>									
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num2"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>							
-					</div>
-					
- 					<div id="tabs-5">
-						<table>
-							<c:forEach var="bestUser" items="${bestUser}" begin="30" end="39" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num5"></span>
-									</td>
-									<td class="medal">
-									</td>									
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUser.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold">${bestUser.userNo.nick}</span>(${bestUser.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>									
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num2"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>						
-					</div>	
-									 
- 					<div id="tabs-6">
-						<table>
-							<c:forEach var="bestUser" items="${bestUser}" begin="40" end="49" varStatus="status">
-								<tr class="rank_wrap">
-									<td class="rank_num">
-										<span class="num6"></span>
-									</td>
-									<td class="medal">
-									</td>									
-									<td class="grade_img">
-										<img src="${pageContext.request.contextPath}/resources/images/${bestUser.userNo.userGrade.userGradeImage}" class="gradeImg">
-									</td>
-									<td class="user_name">
-										<span class="blue2 bold">${bestUser.userNo.nick}</span>(${bestUser.userNo.userId})
-									</td>
-									<td class="board_cntImg">
-										<img src="${pageContext.request.contextPath}/resources/images/menu2_1.png" class="boardImg">
-									</td>									
-									<td class="board_cnt">
-										<span class="red bold board_cnt_num2"></span>개작성
-									</td>
-								</tr>
-							</c:forEach>
-						</table>							
-					</div>					
-				</div><!-- div id="tabs" -->
-			</div><!-- div id="tabWrap" -->				
-			</div><!-- 열혈무까인 -->
-		</div>
-		
 	</div>
-	
-	<!-- infoBaner main에만 -->
-<!-- 	<div class="banerArea"></div> -->
-<script>
-	//메인이미지
-	$(".cafeMuKKaAddWrap2").animate({"opacity":"1"},1500, function(){
-		$("li.mainBox").eq(0).animate({"opacity":"1"},1000);
-		$("li.mainBox").eq(1).animate({"opacity":"1"},1000);
-		$("li.mainBox").eq(2).animate({"opacity":"1"},1000);
-	})
+ </section>
+</div>
+		<!-- 로그인 modal start -->
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				    
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h3 class="modal-title">로그인</h3>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form id="loginForm" action="${pageContext.request.contextPath }/user/" method="post">
+							<%-- <img src="${pageContext.request.contextPath }/resources/images/h.jpg" style="width: 460px;"> --%>
+							<h3 style="color: #85cc28;margin: 10px;"></h3>
+							<input class="inputRegi" type="text" name="userId" placeholder="아이디" style="margin-bottom: 20px;"><br>
+							<input class="inputRegi" type="password" name="password" autocomplete="on" placeholder="비밀번호" style="margin-bottom: 5px;"><br>
+							
+							<div class="checkbox">
+                              <label>
+                                  <input name="remember" type="checkbox" value="Y"  <c:if test='${userid != null && userid != ""}'>checked</c:if>> 로그인유지
+                              </label>
+                             </div>                             
 
+							<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
+							<a href="#" id="findId" style="color:64CD3C;margin-left: 150px;">아이디 찾기</a>
+							<a href="#" id="findPass" style="color:64CD3C;margin-left: 10px;">비밀번호 찾기</a><br>
+						</form>
+					</div>
+					
+					<!-- Modal footer -->
+					<div style="border-top: 1px solid #ccc;">
+						<div style="text-align: center;margin: 16px;">
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+		</div>
+		<!-- 로그인 modal end -->
 		
- 	/* 파워링크 */
- 	//로딩시 실행
- 	 $(".powerLinkWrap ul li div").eq(0).removeClass("powerDummy").addClass("powerLinkEmphasis").animate({"opacity":1}, 2000, function () {
-			$(".powerLinkWrap ul li div").eq(0).removeClass("powerLinkEmphasis").addClass("powerDummy").animate({"opacity":1},1000, function(){
-				power_change();
-			})
-			
- 	}) 
- 	
- 	function power_change(){
- 		$val = $("ul.powerBanner").attr("val");
- 		$mx = $("ul.powerBanner").attr("mx");
- 		if($val == $mx){
- 			$val = 0;
- 		}else{
- 			$val++;
- 		}
- 		console.log($val);
- 		
- 		$(".powerLinkWrap ul li div").eq($val).removeClass("powerDummy").addClass("powerLinkEmphasis").animate({"opacity":1}, 2000, function () {
- 			$(".powerLinkWrap ul li div").eq($val).removeClass("powerLinkEmphasis").addClass("powerDummy").animate({"opacity":1},1000);
- 		})
- 		$("ul.powerBanner").attr("val",$val);
- 		setTimeout('power_change()',3000);
- 			
- 	}
- 	
-	//신상카페
-	function dron_change(){		
-		$(".dron").animate({"marginLeft":"0.2px"},1600);
+		<!-- 아이디찾기 modal start -->
+		<div class="modal fade" id="findIdModal">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				    
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h3 class="modal-title">마음:TACT 아이디 찾기</h3>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div>
+							<input type="radio" name="userType" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
+							<input type="radio" name="userType" value="1"> <label>사업자 회원</label>
+							<input class="inputRegi" type="text" name="name" placeholder="이름" style="margin-bottom: 20px;"><br>
+							<input class="inputRegi" type="email" name="email" placeholder="이메일" style="margin-bottom: 30px;"><br>
+							<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
+							<input type="button" class="btn btn-primary" id="btnFindId" style="margin-top: 5px;width: 167px;cursor: pointer;" value="아이디 찾기">
+						</div>
+					</div>
+					
+					<!-- Modal footer -->
+					<div style="border-top: 1px solid #ccc;">
+						<div style="text-align: center;margin: 16px;">
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+		</div>
+		<!-- 아이디찾기 modal end -->
 		
-		/* 두번째사진 */
-		$(".dron").animate({"marginLeft":"191px"},600, function() {
-			$(".newCafeImgs").eq(0).hide();
-			$(".newCafeImgs").eq(1).show();		
-			$(".newCafeImgs").eq(2).hide();
-			
-			$(".newCafeTitleWrap").eq(0).hide();
-			$(".newCafeTitleWrap").eq(1).show();		
-			$(".newCafeTitleWrap").eq(2).hide();			
-		})
-		$(".dron").animate({"marginLeft":"191px"},1600);
+		<!-- 비밀번호 찾기 modal start -->
+		<div class="modal fade" id="findPassModal">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				    
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h3 class="modal-title">마음:TACT 비밀번호 찾기</h3>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div>
+							<input type="radio" name="userTypePw" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
+							<input type="radio" name="userTypePw" value="1"> <label>사업자 회원</label>
+							<input class="inputRegi" type="text" name="userIdPw" placeholder="아이디" style="margin-bottom: 20px;"><br>
+							<input class="inputRegi" type="email" name="emailPw" placeholder="이메일" style="margin-bottom: 30px;"><br>
+							<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
+							<input type="button" id="btnFindPass"class="btn btn-primary" style="margin-top: 5px;width: 167px;cursor: pointer;" value="비밀번호 찾기">
+						</div>
+					</div>
+					
+					<!-- Modal footer -->
+					<div style="border-top: 1px solid #ccc;">
+						<div style="text-align: center;margin: 16px;">
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+		</div>
+		<!-- 비밀번호 찾기 modal end -->
 		
-		/* 세번째사진 */
-		$(".dron").animate({"marginLeft":"383px"},600, function() {
-			$(".newCafeImgs").eq(0).hide();
-			$(".newCafeImgs").eq(1).hide();		
-			$(".newCafeImgs").eq(2).show();
-			
-			$(".newCafeTitleWrap").eq(0).hide();
-			$(".newCafeTitleWrap").eq(1).hide();		
-			$(".newCafeTitleWrap").eq(2).show();			
-		})
-		$(".dron").animate({"marginLeft":"383px"},1600);
-		
-		/* 첫번째사진 */
-		$(".dron").animate({"marginLeft":"0.2px"},600, function() {
-			$(".newCafeImgs").eq(0).show();
-			$(".newCafeImgs").eq(1).hide();		
-			$(".newCafeImgs").eq(2).hide();
-			
-			$(".newCafeTitleWrap").eq(0).show();
-			$(".newCafeTitleWrap").eq(1).hide();		
-			$(".newCafeTitleWrap").eq(2).hide();			
-		})			
-	}
-	setInterval("dron_change()", 4000);
-	
-	
-	$(".newCafeImgs").eq(1).hide();
-	$(".newCafeImgs").eq(2).hide();
-	
-	$(".newCafeTitleWrap").eq(1).hide();
-	$(".newCafeTitleWrap").eq(2).hide();
-	dron_change();
-	
-	//원본파일 불러오기(선명한 파일)
-	$(".thumbNailImg").each(function(i, obj) {
-		var file = $(this).attr("src");
-		var start = file.substring(0,51);
-		var end = file.substring(53);
-		var fileName = start + end;
-		$(this).attr("src", fileName);
-		console.log(fileName);
-	})
-	
-	//타이핑 테스트
-	var typingBool = false; 
-    var typingIdx=0; 
-    var typingTxt = $(".typing-txt").text(); // 타이핑될 텍스트를 가져온다 
-    typingTxt=typingTxt.split(""); // 한글자씩 자른다. 
-    
-    if(typingBool==false){ // 타이핑이 진행되지 않았다면 
-       typingBool=true;    
-       var tyInt = setInterval(typing,150); // 반복동작 
-     } 
-     
-     function typing(){ 
-       if(typingIdx<typingTxt.length){ // 타이핑될 텍스트 길이만큼 반복 
-         $(".typing").append(typingTxt[typingIdx]); // 한글자씩 이어준다.
-         typingIdx++; 
-       } else{ 
-          clearInterval(tyInt); //끝나면 반복종료 
-       } 
-     }
-     
-     //카페 전월기준 베스트 별점순 : 1위~10위
-     for(var i=0;i<10;i++){ // 0,1,2,3,4,5,6,7,8,9
-		$(".likeRank_no").eq(i).text(1+i);
-	} 
-     
+		<!-- 회원가입 modal start -->
+		<div class="modal fade" id="joinModal">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+				    
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h3 class="modal-title">마음:TACT 회원 가입</h3>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<input class="inputRegi1" type="text" name="duplCheckId" id="duplCheckId" placeholder="아이디">
+						<input type="hidden" id="flagId" value="false">
+						<button class="btnCheck" id="btnDuplCheckId" style="cursor: pointer;">중복확인</button><br>
+						<form>
+							<input class="inputRegi" type="password" id="pass1" autocomplete="on" placeholder="비밀번호"><br>
+							<input class="inputRegi" type="password" id="pass2" autocomplete="on" placeholder="비밀번호 확인"><br>
+						</form>
+						<input class="inputRegi" type="text" id="joinName" placeholder="이름"><br>
+						<input class="inputRegi1" type="text" name="duplCheckNick" id="duplCheckNick" placeholder="닉네임">
+						<button class="btnCheck"  id="btnDuplCheckNick" style="cursor: pointer;">중복확인</button><br>
+						<input type="hidden" id="flagNick" value="false">
+						<select class="inputRegi" name="gender"style="height: 42px;width: 337px;color: #949494;">
+							<option selected="selected">성별</option>
+							<option value="MALE">남자</option>
+							<option value="FEMALE">여자</option>
+						</select>
+						<input class="inputRegi" type="date" id="joinBirth" placeholder="생년월일" style="color: #949494;"><br>
+						<input class="inputRegi" type="text" id="joinTel" placeholder="전화번호"><br>
+						<input class="inputRegi1" type="text" name ="address" id="address" placeholder="주소">
 
-	/* 별점 */	
-	var starpoint = ${starpoint};
-	for(var i=0;i<starpoint.length;i++){
-	     $('.starPoint').barrating({
-				theme: 'fontawesome-stars',
-				initialRating:  Math.round(starpoint[i]),
-				readonly: true
-			})
-			
-		$(".spointNum").eq(i).text(starpoint[i]);			
-		
-	}
 
-	
-	// 숫자 포멧
-	function pad(n, width) {
-	  n = n + '';
-	  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-	}
-	
-	// 베스트 순위 산출 기간
-	var nowYear = new Date().getFullYear();
-	console.log(nowYear); // 2020
-	var nowMonth = new Date().getMonth() + 1;
-	console.log(nowMonth); // 6
-	var preMonth = nowMonth - 1;
-	console.log(preMonth); // 5
-	var preMonthPad = pad(preMonth, 2);
-	console.log(preMonthPad);
-	var lastDay = (new Date(nowYear, preMonth, 0)).getDate();
-	var term1 = "("+nowYear+"."+preMonthPad+".01 ~ "+preMonthPad+"."+lastDay+")";
-	var term2 = nowYear+"."+preMonthPad+".01 ~ "+preMonthPad+"."+lastDay+"- 기준 [1위-50위]";
-	$(".term").text(term1);
-	$(".termMonthText").text(preMonth);	
-		
-     //탐방기 베스트순 : 4위~15위
-     for(var i=0;i<12;i++){ // 0,1,2,3,4,5,6,7,8,9
-		$(".rvRank").eq(i).text(4+i);
-	} 
-    
-	/* 열혈무까인 리스트 */	
-     $( "#tabs" ).tabs();
-	
- 	var bestUserAllCnt = ${bestUserAllCnt};
- 	/* 열혈무까인(종합) 1위-10위 */
- 	for(var i=0;i<10;i++){
- 		$(".board_cnt_num1").eq(i).text(bestUserAllCnt[i]);
- 	}
- 	/* 전월기준 1위 - 50위 */
-	var bestUserCnt = ${bestUserCnt};
- 	for(var i=0;i<50;i++){
- 		$(".board_cnt_num2").eq(i).text(bestUserCnt[i]);
- 		$(".board_cnt_num3").eq(i-10).text(bestUserCnt[i]);
- 		$(".board_cnt_num4").eq(i-20).text(bestUserCnt[i]);
- 		$(".board_cnt_num5").eq(i-30).text(bestUserCnt[i]);
- 		$(".board_cnt_num6").eq(i-40).text(bestUserCnt[i]);
- 	}
- 	
- 	for(var i=0;i<50;i++){
- 		$(".num1").eq(i).text(i+1);
- 		$(".num2").eq(i).text(i+1);
- 		$(".num3").eq(i).text(i+11);
- 		$(".num4").eq(i).text(i+21);
- 		$(".num5").eq(i).text(i+31);
- 		$(".num6").eq(i).text(i+41);
- 	}
- 	
- 	//1위~3위 css다르게 적용
- 	for(var i=0;i<3;i++){
- 		$(".num1").eq(i).addClass("bestRankUserAll");
- 		$(".nickname").eq(i).removeClass("blue2").addClass("red");
- 		$(".medal").eq(i).append("<img src='${pageContext.request.contextPath}/resources/images/mini_medal.png' class='mini_medal'>");
- 		$(".rank_wrap").eq(i).css("background","#FFFFE4");
- 		$(".num2").eq(i).addClass("bestRankUserAll");
- 	}
- 	
- 	//각 탭 누를시 적용될 css
- 	$(".tabs-li a").eq(0).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankUserTerm").addClass("bestRankList_info").html("종합 베스트 10");
- 	})
- 	$(".tabs-li a").eq(1).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankList_info").addClass("bestRankUserTerm").html(term2);
- 	})
- 	$(".tabs-li a").eq(2).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankList_info").addClass("bestRankUserTerm").html(term2);
- 	})
- 	$(".tabs-li a").eq(3).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankList_info").addClass("bestRankUserTerm").html(term2);
- 	})
- 	$(".tabs-li a").eq(4).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankList_info").addClass("bestRankUserTerm").html(term2);
- 	})
- 	$(".tabs-li a").eq(5).click(function(){
- 		$(".bestRankSubTitle").removeClass("bestRankList_info").addClass("bestRankUserTerm").html(term2);
- 	}) 	
-    
-</script>	
-<%@ include file="../userInclude/footer.jsp" %>
+
+						<input type="button" value="주소검색" class="btnCheck"  id="btnSearchAddr" onclick="openDaumZipAddress();" style="cursor: pointer;"><br>
+						<input class="inputRegi" type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
+						<input class="inputRegi" type="email" id="joinEmail" placeholder="이메일"><br>
+						<input type="radio" name="joinUserType" id="joinUserType" value="2"> <span class="chgColorSpan">개인회원</span>
+						<input type="radio" name="joinUserType" id="joinUserType" value="1" style="margin-left:20px;"> <span class="chgColorSpan">관리자</span><br>
+						<button type="button" class="btn btn-primary" id="btnJoin" style="cursor: pointer;">가입하기</button>
+					</div>
+					
+					<!-- Modal footer -->
+					<div style="border-top: 1px solid #ccc;">
+						<div style="text-align: center;margin: 16px;">
+							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#64CD3C;">로그인</a>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+		</div>
+		<!-- 회원가입 modal end -->
+</body>
+</html>
