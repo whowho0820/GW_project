@@ -29,300 +29,325 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.barrating.min.js"></script>
 <!-- 탭 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/jquery-ui.css"> 
+
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
 
-<script>
-	/* 주소 검색 */
-	function openDaumZipAddress() {
-		new daum.Postcode({
-			oncomplete:function(data) {
-				jQuery("#address").val(data.address);
-				jQuery("#detailAddress").focus();
-				console.log(data);
-			}
-		}).open();
-	}
+<script type="text/javascript">
+	/* 아이디 중복 체크 */
 	
-	/* 로그인 show */
-	function loginShow() {
+
+
+
+
+
+
+</script>
+
+
+
+<script>
+
+$( function() {
+	  
+
+	$("#btnDuplCheckId").click(function() {				
+		var userId = $("input[name='duplCheckId']").val();
+		
+		if(userId == ""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		
+		var json = JSON.stringify({"userId":userId});
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/rest/duplcheckid/",
+			type:"post",
+			headers:{"Content-Type":"application/json"},
+			data:json,
+			dataType:"text",
+			success:function(res){
+				if(res == "duplicate"){
+					alert("이미 사용중이 아이디입니다.");
+					$("input[name='duplCheckId']").val("");
+				}else{
+					alert("사용 가능한 아이디입니다.");
+					$("#flagId").val("true");
+				}
+			}
+		})
+	})	  
+	
+
+	/* 로그인, 아이디 찾기, 비번찾기, 회원가입 전환시 작동 */		
+	$(".login").click(function() {
+		loginShow();
+	})
+	
+	$("#findId").click(function() {
+		$('#findIdModal').removeClass("fade");
+		$('#loginModal').removeClass("fade");
+		$('#loginModal').modal('hide');
+		$('#findIdModal').modal('show');
+		$('#findIdModal').addClass("fade");
+		$('#loginModal').addClass("fade");
+	})
+	$("#findPass").click(function() {
+		$('#findIdModal').removeClass("fade");
+		$('#findPassModal').removeClass("fade");
+		$('#loginModal').removeClass("fade");
+		$('#loginModal').modal('hide');
+		$('#findIdModal').modal('hide');
+		$('#findPassModal').modal('show');
+		$('#findIdModal').addClass("fade");
+		$('#findPassModal').addClass("fade");
+		$('#loginModal').addClass("fade");
+	})
+	$(".join").click(function() {
 		$('#findIdModal').removeClass("fade");
 		$('#findPassModal').removeClass("fade");
 		$('#joinModal').removeClass("fade");
 		$('#loginModal').removeClass("fade");
+		$('#loginModal').modal('hide');
 		$('#findIdModal').modal('hide');
 		$('#findPassModal').modal('hide');
-		$('#joinModal').modal('hide');
-		$('#loginModal').modal('show');
+		$('#joinModal').modal('show');
+		$('#joinModal').addClass("fade");
 		$('#findIdModal').addClass("fade");
 		$('#findPassModal').addClass("fade");
-		$('#joinModal').addClass("fade");
 		$('#loginModal').addClass("fade");
-	}
+	})
+	/* 로그인 처리 */
+	$("#loginForm").submit(function (e) {
+		var id = $("input[name='userId']").val();
+		var password = $("input[name='password']").val();
 		
-		/* 로그인, 아이디 찾기, 비번찾기, 회원가입 전환시 작동 */		
-		$(".login").click(function() {
-			loginShow();
-		})
-		
-		$("#findId").click(function() {
-			$('#findIdModal').removeClass("fade");
-			$('#loginModal').removeClass("fade");
-			$('#loginModal').modal('hide');
-			$('#findIdModal').modal('show');
-			$('#findIdModal').addClass("fade");
-			$('#loginModal').addClass("fade");
-		})
-		$("#findPass").click(function() {
-			$('#findIdModal').removeClass("fade");
-			$('#findPassModal').removeClass("fade");
-			$('#loginModal').removeClass("fade");
-			$('#loginModal').modal('hide');
-			$('#findIdModal').modal('hide');
-			$('#findPassModal').modal('show');
-			$('#findIdModal').addClass("fade");
-			$('#findPassModal').addClass("fade");
-			$('#loginModal').addClass("fade");
-		})
-		$(".join").click(function() {
-			$('#findIdModal').removeClass("fade");
-			$('#findPassModal').removeClass("fade");
-			$('#joinModal').removeClass("fade");
-			$('#loginModal').removeClass("fade");
-			$('#loginModal').modal('hide');
-			$('#findIdModal').modal('hide');
-			$('#findPassModal').modal('hide');
-			$('#joinModal').modal('show');
-			$('#joinModal').addClass("fade");
-			$('#findIdModal').addClass("fade");
-			$('#findPassModal').addClass("fade");
-			$('#loginModal').addClass("fade");
-		})
-		/* 로그인 처리 */
-		$("#loginForm").submit(function (e) {
-			var id = $("input[name='userId']").val();
-			var password = $("input[name='password']").val();
-			
-			if(id == "" || password == ""){
-				alert("사용자ID와 비밀번호를 정확히 입력해주세요.")
-				return false;
-			}
-		})
-		var result = $("#result").val();
-		if(result == 1){
-			alert("해당 아이디가 존재하지 않습니다. 회원가입을 해주세요.");
-			$("#logo").trigger("click");
-		}else if(result == 2){
-			alert("비밀번호가 틀렸습니다. 다시 확인해주세요.");
-			$("#logo").trigger("click");
-		}else if(result == 3){
-			alert("관리자 권한이 없습니다. 다시 확인해주세요.");
-			$("#logo").trigger("click");
+		if(id == "" || password == ""){
+			alert("사용자ID와 비밀번호를 정확히 입력해주세요.")
+			return false;
 		}
+	})
+	var result = $("#result").val();
+	if(result == 1){
+		alert("해당 아이디가 존재하지 않습니다. 회원가입을 해주세요.");
+		$("#logo").trigger("click");
+	}else if(result == 2){
+		alert("비밀번호가 틀렸습니다. 다시 확인해주세요.");
+		$("#logo").trigger("click");
+	}else if(result == 3){
+		alert("관리자 권한이 없습니다. 다시 확인해주세요.");
+		$("#logo").trigger("click");
+	}
+	
+	/* 아이디 찾기 */
+	$("#btnFindId").click(function() {
+		var userType = $("input[name='userType']").val();
+		var name = $("input[name='name']").val();
+		var email = $("input[name='email']").val();
 		
-		/* 아이디 찾기 */
-		$("#btnFindId").click(function() {
-			var userType = $("input[name='userType']").val();
-			var name = $("input[name='name']").val();
-			var email = $("input[name='email']").val();
-			
-			if(userType == "" || name == "" || email == ""){
-				alert("모든 항목을 선택/입력 해주세요.")
-				return false;
-			}
-			var json = JSON.stringify({"userType":{"userType":userType}, "name":name, "email":email});
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath }/rest/findid/",
-				type:"post",
-				headers:{"Content-Type":"application/json"},
-				data:json,
-				dataType:"text",
-				success:function(res){
-					$("input[name='userType']").removeAttr("checked");
-					$("input[name='name']").val("");
-					$("input[name='email']").val("");
-					 
-					if(res == "NULL"){
-						alert("찾고 있는 아이디가 없습니다. 회원가입을 해주세요.");
-						return false;
-					}
-					
-					var con = confirm("회원님의 아이디는 "+res+"입니다. 비밀번호도 찾으시겠어요?");
-					if(con == true){
-						$("#findPass").trigger("click");	
-					}else{
-						$(".login").trigger("click");
-					}
-					
+		if(userType == "" || name == "" || email == ""){
+			alert("모든 항목을 선택/입력 해주세요.")
+			return false;
+		}
+		var json = JSON.stringify({"userType":{"userType":userType}, "name":name, "email":email});
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/rest/findid/",
+			type:"post",
+			headers:{"Content-Type":"application/json"},
+			data:json,
+			dataType:"text",
+			success:function(res){
+				$("input[name='userType']").removeAttr("checked");
+				$("input[name='name']").val("");
+				$("input[name='email']").val("");
+				 
+				if(res == "NULL"){
+					alert("찾고 있는 아이디가 없습니다. 회원가입을 해주세요.");
+					return false;
 				}
-			})
-		})
-		
-		/* 비번 찾기 */
-		$("#btnFindPass").click(function() {
-			var userType = $("input[name='userTypePw']").val();
-			var userId = $("input[name='userIdPw']").val();
-			var email = $("input[name='emailPw']").val();
-			
-			if(userType == "" || userId == "" || email == ""){
-				alert("모든 항목을 선택/입력 해주세요.")
-				return false;
-			}
-			var json = JSON.stringify({"userType":{"userType":userType}, "userId":userId, "email":email});
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath }/rest/findpass/",
-				type:"post",
-				headers:{"Content-Type":"application/json"},
-				data:json,
-				dataType:"text",
-				success:function(res){
-					alert("회원님의 임시비밀번호를 발급하였습니다. 이메일을 확인하시고 로그인해주세요.");
-					$("input[name='userTypePw']").removeAttr("checked");
-					$("input[name='userIdPw']").val("");
-					$("input[name='emailPw']").val("");
+				
+				var con = confirm("회원님의 아이디는 "+res+"입니다. 비밀번호도 찾으시겠어요?");
+				if(con == true){
+					$("#findPass").trigger("click");	
+				}else{
 					$(".login").trigger("click");
 				}
-			})
-		})
-		
-		/* 아이디 중복 체크 */
-		$("#btnDuplCheckId").click(function() {
-			var userId = $("input[name='duplCheckId']").val();
-			
-			if(userId == ""){
-				alert("아이디를 입력해주세요.");
-				return false;
+				
 			}
-			
-			var json = JSON.stringify({"userId":userId});
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath }/rest/duplcheckid/",
-				type:"post",
-				headers:{"Content-Type":"application/json"},
-				data:json,
-				dataType:"text",
-				success:function(res){
-					if(res == "duplicate"){
-						alert("이미 사용중이 아이디입니다.");
-						$("input[name='duplCheckId']").val("");
-					}else{
-						alert("사용 가능한 아이디입니다.");
-						$("#flagId").val("true");
-					}
+		})
+	})
+	
+	/* 비번 찾기 */
+	$("#btnFindPass").click(function() {
+		var userType = $("input[name='userTypePw']").val();
+		var userId = $("input[name='userIdPw']").val();
+		var email = $("input[name='emailPw']").val();
+		
+		if(userType == "" || userId == "" || email == ""){
+			alert("모든 항목을 선택/입력 해주세요.")
+			return false;
+		}
+		var json = JSON.stringify({"userType":{"userType":userType}, "userId":userId, "email":email});
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/rest/findpass/",
+			type:"post",
+			headers:{"Content-Type":"application/json"},
+			data:json,
+			dataType:"text",
+			success:function(res){
+				alert("회원님의 임시비밀번호를 발급하였습니다. 이메일을 확인하시고 로그인해주세요.");
+				$("input[name='userTypePw']").removeAttr("checked");
+				$("input[name='userIdPw']").val("");
+				$("input[name='emailPw']").val("");
+				$(".login").trigger("click");
+			}
+		})
+	})
+	
+
+	/* 비밀번호 정규표현식 체크 */
+	var passRules = /^(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,50}$/;
+	
+	$("#pass1").change(function() {
+		var pass1 = $("#pass1").val();
+		if(passRules.test(pass1)){
+			alert("사용가능한 비밀번호입니다.");
+		}else{
+			alert("사용 불가능한 비밀번호입니다.(숫자, 특수문자, 영문 1자리 이상 포함, 8자리 이상)")
+			$("#pass1").val('');
+		}
+	})
+	$("#pass2").change(function() {
+		var pass1 = $("#pass1").val();
+		var pass2 = $("#pass2").val();
+		if(pass1 == pass2){
+			alert("비밀번호가 일치합니다.");
+		}else{
+			alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			$("#pass2").val('');
+		}
+	})
+	
+	/* 닉네임 중복 체크 */
+	$("#btnDuplCheckNick").click(function() {
+		var nick = $("input[name='duplCheckNick']").val();
+		
+		if(nick == ""){
+			alert("닉네임을 입력해주세요.");
+			return false;
+		}
+		
+		var json = JSON.stringify({"nick":nick});
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/rest/duplchecknick/",
+			type:"post",
+			headers:{"Content-Type":"application/json"},
+			data:json,
+			dataType:"text",
+			success:function(res){
+				if(res == "duplicate"){
+					alert("이미 사용중인 닉네임입니다.");
+					$("input[name='duplCheckNick']").val("");
+				}else{
+					alert("사용 가능한 닉네임입니다.");
+					$("#flagNick").val("true");
 				}
-			})
-		})
-		
-		/* 비밀번호 정규표현식 체크 */
-		var passRules = /^(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,50}$/;
-		
-		$("#pass1").change(function() {
-			var pass1 = $("#pass1").val();
-			if(passRules.test(pass1)){
-				alert("사용가능한 비밀번호입니다.");
-			}else{
-				alert("사용 불가능한 비밀번호입니다.(숫자, 특수문자, 영문 1자리 이상 포함, 8자리 이상)")
-				$("#pass1").val('');
 			}
 		})
-		$("#pass2").change(function() {
-			var pass1 = $("#pass1").val();
-			var pass2 = $("#pass2").val();
-			if(pass1 == pass2){
-				alert("비밀번호가 일치합니다.");
-			}else{
-				alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-				$("#pass2").val('');
-			}
-		})
+	})
+	/* 가입하기 */
+	$("#btnJoin").click(function() {
+		var userId = $("input[name='duplCheckId']").val();
+		var password = $("#pass2").val();
+		var name = $("#joinName").val();
+		var nick = $("input[name='duplCheckNick']").val();
+		var gender = $("select[name='gender']").val();
+		var birthday = $("#joinBirth").val();
+		var tel = $("#joinTel").val();
+		var address = $("input[name='address']").val();
+		var detailAddress = $("input[name='detailAddress']").val();
+		var email = $("#joinEmail").val();
+		var userType = $("input[name='joinUserType']").val();
 		
-		/* 닉네임 중복 체크 */
-		$("#btnDuplCheckNick").click(function() {
-			var nick = $("input[name='duplCheckNick']").val();
-			
-			if(nick == ""){
-				alert("닉네임을 입력해주세요.");
-				return false;
-			}
-			
-			var json = JSON.stringify({"nick":nick});
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath }/rest/duplchecknick/",
-				type:"post",
-				headers:{"Content-Type":"application/json"},
-				data:json,
-				dataType:"text",
-				success:function(res){
-					if(res == "duplicate"){
-						alert("이미 사용중인 닉네임입니다.");
-						$("input[name='duplCheckNick']").val("");
-					}else{
-						alert("사용 가능한 닉네임입니다.");
-						$("#flagNick").val("true");
-					}
+		if(userId=="" || password=="" || name=="" || nick=="" || gender=="" || birthday=="" || tel=="" || address=="" || email=="" || userType==""){
+			alert("모든 항목을 작성해주세요.");
+			return false;
+		}
+		var flagId = $("#flagId").val();
+		var flagNick = $("#flagNick").val();
+		alert(flagId);
+		alert(flagNick);
+		if(flagId == "false" || flagNick == "false"){
+			alert("아이디 또는 닉네임 중복확인을 해주세요.");
+			return false;
+		}
+		
+		var json = JSON.stringify({"userId":userId, "password":password, "name":name, "nick":nick, 
+								   "gender": gender, "birthday":birthday, "tel":tel, "address":address, 
+								   "detailAddress":detailAddress, "email":email, "userType":{"userType":userType}});
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath }/rest/register/",
+			type:"post",
+			headers:{"Content-Type":"application/json"},
+			data:json,
+			dataType:"text",
+			success:function(res){
+				if(res == "SUCCESS"){
+					alert("회원 가입이 되었습니다. 로그인한 후 이용해주세요.");
+					$("input[name='duplCheckId']").val("");
+					$("#pass1").val("");
+					$("#pass2").val("");
+					$("#joinName").val("");
+					$("input[name='duplCheckNick']").val("");
+					$("select[name='gender']").val("성별");
+					$("#joinBirth").val("");
+					$("#joinTel").val("");
+					$("input[name='address']").val("");
+					$("input[name='detailAddress']").val("");
+					$("#joinEmail").val("");
+					$("input[name='joinUserType']").removeAttr("checked");
+					$(".login").trigger("click");
 				}
-			})
-		})
-		/* 가입하기 */
-		$("#btnJoin").click(function() {
-			var userId = $("input[name='duplCheckId']").val();
-			var password = $("#pass2").val();
-			var name = $("#joinName").val();
-			var nick = $("input[name='duplCheckNick']").val();
-			var gender = $("select[name='gender']").val();
-			var birthday = $("#joinBirth").val();
-			var tel = $("#joinTel").val();
-			var address = $("input[name='address']").val();
-			var detailAddress = $("input[name='detailAddress']").val();
-			var email = $("#joinEmail").val();
-			var userType = $("input[name='joinUserType']").val();
-			
-			if(userId=="" || password=="" || name=="" || nick=="" || gender=="" || birthday=="" || tel=="" || address=="" || email=="" || userType==""){
-				alert("모든 항목을 작성해주세요.");
-				return false;
 			}
-			var flagId = $("#flagId").val();
-			var flagNick = $("#flagNick").val();
-			alert(flagId);
-			alert(flagNick);
-			if(flagId == "false" || flagNick == "false"){
-				alert("아이디 또는 닉네임 중복확인을 해주세요.");
-				return false;
-			}
-			
-			var json = JSON.stringify({"userId":userId, "password":password, "name":name, "nick":nick, 
-									   "gender": gender, "birthday":birthday, "tel":tel, "address":address, 
-									   "detailAddress":detailAddress, "email":email, "userType":{"userType":userType}});
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath }/rest/register/",
-				type:"post",
-				headers:{"Content-Type":"application/json"},
-				data:json,
-				dataType:"text",
-				success:function(res){
-					if(res == "SUCCESS"){
-						alert("회원 가입이 되었습니다. 로그인한 후 이용해주세요.");
-						$("input[name='duplCheckId']").val("");
-						$("#pass1").val("");
-						$("#pass2").val("");
-						$("#joinName").val("");
-						$("input[name='duplCheckNick']").val("");
-						$("select[name='gender']").val("성별");
-						$("#joinBirth").val("");
-						$("#joinTel").val("");
-						$("input[name='address']").val("");
-						$("input[name='detailAddress']").val("");
-						$("#joinEmail").val("");
-						$("input[name='joinUserType']").removeAttr("checked");
-						$(".login").trigger("click");
-					}
-				}
-			})			
-		})	 
+		})			
+	})	 	
+	
+	
+});
+	
+
+/* 주소 검색 */
+function openDaumZipAddress() {
+	new daum.Postcode({
+		oncomplete:function(data) {
+			jQuery("#address").val(data.address);
+			jQuery("#detailAddress").focus();
+			console.log(data);
+		}
+	}).open();
+}
+
+/* 로그인 show */
+function loginShow() {
+	$('#findIdModal').removeClass("fade");
+	$('#findPassModal').removeClass("fade");
+	$('#joinModal').removeClass("fade");
+	$('#loginModal').removeClass("fade");
+	$('#findIdModal').modal('hide');
+	$('#findPassModal').modal('hide');
+	$('#joinModal').modal('hide');
+	$('#loginModal').modal('show');
+	$('#findIdModal').addClass("fade");
+	$('#findPassModal').addClass("fade");
+	$('#joinModal').addClass("fade");
+	$('#loginModal').addClass("fade");
+}
+	
+
 </script>
 
 <style>
@@ -708,7 +733,7 @@
 					   <div class="parallax-bg"></div>					   
 						    <div class="swiper-wrapper" >				
 								<div class="swiper-slide green swiper-slide-active">				
-									<img src="${pageContext.request.contextPath }/resources/images/logo_green.png" alt="logo" id="logo" class="logo" data-swiper-parallax="-100"/>
+									<img src="${pageContext.request.contextPath }/resources/images/logo_green2.png" alt="logo" id="logo" class="logo" data-swiper-parallax="-100"/>
 									<div class="forward">
 									<p class="weight-bold">
 										<strong class="color-green">마음:TACT</strong>
@@ -723,14 +748,14 @@
 										<c:when test="${Auth == null }">
 											<input type="hidden" value="0" name="AuthNo">										
 											<a class="btn btn-main btn-main-join shadow" href="#" data-toggle="modal" data-target="#joinModal">신규회원</a>
-											<button class="btn btn-main btn-main-login shadow" href="#" data-toggle="modal" data-target="#loginModal">기존회원</button>
+											<a class="btn btn-main btn-main-login shadow" href="#" data-toggle="modal" data-target="#loginModal">기존회원</a>
 											<input type="hidden" value="${error }" id="result">
 										</c:when>
 										<c:when test="${Auth == '관리자' }">
 											<input type="hidden" value="${AuthNo }" name="AuthNo">
 											<li>
 												<a href="${pageContext.request.contextPath }/admin/">
-													<button style="cursor: pointer;width: 70px;height: 30px;border: 1px;background: #85cc28;color: white;letter-spacing: 3px;font-weight: 500;">관리자</button>
+													관리자
 												</a>
 											</li>
 											<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
@@ -877,7 +902,7 @@
 					<div class="modal-body">
 						<input class="inputRegi1" type="text" name="duplCheckId" id="duplCheckId" placeholder="아이디">
 						<input type="hidden" id="flagId" value="false">
-						<button class="btnCheck" id="btnDuplCheckId" style="cursor: pointer;">중복확인</button><br>
+						<button class="btnCheck" id="btnDuplCheckId" onclick="btnDuplCheckId();"  style="cursor: pointer;">중복확인</button><br>
 						<form>
 							<input class="inputRegi" type="password" id="pass1" autocomplete="on" placeholder="비밀번호"><br>
 							<input class="inputRegi" type="password" id="pass2" autocomplete="on" placeholder="비밀번호 확인"><br>

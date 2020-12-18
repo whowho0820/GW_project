@@ -43,7 +43,7 @@
 	        <if test="searchExt1!=2">AND SD.DOCSTATUS=${searchExt1}</if>        
         </if>        
         
-        <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+        <if test="searchKeyword != null  and searchType !=''">
             <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
                  ${item} LIKE CONCAT('%', #{searchKeyword},'%' )
             </foreach>

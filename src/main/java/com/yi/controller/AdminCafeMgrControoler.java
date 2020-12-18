@@ -215,6 +215,7 @@ public class AdminCafeMgrControoler {
 	        
 	        etcSvc.setCommonAttribute(userno, modelMap);
 	    	
+	        System.out.println("================:"+searchVO.getSearchKeyword());
 	        // 
 	        searchVO.setUserno(userno);
 	        searchVO.pageCalculate( signSvc.selectSignDocTobeCount(searchVO) ); // startRow, endRow

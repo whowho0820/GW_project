@@ -116,8 +116,9 @@ function fn_formSubmit(){
 		border: none;
 	}
 </style> -->
-	<!--content area start-->
+	<!--content area start-->	
 	<div id="content" class="pmd-content inner-page">
+		<form role="form" id="form1" name="form1"  method="post">
 	<!--tab start-->
 	    <div class="container-fluid full-width-container value-added-detail-page">
 			<div>

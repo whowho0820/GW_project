@@ -5,7 +5,7 @@
 
     <sql id="includeSignDocType">
         WHERE DELETEFLAG='N'
-        <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+        <if test="searchKeyword !=null and searchKeyword !='' and searchType !=''">
             <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
                  ${item} LIKE CONCAT('%', #{searchKeyword},'%' )
             </foreach>
