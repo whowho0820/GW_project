@@ -114,9 +114,9 @@
 			<div>
 				<div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
-					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="자료실 번호 검색" name="keyword" >
-					</div>
-					<a href="#" id="searchBtn" class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="카페이름 검색" name="keyword" >
+					</div> 
+					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
@@ -128,39 +128,43 @@
 				  <li class="active">자료실 관리</li>
 				</ol><!--breadcrum end-->
 			</div>
-			<!-- Table -->
+<!-- Table -->
 			<div class="table-responsive pmd-card pmd-z-depth">
 				<table class="table table-mc-red pmd-table">
 					<thead>
 						<tr>
 							<th>no</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>수정일</th>
-							<th>비공개(삭제)여부</th>
-							<th>상세보기</th>
-							<th>게시관리</th>
+							<th>카페명</th>
+							<th>점주명</th>
+							<th>사업자등록번호</th>
+							<th>카페등록일자</th>
+							<th>운영여부</th>
+							<th>카페정보상세</th>
+							<th>카페관리</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="item" items="${list }">
 							<tr>
-								<td>${item.boardNo }</td>
-								<td>${item.writingTitle }</td>
-								<td>${item.userNo.nick }[${item.userNo.userId}]</td>
-								<td><fmt:formatDate value="${item.registrationDate }" pattern="yyyy/MM/dd"/></td>
-								<td><fmt:formatDate value="${item.updateDate }" pattern="yyyy/MM/dd"/></td>
-								<td>${item.boardDelCdt}</td>
+								<td>${item.cafeNo }</td>
+								<td>${item.cafeName}</td>
+								<td>${item.userNo.name }</td>
+								<td>${item.ownerLicenseNo }</td>
+								<td><fmt:formatDate value="${item.registrationDate}" pattern="yyyy/MM/dd"/></td>	
 								<td>
-									<a class="btn pmd-btn-outline" href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${item.boardNo }" target="_blank">상세보기</a>
-								</td>
-								<td>
-									<c:if test="${item.boardDelCdt == 'NO'}">
-										<button class="btn pmd-btn-outline btn-danger closingBtn">비공개(삭제) 전환</button>
+									<c:if test="${item.cafeCdt == 'OPEN'}">
+										<strong style="color:#259b24;">영업중</strong>
 									</c:if>
-									<c:if test="${item.boardDelCdt == 'YES'}">
-										<button class="btn pmd-btn-outline btn-warning closingBtn">공개 전환</button>
+									<c:if test="${item.cafeCdt == 'CLOSING'}">
+										<strong style="color:#ff5722;">폐업</strong>
+									</c:if>
+								</td>
+								<td><a class="btn pmd-btn-outline" href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${item.cafeNo}" target="_blank">상세보기</a></td>
+								<td>
+									<c:if test="${item.cafeCdt == 'OPEN'}">
+										<button class="btn pmd-btn-outline btn-danger closingBtn" data-cafeName="${item.cafeName }" data-cafeNo="${item.cafeNo}">폐업등록</button>
+									</c:if>
+									<c:if test="${item.cafeCdt == 'CLOSING'}">
 									</c:if>
 								</td>
 							</tr>
@@ -171,14 +175,18 @@
 			<!-- 페이징 -->
 			<div style="text-align: center;">
 			  	<ul class="pagination list-inline taCenter">
+				  <!-- 페이징 숫자 버튼 자리 -->
+				  <!-- ex1 : cafeReview?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword} -->
+				  <!-- ex2 : <li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeReview?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li> -->
+				  <!-- ex3 : cafeReview?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword} -->
 				  	<c:if test="${pageMaker.prev == true }">
-						<li><a href="cafeReviewMgr?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
+						<li><a href="cafeManager?page=${pageMaker.startPage-1}&keyword=${cri.keyword}">&laquo;</a></li>
 					</c:if>
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeReviewMgr?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
+						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeManager?page=${idx}&keyword=${cri.keyword}">${idx }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next == true }">
-						<li><a href="cafeReviewMgr?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
+						<li><a href="cafeManager?page=${pageMaker.endPage+1}&keyword=${cri.keyword}">&raquo;</a></li>
 					</c:if>
 			  	</ul>
 			</div>
@@ -194,13 +202,26 @@
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword == '') {
-			alert("자료실 번호를 작성해주세요.");
+			alert("카페이름을 작성해주세요.");
 			return false;
 		}
 		
-		location.href = "cafeReviewMgr?keyword="+keyword;
+		location.href = "cafeManager?keyword="+keyword;
+		
+		return false;
+	})
+	
+	$(".closingBtn").click(function(){
+		var cafeName = $(this).attr("data-cafeName");
+		var cafeNo = $(this).attr("data-cafeNo");
+		var res = confirm("["+cafeName+"]를 폐업등록 하시겠습니까?");
+		
+		if(res == true) {
+			location.href = "${pageContext.request.contextPath}/admin/cafeMgn/cafeManager/modify?cafeNo="+cafeNo+"&cafeCdt=2&page=${cri.page}&keyword=${cri.keyword}";
+		} 
 		
 		return false;
 	})
 </script>
+
 <%@ include file="../adminInclude/footer.jsp"%>

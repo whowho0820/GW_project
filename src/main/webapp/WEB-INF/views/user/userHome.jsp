@@ -32,21 +32,8 @@
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
 
-<script type="text/javascript">
-	/* 아이디 중복 체크 */
-	
-
-
-
-
-
-
-</script>
-
-
-
 <script>
-
+/* 아이디 중복 체크 */
 $( function() {
 	  
 
@@ -753,18 +740,14 @@ function loginShow() {
 										</c:when>
 										<c:when test="${Auth == '관리자' }">
 											<input type="hidden" value="${AuthNo }" name="AuthNo">
-											<li>
-												<a href="${pageContext.request.contextPath }/admin/">
-													관리자
-												</a>
-											</li>
-											<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
+											<a class="btn btn-main btn-main-login shadow" href="${pageContext.request.contextPath }/admin/">관 리 자</a>											
+											<a class="btn btn-main btn-main-join shadow" href="${pageContext.request.contextPath }/user/logout">LOGOUT</a>
 										</c:when>
 										<c:when test="${Auth != '관리자' }">
 											<input type="hidden" value="${AuthNo }" name="AuthNo">
 											<input type="hidden" value="${userId }">
-											<li><a href="${pageContext.request.contextPath }/user/mypage?userId=${userId}">${Auth}님</a></li>
-											<li><a href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
+											<li><a class="btn btn-main btn-main-login shadow" href="${pageContext.request.contextPath }/user/mypage?userId=${userId}">${Auth}님</a></li>
+											<li><a class="btn btn-main btn-main-join shadow" href="${pageContext.request.contextPath }/user/logout">LOGOUT</a></li>
 										</c:when>
 									</c:choose>
 									</div>										
