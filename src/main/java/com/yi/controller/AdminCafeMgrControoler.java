@@ -72,53 +72,53 @@ public class AdminCafeMgrControoler {
 //		return "/admin/adminNewCafeMgr";
 //	}		
 //	
-	// 등록 승인
-	@RequestMapping(value = "newCafeManager/modify", method = RequestMethod.GET)
-	public String newCafeModify(int cafeNo ,SearchCriteria cri, Model model) throws Exception {
-		
-		service.updateNewCafeCdt(cafeNo);
-		
-		model.addAttribute("page", cri.getPage());
-		model.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/admin/cafeMgn/newCafeManager";
-	}
+//	// 등록 승인
+//	@RequestMapping(value = "newCafeManager/modify", method = RequestMethod.GET)
+//	public String newCafeModify(int cafeNo ,SearchCriteria cri, Model model) throws Exception {
+//		
+//		service.updateNewCafeCdt(cafeNo);
+//		
+//		model.addAttribute("page", cri.getPage());
+//		model.addAttribute("keyword", cri.getKeyword());
+//		
+//		return "redirect:/admin/cafeMgn/newCafeManager";
+//	}
 	
-	// 결재할 문서
-	@RequestMapping(value = "cafeManager", method = RequestMethod.GET)
-	public String cafeMgr(SearchCriteria cri, Model model) throws Exception {
-		CafeVO vo = new CafeVO();
-		vo.setCafeCdt(CafeCdt.WAITING); // select 조건 -> where c.cafe_cdt != #{vo.cafeCdt} 이기 때문에 WAITING를 사용
-		
-		List<CafeVO> list = service.adminCafeList(vo, cri);
-		PageMaker pageMater = new PageMaker();
-		pageMater.setCri(cri);
-		pageMater.setTotalCount(service.cafeWaitingCntAndKeyword(vo, cri));
-		
-		model.addAttribute("list", list);
-		model.addAttribute("cri", cri);
-		model.addAttribute("pageMaker", pageMater);
-		
-		return "/admin/adminCafeMgr";
-	}
-	
-	// 카페 운영/폐업 등록
-	@RequestMapping(value = "cafeManager/modify", method = RequestMethod.GET)
-	public String cafeMgrModify(int cafeNo, int cafeCdt, SearchCriteria cri, Model model) throws Exception {
-		CafeVO vo = new CafeVO();
-		vo.setCafeNo(cafeNo);
-		
-		if(cafeCdt == 2) {
-			vo.setCafeCdt(CafeCdt.CLOSING);
-		} 
-		
-		service.updateCafeCdt(vo);
-		
-		model.addAttribute("page", cri.getPage());
-		model.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/admin/cafeMgn/cafeManager";
-	}
+//	// 결재할 문서
+//	@RequestMapping(value = "cafeManager", method = RequestMethod.GET)
+//	public String cafeMgr(SearchCriteria cri, Model model) throws Exception {
+//		CafeVO vo = new CafeVO();
+//		vo.setCafeCdt(CafeCdt.WAITING); // select 조건 -> where c.cafe_cdt != #{vo.cafeCdt} 이기 때문에 WAITING를 사용
+//		
+//		List<CafeVO> list = service.adminCafeList(vo, cri);
+//		PageMaker pageMater = new PageMaker();
+//		pageMater.setCri(cri);
+//		pageMater.setTotalCount(service.cafeWaitingCntAndKeyword(vo, cri));
+//		
+//		model.addAttribute("list", list);
+//		model.addAttribute("cri", cri);
+//		model.addAttribute("pageMaker", pageMater);
+//		
+//		return "/admin/adminCafeMgr";
+//	}
+//	
+//	// 카페 운영/폐업 등록
+//	@RequestMapping(value = "cafeManager/modify", method = RequestMethod.GET)
+//	public String cafeMgrModify(int cafeNo, int cafeCdt, SearchCriteria cri, Model model) throws Exception {
+//		CafeVO vo = new CafeVO();
+//		vo.setCafeNo(cafeNo);
+//		
+//		if(cafeCdt == 2) {
+//			vo.setCafeCdt(CafeCdt.CLOSING);
+//		} 
+//		
+//		service.updateCafeCdt(vo);
+//		
+//		model.addAttribute("page", cri.getPage());
+//		model.addAttribute("keyword", cri.getKeyword());
+//		
+//		return "redirect:/admin/cafeMgn/cafeManager";
+//	}
 	
 	
 	//기안하기
@@ -454,26 +454,26 @@ public class AdminCafeMgrControoler {
 	    
 	    
 	
-	// 월간 카페 게시일 등록
-	@RequestMapping(value = "monthCafeManager/modify", method = RequestMethod.GET)
-	public String monthCafeMgrModify(int powNo, SearchCriteria cri, Model model) throws Exception {
-		
-		powerService.updateAdminMonCafePostDate(powNo);
-		
-		model.addAttribute("page", cri.getPage());
-		model.addAttribute("keyword", cri.getKeyword());
-		return "redirect:/admin/cafeMgn/monthCafeManager";
-	}
-	
-	// 월간 카페 게시등록 취소
-	@RequestMapping(value = "monthCafeManager/cancelModify", method = RequestMethod.GET)
-	public String monthCafeMgrCancelModify(int powNo, int year, int month, SearchCriteria cri, Model model) throws Exception {
-		
-		powerService.updateAdminMonCafePostCancel(powNo, year, month);
-		
-		model.addAttribute("page", cri.getPage());
-		model.addAttribute("keyword", cri.getKeyword());
-//		return "/admin/cafeMgn/monthCafeManager";
-		return "redirect:/admin/cafeMgn/monthCafeManager";
-	}
+//	// 월간 카페 게시일 등록
+//	@RequestMapping(value = "monthCafeManager/modify", method = RequestMethod.GET)
+//	public String monthCafeMgrModify(int powNo, SearchCriteria cri, Model model) throws Exception {
+//		
+//		powerService.updateAdminMonCafePostDate(powNo);
+//		
+//		model.addAttribute("page", cri.getPage());
+//		model.addAttribute("keyword", cri.getKeyword());
+//		return "redirect:/admin/cafeMgn/monthCafeManager";
+//	}
+//	
+//	// 월간 카페 게시등록 취소
+//	@RequestMapping(value = "monthCafeManager/cancelModify", method = RequestMethod.GET)
+//	public String monthCafeMgrCancelModify(int powNo, int year, int month, SearchCriteria cri, Model model) throws Exception {
+//		
+//		powerService.updateAdminMonCafePostCancel(powNo, year, month);
+//		
+//		model.addAttribute("page", cri.getPage());
+//		model.addAttribute("keyword", cri.getKeyword());
+////		return "/admin/cafeMgn/monthCafeManager";
+//		return "redirect:/admin/cafeMgn/monthCafeManager";
+//	}
 }

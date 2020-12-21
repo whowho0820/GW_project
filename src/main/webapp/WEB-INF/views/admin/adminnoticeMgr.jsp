@@ -105,6 +105,7 @@
 		border: none;
 	}
 </style>
+
 	<!--content area start-->
 	<div id="content" class="pmd-content inner-page">
 	<!--tab start-->
@@ -112,9 +113,9 @@
 			<div>
 				<div class="pull-right table-title-top-action">
 					<div class="pmd-textfield pull-left">
-					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="공지사항 검색" name="keyword" >
+					  <input type="text" id="exampleInputAmount" class="form-control" value="${cri.keyword }" placeholder="카페이름 검색" name="keyword" >
 					</div>
-					<a href="#" id="searchBtn" class="btn pmd-btn-outline pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
+					<a href="#" id="searchBtn" class="btn btn-primary pmd-btn-raised add-btn pmd-ripple-effect pull-left">Search</a>
 				</div>
 				<!-- Title -->
 				<h1 class="section-title subPageTitle" id="services">
@@ -132,33 +133,40 @@
 					<thead>
 						<tr>
 							<th>no</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>수정일</th>
-							<th>비공개(삭제)여부</th>
-							<th>상세보기</th>
-							<th>게시관리</th>
+							<th>카페명</th>
+							<th>신청일</th>
+							<th>게시일/게시예정일</th>
+							<th>게시여부</th>
+							<th>게시일등록</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="item" items="${list }">
 							<tr>
-								<td>${item.boardNo }</td>
-								<td>${item.writingTitle }</td>
-								<td>${item.userNo.nick }[${item.userNo.userId}]</td>
-								<td><fmt:formatDate value="${item.registrationDate }" pattern="yyyy/MM/dd"/></td>
-								<td><fmt:formatDate value="${item.updateDate }" pattern="yyyy/MM/dd"/></td>
-								<td>${item.boardDelCdt}</td>
-								<td>
-									<a class="btn pmd-btn-outline" href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${item.boardNo }" target="_blank">상세보기</a>
+								<td>${item.powNo }</td>
+								<td>${item.cafeNo.cafeName}</td>
+								<td><fmt:formatDate value="${item.regDate }" pattern="yyyy/MM/dd"/></td>
+								<td>									
+									<fmt:formatDate value="${item.postDate }" pattern="yyyy/MM/dd" var="postDate"/>
+									<c:if test="${postDate != null }">${postDate }</c:if>
+									<c:if test="${postDate == null }"><strong style="font-size: 14px; color: #ff5722">게시일 미등록</strong></c:if>
+									<%-- <c:if test="${postDate == '0001/01/01' }"><strong style="font-size: 14px; color: #ff5722">게시일 미등록</strong></c:if> //로컬에서 작업할 때 --%>
 								</td>
 								<td>
-									<c:if test="${item.boardDelCdt == 'NO'}">
-										<button class="btn pmd-btn-outline btn-danger closingBtn">비공개(삭제) 전환</button>
+									<c:if test="${item.powCdt == 'WAITING' }"><span style="color:#03a9f4;">게시 대기중</span></c:if>
+									<c:if test="${item.powCdt == 'OPEN' }"><span style="color:#ff5722;">게시중</span></c:if>
+									<c:if test="${item.powCdt == 'CLOSING' }"><span style="color:#e0a800;">게시완료</span></c:if>
+									<c:if test="${item.powCdt == 'CANCEL' }"><span style="color:#e0a800;">취소</span></c:if>
+								</td>
+								<td>
+									<c:if test="${postDate == null }">
+									<%-- <c:if test="${postDate == '0001/01/01'}"> // 로컬에서 작업할 때--%>
+										<button class="btn btn-success postDateAddBtn" data-powNo="${item.powNo }">게시일 등록</button>
 									</c:if>
-									<c:if test="${item.boardDelCdt == 'YES'}">
-										<button class="btn pmd-btn-outline btn-warning closingBtn">공개 전환</button>
+									<c:if test="${postDate != null && item.powCdt == 'WAITING'}">
+										<fmt:formatDate value="${item.postDate }" pattern="yyyy" var="postYear"/>
+										<fmt:formatDate value="${item.postDate }" pattern="MM" var="postMonth"/>										
+										<button class="btn btn-warning postDateCancelBtn" data-powNo="${item.powNo}" data-postYear="${postYear }" data-postMonth="${postMonth }">게시 취소</button>
 									</c:if>
 								</td>
 							</tr>
@@ -169,14 +177,14 @@
 			<!-- 페이징 -->
 			<div style="text-align: center;">
 			  	<ul class="pagination list-inline taCenter">
-				  <c:if test="${pageMaker.prev == true }">
-						<li><a href="cafeRecomMgr?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
+				  	<c:if test="${pageMaker.prev == true }">
+						<li><a href="noticeMgr?page=${pageMaker.startPage-1}&keyword=${cri.keyword}">&laquo;</a></li>
 					</c:if>
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="cafeRecomMgr?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
+						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="noticeMgr?page=${idx}&keyword=${cri.keyword}">${idx }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next == true }">
-						<li><a href="cafeRecomMgr?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
+						<li><a href="noticeMgr?page=${pageMaker.endPage+1}&keyword=${cri.keyword}">&raquo;</a></li>
 					</c:if>
 			  	</ul>
 			</div>
@@ -192,13 +200,26 @@
 		var keyword = $("input[name='keyword']").val();
 		
 		if(keyword == '') {
-			alert("공지사항 번호를 작성해주세요.");
+			alert("카페이름을 작성해주세요.");
 			return false;
 		}
 		
 		location.href = "noticeMgr?keyword="+keyword;
 		
 		return false;
+	})
+	
+	$('.postDateAddBtn').click(function(){
+		var powNo = $(this).attr("data-powNo");
+		location.href = "${pageContext.request.contextPath}/admin/boardMgr/noticeMgr/modify?powNo="+powNo+"&page=${cri.page}&keyword=${cri.keyword}";
+	})
+	
+	$(".postDateCancelBtn").click(function(){
+		var powNo = $(this).attr("data-powNo");
+		var postYear = $(this).attr("data-postYear");
+		var postMonth = $(this).attr("data-postMonth");
+		
+		location.href = "${pageContext.request.contextPath}/admin/boardMgr/noticeMgr/cancelModify?powNo="+powNo+"&year="+postYear+"&month="+postMonth+"&page=${cri.page}&keyword=${cri.keyword}";
 	})
 </script>
 <%@ include file="../adminInclude/footer.jsp"%>

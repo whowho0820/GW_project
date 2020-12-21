@@ -862,10 +862,9 @@ function loginShow() {
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
+							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#2dbda0;">회원가입</a>
 						</div>
 					</div>
-				    
 				</div>
 			</div>
 		</div>
@@ -916,7 +915,7 @@ function loginShow() {
 					<!-- Modal footer -->
 					<div style="border-top: 1px solid #ccc;">
 						<div style="text-align: center;margin: 16px;">
-							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#64CD3C;">로그인</a>
+							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#2dbda0;">로그인</a>
 						</div>
 					</div>
 				    
