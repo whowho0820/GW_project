@@ -147,9 +147,9 @@ public class UserHomeController {
 	
 	
 	// 레이아웃 샘플페이지 
-	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	@RequestMapping(value = "/userpg", method = RequestMethod.GET)
 	public String sample() {
-		return "/user/sample";
+		return "/user/userpg";
 	}
 	
 	

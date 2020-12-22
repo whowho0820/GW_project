@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 <!-- 별점 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/w3.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -489,424 +487,442 @@
 		font-weight: bold;
 	}	
 </style>
-		
-<div class="content subPageContent">
-	<!-- 서브페이지 콘텐츠 -->
-	<div class="contentArea">
-		<h2 class="subPageTitle">
-			<span class="title">커피무까</span>
-			<span class="subTit grayB"> | 오늘은 어디서 커피 한잔?</span>
-		</h2>
-		
-		<!-- 서브콘텐츠 시작 -->
-		<div class="cafeMuKKaSubPage">
-		<!-- 파워링크 배너(슬라이드처리) -->
-		<div class="powerLink">
-			<div class="powerLink_dummy">
-				<p class="dummy_text"><i>The best way to start the day is with a nice warm cup of joe.</i></p>
-				<h1 class="dummy_title">Zone & Theme</h1>
-			</div>
-		</div>
 
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자가검진</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자가검진</li>
+				</ol><!--breadcrum end-->
+			</div>
 		
-		<!-- 위치, 테마, 베스트 -->
-		<h3 class="mukka_Title">오늘 카페 어디 갈까?</h3>
-		<div class="boxs">
-			<div class="box">
-				<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe1.cafeNo}">
-					<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe1.zoneNo.zoneName}</div>
-					<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg1.imageName}">
-					<div class="cafe_info">
-						<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe1.cafeName}</h3>
-						<p class="classOne">'${zoneCafe1.oneline}'</p>
+<%-- 		<div class="content subPageContent">
+			<!-- 서브페이지 콘텐츠 -->
+			<div class="contentArea">
+				<h2 class="subPageTitle">
+					<span class="title">커피무까</span>
+					<span class="subTit grayB"> | 오늘은 어디서 커피 한잔?</span>
+				</h2>
+				
+				<!-- 서브콘텐츠 시작 -->
+				<div class="cafeMuKKaSubPage">
+				<!-- 파워링크 배너(슬라이드처리) -->
+				<div class="powerLink">
+					<div class="powerLink_dummy">
+						<p class="dummy_text"><i>The best way to start the day is with a nice warm cup of joe.</i></p>
+						<h1 class="dummy_title">Zone & Theme</h1>
 					</div>
-					<div class="hiddenBox">
-						<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
-						<h3 class="hiddenPointName">${zoneCafe1.zoneNo.zoneName}</h3>
-						<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe1.cafeName}</h3>
-						<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe1.address}</p>
-					    <p class="hiddenText">'${zoneCafe1.oneline}'</p>
-					</div>
-				</a>
-			</div>
-			<div class="box">
-				<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe2.cafeNo}">	
-					<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe2.zoneNo.zoneName}</div>
-					<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg2.imageName}">
-					<div class="cafe_info">
-						<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe2.cafeName}</h3>
-						<p class="classOne">'${zoneCafe2.oneline}'</p>
-					</div>
-					<div class="hiddenBox">
-						<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
-						<h3 class="hiddenPointName">${zoneCafe2.zoneNo.zoneName}</h3>
-						<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe2.cafeName}</h3>
-						<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe2.address}</p>
-					    <p class="hiddenText">'${zoneCafe2.oneline}'</p>					
-					</div>
-				</a>					
-			</div>
-			<div class="box">
-				<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe3.cafeNo}">	
-					<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe3.zoneNo.zoneName}</div>
-					<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg3.imageName}">
-					<div class="cafe_info">
-						<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe3.cafeName}</h3>
-						<p class="classOne">'${zoneCafe3.oneline}'</p>
-					</div>
-					<div class="hiddenBox">
-						<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
-						<h3 class="hiddenPointName">${zoneCafe3.zoneNo.zoneName}</h3>
-						<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe3.cafeName}</h3>
-						<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe3.address}</p>
-					    <p class="hiddenText">'${zoneCafe3.oneline}'</p>					
-					</div>
-				</a>					
-			</div>
-		</div>
+				</div>
 		
-		
-		<!-- 위치별 / 테마별 실시간 -->
-		<div class="realTime">
-			<div class="box left bestViewBox">
-				<h3 class="title bottomLine">
-					<span class="bestTitle">BEST</span> <span class="bestSubtitle">|<span class="blue viewBlue"> 많이 본 인기 카페</span></span>
-					 <span class="orange"><span class="pageNum1">1</span> / <span class="pageTotal1">5</span></span>
-					 <span class="prevBtn1"><i class="fas fa-angle-left"></i></span>
-					 <span class="nextBtn1"><i class="fas fa-angle-right"></i></span>
-				</h3>				
-				<ul class="bestCafeBox">
-					<li class="bestCafe_li">
-						<c:forEach var="viewCafeList" items="${viewCafeList}" begin="0" end="2" varStatus="status">
-							<div class="red w30 no bold"><i class="num1"></i></div>
-							<div class="best_ul_info">
-								<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+				
+				<!-- 위치, 테마, 베스트 -->
+				<h3 class="mukka_Title">오늘 카페 어디 갈까?</h3>
+				<div class="boxs">
+					<div class="box">
+						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe1.cafeNo}">
+							<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe1.zoneNo.zoneName}</div>
+							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg1.imageName}">
+							<div class="cafe_info">
+								<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe1.cafeName}</h3>
+								<p class="classOne">'${zoneCafe1.oneline}'</p>
 							</div>
-							<div class="best_ul_img">
-								<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="0" end="2" varStatus="status">
-									<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
-										<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
-											<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
-										</a>
-									</c:if>
-								</c:forEach>
+							<div class="hiddenBox">
+								<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
+								<h3 class="hiddenPointName">${zoneCafe1.zoneNo.zoneName}</h3>
+								<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe1.cafeName}</h3>
+								<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe1.address}</p>
+							    <p class="hiddenText">'${zoneCafe1.oneline}'</p>
 							</div>
-							<div class="best_line"></div>
-						</c:forEach>												
-					</li>
-					<li class="bestCafe_li">
-						<c:forEach var="viewCafeList" items="${viewCafeList}" begin="3" end="5" varStatus="status">
-							<div class="red w30 no bold"><i class="num2"></i></div>
-							<div class="best_ul_info">
-								<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+						</a>
+					</div>
+					<div class="box">
+						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe2.cafeNo}">	
+							<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe2.zoneNo.zoneName}</div>
+							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg2.imageName}">
+							<div class="cafe_info">
+								<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe2.cafeName}</h3>
+								<p class="classOne">'${zoneCafe2.oneline}'</p>
 							</div>
-							<div class="best_ul_img">
-								<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="3" end="5" varStatus="status">
-									<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
-										<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
-											<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
-										</a>
-									</c:if>
-								</c:forEach>
+							<div class="hiddenBox">
+								<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
+								<h3 class="hiddenPointName">${zoneCafe2.zoneNo.zoneName}</h3>
+								<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe2.cafeName}</h3>
+								<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe2.address}</p>
+							    <p class="hiddenText">'${zoneCafe2.oneline}'</p>					
 							</div>
-							<div class="best_line"></div>
-						</c:forEach>												
-					</li>
-					<li class="bestCafe_li">
-						<c:forEach var="viewCafeList" items="${viewCafeList}" begin="6" end="8" varStatus="status">
-							<div class="red w30 no bold"><i class="num3"></i></div>
-							<div class="best_ul_info">
-								<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+						</a>					
+					</div>
+					<div class="box">
+						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${zoneCafe3.cafeNo}">	
+							<div class="point bgOrange keyword zoneOrangeIcon">${zoneCafe3.zoneNo.zoneName}</div>
+							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${zoneImg3.imageName}">
+							<div class="cafe_info">
+								<h3 class="title"><i class="fas fa-coffee"></i> ${zoneCafe3.cafeName}</h3>
+								<p class="classOne">'${zoneCafe3.oneline}'</p>
 							</div>
-							<div class="best_ul_img">
-								<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="6" end="8" varStatus="status">
-									<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
-										<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
-											<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
-										</a>
-									</c:if>
-								</c:forEach>
+							<div class="hiddenBox">
+								<h1 class="hiddenPoint"><i class="fas fa-map-marker-alt"></i></h1>
+								<h3 class="hiddenPointName">${zoneCafe3.zoneNo.zoneName}</h3>
+								<h3 class="hiddenTitle"><i class="fas fa-coffee"></i> ${zoneCafe3.cafeName}</h3>
+								<p class="hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${zoneCafe3.address}</p>
+							    <p class="hiddenText">'${zoneCafe3.oneline}'</p>					
 							</div>
-							<div class="best_line"></div>
-						</c:forEach>												
-					</li>
-					<li class="bestCafe_li">
-						<c:forEach var="viewCafeList" items="${viewCafeList}" begin="9" end="11" varStatus="status">
-							<div class="red w30 no bold"><i class="num4"></i></div>
-							<div class="best_ul_info">
-								<p class="best_oneline">" ${viewCafeList.oneline} "</p>
-							</div>
-							<div class="best_ul_img">
-								<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="9" end="11" varStatus="status">
-									<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
-										<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
-											<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
-										</a>
-									</c:if>
-								</c:forEach>
-							</div>							
-							<div class="best_line"></div>
-						</c:forEach>												
-					</li>
-					<li class="bestCafe_li">
-						<c:forEach var="viewCafeList" items="${viewCafeList}" begin="12" end="14" varStatus="status">
-							<div class="red w30 no bold"><i class="num5"></i></div>
-							<div class="best_ul_info">
-								<p class="best_oneline">" ${viewCafeList.oneline} "</p>
-							</div>
-							<div class="best_ul_img">
-								<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="12" end="14" varStatus="status">
-									<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
-										<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
-											<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
-										</a>
-									</c:if>
-								</c:forEach>
-							</div>							
-							<div class="best_line"></div>
-						</c:forEach>												
-					</li>																																																				
-				</ul>
-			</div>
-			<div class="box right">
-				<h3 class="title bottomLine"><span class="bestTitle">BEST</span> <span> |<span class="red"> 종합 별점 랭킹 5</span></span></h3>
-				<table class="starPoint_Box">
-					<c:forEach var="starPointCafeList" items="${starPointCafeList}">
-						<tr>
-							<td class="starPointRank" rowspan="2"></td>
-							<td class="starPointWrap" rowspan="2">
-								<div class="starPointWrap clearfix">
-									<div class="star spoint">
-										<select class="starPoint"> 
-											<option value="1">1</option> 
-											<option value="2">2</option> 
-											<option value="3">3</option> 
-											<option value="4">4</option> 
-											<option value="5">5</option> 
-										</select>										
+						</a>					
+					</div>
+				</div>
+				
+				
+				<!-- 위치별 / 테마별 실시간 -->
+				<div class="realTime">
+					<div class="box left bestViewBox">
+						<h3 class="title bottomLine">
+							<span class="bestTitle">BEST</span> <span class="bestSubtitle">|<span class="blue viewBlue"> 많이 본 인기 카페</span></span>
+							 <span class="orange"><span class="pageNum1">1</span> / <span class="pageTotal1">5</span></span>
+							 <span class="prevBtn1"><i class="fas fa-angle-left"></i></span>
+							 <span class="nextBtn1"><i class="fas fa-angle-right"></i></span>
+						</h3>				
+						<ul class="bestCafeBox">
+							<li class="bestCafe_li">
+								<c:forEach var="viewCafeList" items="${viewCafeList}" begin="0" end="2" varStatus="status">
+									<div class="red w30 no bold"><i class="num1"></i></div>
+									<div class="best_ul_info">
+										<p class="best_oneline">" ${viewCafeList.oneline} "</p>
 									</div>
-									<div class="jumsu"><span class="spointNum"></span><span class="gray">/ 5</span></div>
-									</div>	
-							</td>
-							<td class="spoint_keyword" colspan="2">
-								<div class="zoneIcon zoneOrangeIconSmall spointZone">${starPointCafeList.zoneNo.zoneName}</div>
-								<c:choose>
-									<c:when test="${starPointCafeList.themeNo.themeNo == 1}">
-										<div class="date themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
-									</c:when>
-									<c:when test="${starPointCafeList.themeNo.themeNo == 2}">
-										<div class="view themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
-									</c:when>
-									<c:when test="${starPointCafeList.themeNo.themeNo == 3}">
-										<div class="ame themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
-									</c:when>
-									<c:when test="${starPointCafeList.themeNo.themeNo == 4}">
-										<div class="dessert themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
-									</c:when>
-									<c:when test="${starPointCafeList.themeNo.themeNo == 5}">
-										<div class="dog themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
-									</c:when>																																								
-									<c:otherwise>
-										<div class="work themeKeySmall  keyword">#${starPointCafeList.themeNo.themeName}</div>		
-									</c:otherwise>
-								</c:choose>							
-							</td>
-							</tr>
-							<tr>
-								<td class="spointCafeName" colspan="2"><a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${starPointCafeList.cafeNo}"><i class="fas fa-coffee"></i> ${starPointCafeList.cafeName}</a></td>
-							</tr>
-						</c:forEach>																																											
-				</table>
-			</div>
-		</div>
-		
-		<h3 class="mukka_Title">오늘따라 끌리는 <span class="navy_box">#테마</span> 를 골라봐!</h3>
-		<div class="theme_boxs">
-			<ul class="themeWrap">
-			    <!-- 데이트 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe1.cafeNo}">
-						<div class="theme_keyword date themeKeySmall keyword">#${themeCafe1.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg1.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe1.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe1.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox date">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key1_1.png"><br>#${themeCafe1.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe1.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe1.address}</p>
-							<p class="theme_hiddenText">'${themeCafe1.oneline}'</p>
-						</div>
-					</a>					
-				</li>
-				<!-- 뷰 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe2.cafeNo}">
-						<div class="theme_keyword view themeKeySmall keyword">#${themeCafe2.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg2.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe2.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe2.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox view">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key2_2.png"><br>#${themeCafe2.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe2.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe2.address}</p>
-							<p class="theme_hiddenText">'${themeCafe2.oneline}'</p>
-						</div>
-					</a>
-				</li>
-				<!-- 착한아메 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe3.cafeNo}">
-						<div class="theme_keyword ame themeKeySmall keyword">#${themeCafe3.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg3.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe3.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe3.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox ame">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key3_3.png"><br>#${themeCafe3.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe3.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe3.address}</p>
-							<p class="theme_hiddenText">'${themeCafe3.oneline}'</p>
-						</div>
-					</a>
-				</li>
-				<!-- 디저트 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe4.cafeNo}">
-						<div class="theme_keyword dessert themeKeySmall keyword">#${themeCafe4.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg4.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe4.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe4.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox dessert">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key4_4.png"><br>#${themeCafe4.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe4.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe4.address}</p>
-							<p class="theme_hiddenText">'${themeCafe4.oneline}'</p>
-						</div>
-					</a>
-				</li>
-				<!-- 댕댕이 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe5.cafeNo}">
-						<div class="theme_keyword dog themeKeySmall keyword">#${themeCafe5.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg5.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe5.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe5.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox dog">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key5_5.png"><br>#${themeCafe5.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe5.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe5.address}</p>
-							<p class="theme_hiddenText">'${themeCafe5.oneline}'</p>
-						</div>
-					</a>
-				</li>
-				<!-- 작업 -->
-				<li class="theme_box">
-					<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe6.cafeNo}">
-						<div class="theme_keyword work themeKeySmall keyword">#${themeCafe6.themeNo.themeName}</div>
-						<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg6.imageName}" class="themeImg">
-						<div class="theme_info">
-							<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe6.cafeName}</h3>
-							<p class="classOne theme_text">'${themeCafe6.oneline}'</p>
-						</div>
-						<div class="theme_hiddenBox work">
-							<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key6_6.png"><br>#${themeCafe6.themeNo.themeName}</div>
-							<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe6.cafeName}</h3>
-							<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe6.address}</p>
-							<p class="theme_hiddenText">'${themeCafe6.oneline}'</p>
-						</div>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<h3 class="title bottomLine ranThemeTitle">
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 1}">
-					 <span class="keyword_box date">#데이트</span> 하기 좋은 카페
-				</c:if>
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 2}">
-					<span class="keyword_box view">#뷰</span> 가 끝내주는 카페
-				</c:if>
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 3}">
-					<span class="keyword_box ame">#착한아메</span> 가 있는 카페
-				</c:if>
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 4}">
-					나는야 <span class="keyword_box dessert">#디저트</span> 파  라면 바로 여기</span>
-				</c:if>
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 5}">
-					<span class="keyword_box dog">#댕댕이</span> 와 함께 하기 좋은 카페
-				</c:if>																																								
-				<c:if test="${themeGroupCafe1.themeNo.themeNo == 6}">
-					<span class="keyword_box work">#작업</span> 하기 안성맞춤인 카페
-				</c:if>
-		</h3>
-		<div class="theme_tableWrap">
-			<table class="theme_table">
-				<tr>
-					<td class="theme_imgTd">
-						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe1.cafeNo}">
-							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg1.imageName}" class="ran_theme_img">
-						</a>
-						<h4><i class="fas fa-coffee"></i> ${themeGroupCafe1.cafeName}</h4>	
-					</td>
-					<td class="theme_imgTd">
-						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe2.cafeNo}">
-							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg2.imageName}" class="ran_theme_img">
-						</a>
-						<h4><i class="fas fa-coffee"></i> ${themeGroupCafe2.cafeName}</h4>	
-					</td>
-					<td class="theme_imgTd">
-						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe3.cafeNo}">
-							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg3.imageName}" class="ran_theme_img">
-						</a>
-						<h4><i class="fas fa-coffee"></i> ${themeGroupCafe3.cafeName}</h4>	
-					</td>
-					<td class="theme_imgTd">
-						<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe4.cafeNo}">
-							<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg4.imageName}" class="ran_theme_img">
-						</a>
-						<h4><i class="fas fa-coffee"></i> ${themeGroupCafe4.cafeName}</h4>	
-					</td>															
-				</tr>														
-			</table>
-		</div>
-		
-		<h3 class="title bottomLin mukka_Title"><i class="fas fa-grin-stars"></i> 별점 <span class="realRed">5점</span> 받은 바로 그 카페, 다섯 곳 <i class="fas fa-grin-stars"></i> <span class="term orange"></span></h3>
-		<div class="starPoint5_Wrap">
-			<table class="commentWrap">
-				<c:forEach var="starPoint5" items="${starPoint5}">
+									<div class="best_ul_img">
+										<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="0" end="2" varStatus="status">
+											<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
+												<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
+													<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
+												</a>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="best_line"></div>
+								</c:forEach>												
+							</li>
+							<li class="bestCafe_li">
+								<c:forEach var="viewCafeList" items="${viewCafeList}" begin="3" end="5" varStatus="status">
+									<div class="red w30 no bold"><i class="num2"></i></div>
+									<div class="best_ul_info">
+										<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+									</div>
+									<div class="best_ul_img">
+										<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="3" end="5" varStatus="status">
+											<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
+												<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
+													<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
+												</a>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="best_line"></div>
+								</c:forEach>												
+							</li>
+							<li class="bestCafe_li">
+								<c:forEach var="viewCafeList" items="${viewCafeList}" begin="6" end="8" varStatus="status">
+									<div class="red w30 no bold"><i class="num3"></i></div>
+									<div class="best_ul_info">
+										<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+									</div>
+									<div class="best_ul_img">
+										<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="6" end="8" varStatus="status">
+											<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
+												<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
+													<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
+												</a>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="best_line"></div>
+								</c:forEach>												
+							</li>
+							<li class="bestCafe_li">
+								<c:forEach var="viewCafeList" items="${viewCafeList}" begin="9" end="11" varStatus="status">
+									<div class="red w30 no bold"><i class="num4"></i></div>
+									<div class="best_ul_info">
+										<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+									</div>
+									<div class="best_ul_img">
+										<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="9" end="11" varStatus="status">
+											<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
+												<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
+													<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
+												</a>
+											</c:if>
+										</c:forEach>
+									</div>							
+									<div class="best_line"></div>
+								</c:forEach>												
+							</li>
+							<li class="bestCafe_li">
+								<c:forEach var="viewCafeList" items="${viewCafeList}" begin="12" end="14" varStatus="status">
+									<div class="red w30 no bold"><i class="num5"></i></div>
+									<div class="best_ul_info">
+										<p class="best_oneline">" ${viewCafeList.oneline} "</p>
+									</div>
+									<div class="best_ul_img">
+										<c:forEach var="viewCafeListImg" items="${viewCafeListImg}" begin="12" end="14" varStatus="status">
+											<c:if test="${viewCafeListImg.cafeNo.cafeNo == viewCafeList.cafeNo }">
+												<a href="${pageContext.request.contextPath}/user/mukkaCafe/zone/read?cafeNo=${viewCafeList.cafeNo}">
+													<img src="${pageContext.request.contextPath }/resources/images/sumnail/${viewCafeListImg.imageName}" class="best_view_img">
+												</a>
+											</c:if>
+										</c:forEach>
+									</div>							
+									<div class="best_line"></div>
+								</c:forEach>												
+							</li>																																																				
+						</ul>
+					</div>
+					<div class="box right">
+						<h3 class="title bottomLine"><span class="bestTitle">BEST</span> <span> |<span class="red"> 종합 별점 랭킹 5</span></span></h3>
+						<table class="starPoint_Box">
+							<c:forEach var="starPointCafeList" items="${starPointCafeList}">
+								<tr>
+									<td class="starPointRank" rowspan="2"></td>
+									<td class="starPointWrap" rowspan="2">
+										<div class="starPointWrap clearfix">
+											<div class="star spoint">
+												<select class="starPoint"> 
+													<option value="1">1</option> 
+													<option value="2">2</option> 
+													<option value="3">3</option> 
+													<option value="4">4</option> 
+													<option value="5">5</option> 
+												</select>										
+											</div>
+											<div class="jumsu"><span class="spointNum"></span><span class="gray">/ 5</span></div>
+											</div>	
+									</td>
+									<td class="spoint_keyword" colspan="2">
+										<div class="zoneIcon zoneOrangeIconSmall spointZone">${starPointCafeList.zoneNo.zoneName}</div>
+										<c:choose>
+											<c:when test="${starPointCafeList.themeNo.themeNo == 1}">
+												<div class="date themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
+											</c:when>
+											<c:when test="${starPointCafeList.themeNo.themeNo == 2}">
+												<div class="view themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
+											</c:when>
+											<c:when test="${starPointCafeList.themeNo.themeNo == 3}">
+												<div class="ame themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
+											</c:when>
+											<c:when test="${starPointCafeList.themeNo.themeNo == 4}">
+												<div class="dessert themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
+											</c:when>
+											<c:when test="${starPointCafeList.themeNo.themeNo == 5}">
+												<div class="dog themeKeySmall spointTheme">#${starPointCafeList.themeNo.themeName}</div>
+											</c:when>																																								
+											<c:otherwise>
+												<div class="work themeKeySmall  keyword">#${starPointCafeList.themeNo.themeName}</div>		
+											</c:otherwise>
+										</c:choose>							
+									</td>
+									</tr>
+									<tr>
+										<td class="spointCafeName" colspan="2"><a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${starPointCafeList.cafeNo}"><i class="fas fa-coffee"></i> ${starPointCafeList.cafeName}</a></td>
+									</tr>
+								</c:forEach>																																											
+						</table>
+					</div>
+				</div>
+				
+				<h3 class="mukka_Title">오늘따라 끌리는 <span class="navy_box">#테마</span> 를 골라봐!</h3>
+				<div class="theme_boxs">
+					<ul class="themeWrap">
+					    <!-- 데이트 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe1.cafeNo}">
+								<div class="theme_keyword date themeKeySmall keyword">#${themeCafe1.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg1.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe1.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe1.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox date">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key1_1.png"><br>#${themeCafe1.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe1.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe1.address}</p>
+									<p class="theme_hiddenText">'${themeCafe1.oneline}'</p>
+								</div>
+							</a>					
+						</li>
+						<!-- 뷰 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe2.cafeNo}">
+								<div class="theme_keyword view themeKeySmall keyword">#${themeCafe2.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg2.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe2.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe2.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox view">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key2_2.png"><br>#${themeCafe2.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe2.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe2.address}</p>
+									<p class="theme_hiddenText">'${themeCafe2.oneline}'</p>
+								</div>
+							</a>
+						</li>
+						<!-- 착한아메 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe3.cafeNo}">
+								<div class="theme_keyword ame themeKeySmall keyword">#${themeCafe3.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg3.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe3.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe3.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox ame">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key3_3.png"><br>#${themeCafe3.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe3.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe3.address}</p>
+									<p class="theme_hiddenText">'${themeCafe3.oneline}'</p>
+								</div>
+							</a>
+						</li>
+						<!-- 디저트 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe4.cafeNo}">
+								<div class="theme_keyword dessert themeKeySmall keyword">#${themeCafe4.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg4.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe4.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe4.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox dessert">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key4_4.png"><br>#${themeCafe4.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe4.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe4.address}</p>
+									<p class="theme_hiddenText">'${themeCafe4.oneline}'</p>
+								</div>
+							</a>
+						</li>
+						<!-- 댕댕이 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe5.cafeNo}">
+								<div class="theme_keyword dog themeKeySmall keyword">#${themeCafe5.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg5.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe5.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe5.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox dog">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key5_5.png"><br>#${themeCafe5.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe5.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe5.address}</p>
+									<p class="theme_hiddenText">'${themeCafe5.oneline}'</p>
+								</div>
+							</a>
+						</li>
+						<!-- 작업 -->
+						<li class="theme_box">
+							<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeCafe6.cafeNo}">
+								<div class="theme_keyword work themeKeySmall keyword">#${themeCafe6.themeNo.themeName}</div>
+								<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeCafeImg6.imageName}" class="themeImg">
+								<div class="theme_info">
+									<h3 class="theme_title"><i class="fas fa-coffee"></i> ${themeCafe6.cafeName}</h3>
+									<p class="classOne theme_text">'${themeCafe6.oneline}'</p>
+								</div>
+								<div class="theme_hiddenBox work">
+									<div class="themeIcon"><img src="${pageContext.request.contextPath}/resources/images/key6_6.png"><br>#${themeCafe6.themeNo.themeName}</div>
+									<h3 class="theme_hiddenTitle"><i class="fas fa-coffee"></i> ${themeCafe6.cafeName}</h3>
+									<p class="theme_hiddenAdd"><i class="fas fa-map-marker-alt"></i> ${themeCafe6.address}</p>
+									<p class="theme_hiddenText">'${themeCafe6.oneline}'</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<h3 class="title bottomLine ranThemeTitle">
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 1}">
+							 <span class="keyword_box date">#데이트</span> 하기 좋은 카페
+						</c:if>
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 2}">
+							<span class="keyword_box view">#뷰</span> 가 끝내주는 카페
+						</c:if>
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 3}">
+							<span class="keyword_box ame">#착한아메</span> 가 있는 카페
+						</c:if>
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 4}">
+							나는야 <span class="keyword_box dessert">#디저트</span> 파  라면 바로 여기</span>
+						</c:if>
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 5}">
+							<span class="keyword_box dog">#댕댕이</span> 와 함께 하기 좋은 카페
+						</c:if>																																								
+						<c:if test="${themeGroupCafe1.themeNo.themeNo == 6}">
+							<span class="keyword_box work">#작업</span> 하기 안성맞춤인 카페
+						</c:if>
+				</h3>
+				<div class="theme_tableWrap">
+					<table class="theme_table">
 						<tr>
-							<td class="starPoint5_cafeName">
-								<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${starPoint5.cafeNo}">
-								 	<h4><i class="fas fa-coffee"></i> ${starPoint5.cafeName}</h4>
+							<td class="theme_imgTd">
+								<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe1.cafeNo}">
+									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg1.imageName}" class="ran_theme_img">
 								</a>
+								<h4><i class="fas fa-coffee"></i> ${themeGroupCafe1.cafeName}</h4>	
 							</td>
-							<td class="starPoint5_zone">
-								<div class="zoneIcon zoneOrangeIconSmall spointZone">${starPoint5.zoneNo.zoneName}</div>
+							<td class="theme_imgTd">
+								<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe2.cafeNo}">
+									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg2.imageName}" class="ran_theme_img">
+								</a>
+								<h4><i class="fas fa-coffee"></i> ${themeGroupCafe2.cafeName}</h4>	
 							</td>
-							<td class="starPoint5_cnt">
-								<span class="bold">별점 5점</span>을 <span class="red bold sPointCnt"></span> 받았어요!
+							<td class="theme_imgTd">
+								<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe3.cafeNo}">
+									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg3.imageName}" class="ran_theme_img">
+								</a>
+								<h4><i class="fas fa-coffee"></i> ${themeGroupCafe3.cafeName}</h4>	
 							</td>
-							<td  class="starPoint5_comment">
-								<u>${starPoint5.userNo.name}</u>님의 평가 <br><div class="spoint5Theme themeKeySmall spointTheme">#${starPoint5.themeNo.themeName}</div> <span class="blue"><i>'${starPoint5.starPoint.starPointComment}'</i></span>  
-							</td>				
-						</tr>
-					
-				</c:forEach>																															
-			</table>			
-		</div>
-		<!-- 서브콘텐츠 끝 -->
+							<td class="theme_imgTd">
+								<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${themeGroupCafe4.cafeNo}">
+									<img src="${pageContext.request.contextPath }/resources/images/sumnail/${themeGroupImg4.imageName}" class="ran_theme_img">
+								</a>
+								<h4><i class="fas fa-coffee"></i> ${themeGroupCafe4.cafeName}</h4>	
+							</td>															
+						</tr>														
+					</table>
+				</div>
+				
+				<h3 class="title bottomLin mukka_Title"><i class="fas fa-grin-stars"></i> 별점 <span class="realRed">5점</span> 받은 바로 그 카페, 다섯 곳 <i class="fas fa-grin-stars"></i> <span class="term orange"></span></h3>
+				<div class="starPoint5_Wrap">
+					<table class="commentWrap">
+						<c:forEach var="starPoint5" items="${starPoint5}">
+								<tr>
+									<td class="starPoint5_cafeName">
+										<a href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${starPoint5.cafeNo}">
+										 	<h4><i class="fas fa-coffee"></i> ${starPoint5.cafeName}</h4>
+										</a>
+									</td>
+									<td class="starPoint5_zone">
+										<div class="zoneIcon zoneOrangeIconSmall spointZone">${starPoint5.zoneNo.zoneName}</div>
+									</td>
+									<td class="starPoint5_cnt">
+										<span class="bold">별점 5점</span>을 <span class="red bold sPointCnt"></span> 받았어요!
+									</td>
+									<td  class="starPoint5_comment">
+										<u>${starPoint5.userNo.name}</u>님의 평가 <br><div class="spoint5Theme themeKeySmall spointTheme">#${starPoint5.themeNo.themeName}</div> <span class="blue"><i>'${starPoint5.starPoint.starPointComment}'</i></span>  
+									</td>				
+								</tr>
+							
+						</c:forEach>																															
+					</table>			
+				</div>
+				<!-- 서브콘텐츠 끝 --> --%>
 		</div>
 	</div>
 </div>
 	
+			</div>
+	</div>
 
 <%-- 지우면 안됨 subMenu.jsp에 container 시작 태그 있음 --%>
 </div>

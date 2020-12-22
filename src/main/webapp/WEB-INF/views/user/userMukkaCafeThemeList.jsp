@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 
 <style>
 	.cafeLocationSearch {
@@ -317,7 +315,7 @@ ul.themeListCafeWrap li img{
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/fontawesome-stars.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.barrating.min.js"></script>
 
-<script type="text/javascript"> 
+<!-- <script type="text/javascript"> 
 	$(function() {
 		
 		
@@ -339,189 +337,207 @@ ul.themeListCafeWrap li img{
 		
 		
 	})
-</script>
+</script> -->
 
-		<div class="content subPageContent">
-			<!-- 서브페이지 콘텐츠 -->
-			<div class="contentArea">
-				<h2 class="subPageTitle">
-					<span class="title">테마별</span> <span class="subTit grayB"> |
-						키워드 중심의 카페정보</span>
-				</h2>
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>증상별</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">증상별</li>
+				</ol><!--breadcrum end-->
+			</div>
+
+	<%-- 		<div class="content subPageContent">
+				<!-- 서브페이지 콘텐츠 -->
+				<div class="contentArea">
+					<h2 class="subPageTitle">
+						<span class="title">테마별</span> <span class="subTit grayB"> |
+							키워드 중심의 카페정보</span>
+					</h2>
+			
+					<!-- 서브콘텐츠 시작 -->
+			<div class="themeCafeList">
+					<!-- 위치, 테마 선택 및 검색란 -->
+					<div class="cafeLocationSearch clearfix">
+						<div class="selectLeft">
+							<!-- <button class="keyword">#전체</button>
+							<button class="keyword">#데이트</button>
+							<button class="keyword">#뷰</button>
+							<button class="keyword">#착한아메</button>
+							<button class="keyword">#디저트</button>
+							<button class="keyword">#댕댕이</button>
+							<button class="keyword">#작업</button> -->
+						<select name="searchZone" id="searchZone">
+							<option value="all" ${cri.searchZone=='all'? 'selected':'' }>전체(위치별)</option>
+							<option value="1" ${cri.searchZone=='1'? 'selected':'' }>동성로</option>
+							<option value="2" ${cri.searchZone=='2'? 'selected':'' }>수성못 들안길</option>
+							<option value="3" ${cri.searchZone=='3'? 'selected':'' }>두류공원 이월드</option>
+							<option value="4" ${cri.searchZone=='4'? 'selected':'' }>달서구</option>
+							<option value="5" ${cri.searchZone=='5'? 'selected':'' }>수성구</option>
+							<option value="6" ${cri.searchZone=='6'? 'selected':'' }>서구-북구</option>
+							<option value="7" ${cri.searchZone=='7'? 'selected':'' }>중구</option>
+							<option value="8" ${cri.searchZone=='8'? 'selected':'' }>동구</option>
+							<option value="9" ${cri.searchZone=='9'? 'selected':'' }>남구</option>
+							<option value="10" ${cri.searchZone=='10'? 'selected':'' }>달성군</option>
+							<option value="11" ${cri.searchZone=='11'? 'selected':'' }>팔공산</option>
+						</select>
+						<select name="searchTheme" id="searchTheme">
+							<option value="all" ${cri.searchTheme=='all'? 'selected':'' }>전체(테마별)</option>
+							<option value="1" ${cri.searchTheme=='1'? 'selected':'' }>#데이트</option>
+							<option value="2" ${cri.searchTheme=='2'? 'selected':'' }>#뷰</option>
+							<option value="3" ${cri.searchTheme=='3'? 'selected':'' }>#착한아메</option>
+							<option value="4" ${cri.searchTheme=='4'? 'selected':'' }>#디저트</option>
+							<option value="5" ${cri.searchTheme=='5'? 'selected':'' }>#댕댕이</option>
+							<option value="6" ${cri.searchTheme=='6'? 'selected':'' }>#작업</option>
+						</select>						
+						</div>
+						<div class="selectRight">
+							<select name="searchType" id="searchType">
+								<option value="n" ${cri.searchType==null? 'selected':'' }>----</option>
+								<option value="cafeName" ${cri.searchType=='cafeName'? 'selected':'' }>카페명</option>
+							</select> 
+							<input type="text" name="keyword" id="keyword" value="${cri.keyword }" placeholder="검색어를 입력하세요." /> 
+							<input type="submit" id="btnSearch" value="검색" class="navyBtn" />
+						</div>
+					</div>
+					<!-- 위치별 카페 리스트 -->
+					<div class="themeListCafe">
+						<ul class="themeListCafeWrap">
+							<c:forEach var="cafe" items="${list }" varStatus="i">
+								<li><a
+									href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${cafe.cafeNo}">
+										<c:forEach var="img" items="${imgList }">
+											<c:if test="${img.cafeNo.cafeNo == cafe.cafeNo }">
+												<img
+													src="${pageContext.request.contextPath }/resources/images/sumnail/${img.imageName}">
+											</c:if>
+										</c:forEach>
+										<div class="blackOpacity"></div>
+										<div class="star">
+											<select class="starPoint">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+										<div class="cafeVoteNum bgRed">${cafe.voteNumber }</div> <c:set
+											var="theme" value="${cafe.themeNo.themeNo }" /> <c:choose>
+											<c:when test="${theme == 1 }">
+												<div class="themeKeySmall date bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+											<c:when test="${theme == 2 }">
+												<div class="themeKeySmall view bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+											<c:when test="${theme == 3 }">
+												<div class="themeKeySmall ame bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+											<c:when test="${theme == 4 }">
+												<div class="themeKeySmall dessert bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+											<c:when test="${theme == 5 }">
+												<div class="themeKeySmall dog bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+											<c:when test="${theme == 6 }">
+												<div class="themeKeySmall work bold firstKeyword">#${cafe.themeNo.themeName
+													}</div>
+											</c:when>
+										</c:choose>
+										<div class="themeKeySmall bold rankTheme_one"></div>
+										<div class="themeKeySmall bold rankTheme_two"></div>
+										<h3 class="theme_cafeName">${cafe.cafeName }</h3>
+										<h1 class="before_heart">
+											<i class="fa fa-heart-o" aria-hidden="true"></i>
+										</h1>
+								</a></li>
+							</c:forEach>
+						</ul>
+				  </div>
+			 </div> 
+			<!-- 페이징 처리 부분 -->
+			<div style="text-align: center;">
+				<ul class="pagination">
+					<c:if test="${pageMaker.prev == true }">
+						<li><a href="theme?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+						<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="theme?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
+					</c:forEach>
+					<c:if test="${pageMaker.next == true }">
+						<li><a href="theme?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</div>
+			</div>
+		</div>	
+	지우면 안됨 subMenu.jsp에 container 시작 태그 있음
+	</div>
+	<script>
+		var arr = new Array();
+		<c:forEach var="themeList" items="${themeList}" varStatus="status">
+			arr.push("${themeList.themeName}");
+		</c:forEach>
 		
-				<!-- 서브콘텐츠 시작 -->
-		<div class="themeCafeList">
-				<!-- 위치, 테마 선택 및 검색란 -->
-				<div class="cafeLocationSearch clearfix">
-					<div class="selectLeft">
-						<!-- <button class="keyword">#전체</button>
-						<button class="keyword">#데이트</button>
-						<button class="keyword">#뷰</button>
-						<button class="keyword">#착한아메</button>
-						<button class="keyword">#디저트</button>
-						<button class="keyword">#댕댕이</button>
-						<button class="keyword">#작업</button> -->
-					<select name="searchZone" id="searchZone">
-						<option value="all" ${cri.searchZone=='all'? 'selected':'' }>전체(위치별)</option>
-						<option value="1" ${cri.searchZone=='1'? 'selected':'' }>동성로</option>
-						<option value="2" ${cri.searchZone=='2'? 'selected':'' }>수성못 들안길</option>
-						<option value="3" ${cri.searchZone=='3'? 'selected':'' }>두류공원 이월드</option>
-						<option value="4" ${cri.searchZone=='4'? 'selected':'' }>달서구</option>
-						<option value="5" ${cri.searchZone=='5'? 'selected':'' }>수성구</option>
-						<option value="6" ${cri.searchZone=='6'? 'selected':'' }>서구-북구</option>
-						<option value="7" ${cri.searchZone=='7'? 'selected':'' }>중구</option>
-						<option value="8" ${cri.searchZone=='8'? 'selected':'' }>동구</option>
-						<option value="9" ${cri.searchZone=='9'? 'selected':'' }>남구</option>
-						<option value="10" ${cri.searchZone=='10'? 'selected':'' }>달성군</option>
-						<option value="11" ${cri.searchZone=='11'? 'selected':'' }>팔공산</option>
-					</select>
-					<select name="searchTheme" id="searchTheme">
-						<option value="all" ${cri.searchTheme=='all'? 'selected':'' }>전체(테마별)</option>
-						<option value="1" ${cri.searchTheme=='1'? 'selected':'' }>#데이트</option>
-						<option value="2" ${cri.searchTheme=='2'? 'selected':'' }>#뷰</option>
-						<option value="3" ${cri.searchTheme=='3'? 'selected':'' }>#착한아메</option>
-						<option value="4" ${cri.searchTheme=='4'? 'selected':'' }>#디저트</option>
-						<option value="5" ${cri.searchTheme=='5'? 'selected':'' }>#댕댕이</option>
-						<option value="6" ${cri.searchTheme=='6'? 'selected':'' }>#작업</option>
-					</select>						
-					</div>
-					<div class="selectRight">
-						<select name="searchType" id="searchType">
-							<option value="n" ${cri.searchType==null? 'selected':'' }>----</option>
-							<option value="cafeName" ${cri.searchType=='cafeName'? 'selected':'' }>카페명</option>
-						</select> 
-						<input type="text" name="keyword" id="keyword" value="${cri.keyword }" placeholder="검색어를 입력하세요." /> 
-						<input type="submit" id="btnSearch" value="검색" class="navyBtn" />
-					</div>
-				</div>
-				<!-- 위치별 카페 리스트 -->
-				<div class="themeListCafe">
-					<ul class="themeListCafeWrap">
-						<c:forEach var="cafe" items="${list }" varStatus="i">
-							<li><a
-								href="${pageContext.request.contextPath }/user/mukkaCafe/zone/read?cafeNo=${cafe.cafeNo}">
-									<c:forEach var="img" items="${imgList }">
-										<c:if test="${img.cafeNo.cafeNo == cafe.cafeNo }">
-											<img
-												src="${pageContext.request.contextPath }/resources/images/sumnail/${img.imageName}">
-										</c:if>
-									</c:forEach>
-									<div class="blackOpacity"></div>
-									<div class="star">
-										<select class="starPoint">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</div>
-									<div class="cafeVoteNum bgRed">${cafe.voteNumber }</div> <c:set
-										var="theme" value="${cafe.themeNo.themeNo }" /> <c:choose>
-										<c:when test="${theme == 1 }">
-											<div class="themeKeySmall date bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-										<c:when test="${theme == 2 }">
-											<div class="themeKeySmall view bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-										<c:when test="${theme == 3 }">
-											<div class="themeKeySmall ame bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-										<c:when test="${theme == 4 }">
-											<div class="themeKeySmall dessert bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-										<c:when test="${theme == 5 }">
-											<div class="themeKeySmall dog bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-										<c:when test="${theme == 6 }">
-											<div class="themeKeySmall work bold firstKeyword">#${cafe.themeNo.themeName
-												}</div>
-										</c:when>
-									</c:choose>
-									<div class="themeKeySmall bold rankTheme_one"></div>
-									<div class="themeKeySmall bold rankTheme_two"></div>
-									<h3 class="theme_cafeName">${cafe.cafeName }</h3>
-									<h1 class="before_heart">
-										<i class="fa fa-heart-o" aria-hidden="true"></i>
-									</h1>
-							</a></li>
-						</c:forEach>
-					</ul>
-			  </div>
-		 </div> 
-		<!-- 페이징 처리 부분 -->
-		<div style="text-align: center;">
-			<ul class="pagination">
-				<c:if test="${pageMaker.prev == true }">
-					<li><a href="theme?page=${pageMaker.startPage-1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<li class="${pageMaker.cri.page == idx?'active':'' }"><a href="theme?page=${idx }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx }</a></li>
-				</c:forEach>
-				<c:if test="${pageMaker.next == true }">
-					<li><a href="theme?page=${pageMaker.endPage+1 }&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
-				</c:if>
-			</ul>
-		</div>
-		</div>
-	</div>	
-<%-- 지우면 안됨 subMenu.jsp에 container 시작 태그 있음 --%>
+		var len = arr.length;
+		var cnt = Math.floor(len/2);
+		
+		
+		console.log(arr); //한페이지당 총개수/2 -- 16
+		
+		var arr1 = new Array();
+		for(var i=0;i<=cnt;i++){ 
+			arr1.push(arr.splice(0,2));
+			console.log("찍어줘"+arr.splice(0,2));
+		}
+		
+		for(var i =0;i<arr1.length;i++){
+			console.log(arr1[i]);
+			$(".rankTheme_one").eq(i).text("#"+arr1[i][0]);
+			$(".rankTheme_two").eq(i).text("#"+arr1[i][1]);
+		}
+		
+		// 테마분류 색상 설정
+		$(".rankTheme_one").each(function(i, obj){
+			var name = $(this).text();
+			var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
+			var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
+			
+			for(var i=0; i<keyword.length; i++){
+				if(name.indexOf(keywordK[i]) > -1) {
+					$(this).addClass(keyword[i]);
+				}
+			}
+			
+		})
+		
+		$(".rankTheme_two").each(function(i, obj){
+			var name = $(this).text();
+			var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
+			var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
+			
+			for(var i=0; i<keyword.length; i++){
+				if(name.indexOf(keywordK[i]) > -1) {
+					$(this).addClass(keyword[i]);
+				}
+			}
+			
+		})		
+	</script>
+	<!-- container end --> --%>
+	</div>
 </div>
-<script>
-	var arr = new Array();
-	<c:forEach var="themeList" items="${themeList}" varStatus="status">
-		arr.push("${themeList.themeName}");
-	</c:forEach>
-	
-	var len = arr.length;
-	var cnt = Math.floor(len/2);
-	
-	
-	console.log(arr); //한페이지당 총개수/2 -- 16
-	
-	var arr1 = new Array();
-	for(var i=0;i<=cnt;i++){ 
-		arr1.push(arr.splice(0,2));
-		console.log("찍어줘"+arr.splice(0,2));
-	}
-	
-	for(var i =0;i<arr1.length;i++){
-		console.log(arr1[i]);
-		$(".rankTheme_one").eq(i).text("#"+arr1[i][0]);
-		$(".rankTheme_two").eq(i).text("#"+arr1[i][1]);
-	}
-	
-	// 테마분류 색상 설정
-	$(".rankTheme_one").each(function(i, obj){
-		var name = $(this).text();
-		var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
-		var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
-		
-		for(var i=0; i<keyword.length; i++){
-			if(name.indexOf(keywordK[i]) > -1) {
-				$(this).addClass(keyword[i]);
-			}
-		}
-		
-	})
-	
-	$(".rankTheme_two").each(function(i, obj){
-		var name = $(this).text();
-		var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
-		var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
-		
-		for(var i=0; i<keyword.length; i++){
-			if(name.indexOf(keywordK[i]) > -1) {
-				$(this).addClass(keyword[i]);
-			}
-		}
-		
-	})		
-</script>
-<!-- container end -->
 <%@ include file="../userInclude/footer.jsp" %>

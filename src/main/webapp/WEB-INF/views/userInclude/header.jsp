@@ -253,54 +253,54 @@
 			</li><!-- End user info -->
 			
 			<li> 
-				<a id="Dashboard" class="pmd-ripple-effect menu" href="${pageContext.request.contextPath }/admin/">	
+				<a id="Dashboard" class="pmd-ripple-effect menu" href="${pageContext.request.contextPath }/user/userpg">	
 				<i class="fas fa-tachometer-alt fs18 media-left media-middle" ></i>
-				<span class="media-body">Works</span>
+				<span class="media-body">프로그램 개요</span>
 				</a> 
 			</li>
 			
 			<li class="dropdown pmd-dropdown"> 
 				<a id="cafeMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-store fs18 media-left media-middle"></i>
-					<span class="media-body">근태관리</span>
+					<span class="media-body">점검하기</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager">결재받을 문서</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/cafeManager">결재할 문서</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManagerFormList">기안하기</a></li>
-					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/admin/cafeMgn/monthCafeManager2">결재문서 양식</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/user/mukkaCafe">자가검진</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/user/mukkaCafe/zone">생애주기별</a></li>
+					<li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/user/mukkaCafe/theme">증상별</a></li>
+					<%-- <li><a class="cafeMgrSub menu" href="${pageContext.request.contextPath}/user/community">베스트</a></li> --%>
 				</ul>
 			</li>
 			<li class="dropdown pmd-dropdown"> 
 				<a id="userMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-users fs18 media-left media-middle"></i>
-					<span class="media-body">직원 관리</span>
+					<span class="media-body">커뮤니티</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/cafeUserManager">부서 관리</a></li>
-					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/userManager">사용자 관리</a></li>
-					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/admin/userMgr/adminManager">관리자 관리</a></li>
+					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/user/community">공지사항</a></li>
+					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/user/community/cafeRecommend">자유게시판</a></li>
+					<li><a class="userMgrSub menu" href="${pageContext.request.contextPath}/user/community/cafeReview">자료실</a></li>
 				</ul>
 			</li>
-			<li class="dropdown pmd-dropdown"> 
+<%-- 			<li class="dropdown pmd-dropdown"> 
 				<a id="boardMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-chalkboard fs18 media-left media-middle"></i>
-					<span class="media-body">게시글 관리</span>
+					<span class="media-body">게시글</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">자료실 관리</a></li>
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">자유게시판 관리</a></li>
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">공지사항 관리</a></li>					
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/user/community/cafeReview">자료실</a></li>
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">자유게시판</a></li>
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">공지사항</a></li>					
 				</ul>
-			</li>
+			</li> --%>
 						
 			<li class="dropdown pmd-dropdown"> 
 				<a id="noticeMgr" aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media menu" data-sidebar="true" href="javascript:void(0);">	
 					<i class="fas fa-bullhorn fs18 media-left media-middle"></i>
-					<span class="media-body">일정 관리</span>
+					<span class="media-body">일정</span>
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
