@@ -206,54 +206,9 @@
 				</ol><!--breadcrum end-->
 			</div>	
 	
-<%-- 		<div class="content subPageContent">
+ 		<div class="content subPageContent">
 			<!-- 서브페이지 콘텐츠 -->
 			<div class="contentArea">
-				<!-- 서브페이지 공통적인 타이틀 -->
-				<h2 class="subPageTitle">
-					<span class="title">자유게시판</span>
-				</h2>
-					
-				<!-- 게시판 베스트 -->
-				<div class="bestBoardBox">
-					<div class="boardTitle bottomLine2">
-						<p>베스트</p>
-						<p><span class="orange preMonth"></span> 월 (월간)</p>
-					</div>
-					<table class="post1-5">
-						<c:forEach var="rcBestList" items="${rcBestList}" begin="0" end="2" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgRed"><!-- 랭킹숫자 --></p></td>
-									<td>
-										<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${rcBestList.boardNo}" class="title">${rcBestList.writingTitle}</a>
-										<span class="review red">(${rcBestList.replyCnt})</span>
-									</td>
-								</tr>
-						</c:forEach>
-						<c:forEach var="rcBestList" items="${rcBestList}" begin="3" end="4" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgPink"><!-- 랭킹숫자 --></p></td>
-									<td>
-										<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${rcBestList.boardNo}" class="title">${rcBestList.writingTitle}</a>
-										<span class="review red">(${rcBestList.replyCnt})</span>
-									</td>
-								</tr>
-						</c:forEach>				
-					</table>
-					<table class="post6-10">
-						<c:forEach var="rcBestList" items="${rcBestList}" begin="5" end="10" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgPink"><!-- 랭킹숫자 --></p></td>
-									<td>
-										<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${rcBestList.boardNo}" class="title">${rcBestList.writingTitle}</a>
-										<span class="review red">(${rcBestList.replyCnt})</span>
-									</td>
-								</tr>
-						</c:forEach>				
-					</table>
-				</div>
-				<!-- 게시판 베스트 end -->
-				
 				<!-- 카테고리 & 검색창 -->
 				<div class="cafeRecommendSearch bottomLine2 clearfix">
 					<div class="selectLeft">
@@ -414,9 +369,9 @@
 				location.href = "${pageContext.request.contextPath }/user/community/cafeRecommend/register"; 
 			})	
 		</script>
-		지우면 안됨 subMenu.jsp에 container 시작 태그 있음
+		
 		</div>
-		<!-- container end --> --%>
+		<!-- container end --> 
 		</div>
 	</div>
 
