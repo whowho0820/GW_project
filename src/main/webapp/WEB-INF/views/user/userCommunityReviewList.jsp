@@ -41,6 +41,7 @@
 	
 	.cafeReviewArea .cafeR_totalBtn {
 		margin-right: 10px;
+		padding: 7px 10px;
 	}
 	
 	.cafeReviewArea .cafeR_add {
@@ -305,6 +306,53 @@
 	.cafeR_box .themeKeySmall {
 		margin-right:0;
 	}
+	.btn {
+	    width: auto;
+	    min-width: 125px;
+	    height: 2.667em;
+	    padding: 0 1em;
+	    font-size: 1em;
+	    line-height: 2.5em;
+	    text-align: center;
+	    box-sizing: border-box;
+	    white-space: nowrap;
+	    outline: none;
+	    border: 1px solid #555;
+	    color: #555;
+	    background-color: transparent;
+	    overflow: hidden;
+	    -webkit-transition: background-color .2s ease-in-out, -webkit-transform .3s ease-out;
+	    -moz-transition: background .2s ease-in-out, -moz-transform .3s ease-out;
+	    -ms-transition: background .2s ease-in-out, -ms-transform .3s ease-out;
+	    -o-transition: background .2s ease-in-out, -o-transform .3s ease-out;
+	    transition: background .2s ease-in-out, transform .3s ease-out;
+	}
+	a.btn {
+	    display: inline-block;
+	}
+	.btn.radius20 {
+	    border-radius: 1.333em;
+	}
+	.btn.shadow {
+	    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	}
+	.btn.green {
+	    border: 1px solid #00bf6f;
+	    color: #fff;
+	    background-color: #00bf6f;
+	}
+	
+	.btn_group.margin > .btn {
+	    margin: 0.2em;
+	}
+	.btn_group.margin >.btn:first-child {
+	    margin-left: 0;
+	}
+	.btn_group.margin >.btn:last-child {
+	    margin-right: 0;
+	}	
 </style>
 
 	<!--content area start-->
@@ -325,61 +373,24 @@
 			
 		 <div class="content subPageContent">
 			<!-- 서브페이지 콘텐츠 -->
-			<div class="contentArea">					
-				<!-- 게시판 베스트 -->
-				<div class="bestBoardBox">					
-					<c:if test="${monthBestList.size() != 0 }">
-						<table class="post1-5">
-							<c:forEach var="bestItem" items="${monthBestList }" begin="0" end="2" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgRed">${status.index + 1 }</p></td>
-									<td>
-										<a href="${pageContext.request.contextPath }/user/community/cafeReview/read?boardNo=${bestItem.boardNo}&page=${cri.page}&flag=true&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}" class="title">${bestItem.writingTitle }</a>
-										<span class="review red">(${bestItem.replyCnt })</span>
-									</td>
-								</tr>
-							</c:forEach>
-							<c:forEach var="bestItem" items="${monthBestList }" begin="3" end="4" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgPink">${status.index + 1 }</p></td>
-									<td>
-										<a href="${pageContext.request.contextPath }/user/community/cafeReview/read?boardNo=${bestItem.boardNo}&page=${cri.page}&flag=true&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}" class="title">${bestItem.writingTitle }</a>
-										<span class="review red">(${bestItem.replyCnt })</span>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-						<table class="post6-10">
-							<c:forEach var="bestItem" items="${monthBestList }" begin="5" end="10" varStatus="status">
-								<tr>
-									<td class="no"><p class="bgPink">${status.index + 1 }</p></td>
-									<td>
-										<a href="${pageContext.request.contextPath }/user/community/cafeReview/read?boardNo=${bestItem.boardNo}&page=${cri.page}&flag=true&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}" class="title">${bestItem.writingTitle }</a>
-										<span class="review red">(${bestItem.replyCnt })</span>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:if>
-				</div>
-				<!-- 게시판 베스트 end -->
+			<div class="contentArea">										
 				
-				<!-- 선택 검색 -->
-				<div class="cafeReviewSearch bottomLine2 clearfix">
-				<!--	<div class="selectLeft">
-						<select name="searchZone" id="searchZone">
-							<option value="" ${cri.searchZone == '' ? 'selected' : '' }>전체(위치별)</option>
-							<c:forEach var="zone" items="${zoneList }">
-								<option value="${zone.zoneNo }" ${cri.searchZone == zone.zoneNo ? 'selected' : '' }>${zone.zoneName }</option>
-							</c:forEach>
-						</select>
-						<select name="searchTheme" id="searchTheme">
-							<option value="" ${cri.searchTheme == '' ? 'selected' : '' }>전체(테마별)</option>
-							<c:forEach var="theme" items="${themeList }">					
-								<option value="${theme.themeNo}" ${cri.searchTheme == theme.themeNo ? 'selected' : '' }>#${theme.themeName}</option>
-							</c:forEach>
-						</select>
-					</div> -->
+				
+				<!-- 탐방기 -->
+				<div class="cafeReviewArea">
+					<div class="cafeR_titleWrap clearfix">				
+						<h3 class="cafeR_title">오늘의 자료 | <span class="red cafeRCnt">${todayCnt}개</span></h3>
+						<div class="cafeR_topBtns">
+							<div class="cafeR_topBtn cafeR_totalBtn grayLineBtn">
+								<a href="${pageContext.request.contextPath }/user/community/cafeReview?type=best" class="red bold btn radius20 shadow green">베스트 자료</a>
+							</div>
+							<div class="cafeR_topBtn cafeR_add navyBtn">
+								<a href="#" class="cafeR_addBtn btn radius20 shadow green">자료 올리기</a>
+							</div>						
+						</div>
+					</div>
+					<!-- 선택 검색 -->
+				<div class="cafeReviewSearch bottomLine2 clearfix">								
 					<div class="selectRight">
 						<select name="searchType" id="searchType">
 							<option value="n" ${cri.searchType == null ? 'selected' : '' }>----</option>
@@ -394,22 +405,6 @@
 						<button type="button" class="navyBtn" id="btnSearch">검색</button>
 					</div>
 				</div>
-				
-				<!-- 탐방기 -->
-				<div class="cafeReviewArea">
-					<div class="cafeR_titleWrap clearfix">				
-						<h3 class="cafeR_title">오늘의 자료 | <span class="red cafeRCnt">${todayCnt}개</span></h3>
-						<div class="cafeR_topBtns">
-							<div class="cafeR_topBtn cafeR_totalBtn grayLineBtn">
-								<a href="${pageContext.request.contextPath }/user/community/cafeReview?type=best">
-									<span class="red bold">베스트 자료</span> 전체 보기
-								</a>
-							</div>
-							<div class="cafeR_topBtn cafeR_add navyBtn">
-								<a href="#" class="cafeR_addBtn">자료 올리기</a>
-							</div>
-						</div>
-					</div>
 					<div class="cafeR_list clearfix mb30">
 						<!-- 탐방기 글 박스 -->
 						<c:forEach var="item" items="${list }">

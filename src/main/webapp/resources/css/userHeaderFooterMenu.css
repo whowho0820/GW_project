@@ -133,11 +133,13 @@
 /* mainSearch - keyword */
 .mainSearchBox {
 	border-top: 1px solid #fff;
+	background: #2dbda0;
+	margin-top: 50px;
 }
 
 .mainSearch {
 	width: 1200px;
-	margin: 0 auto;
+	margin: 0 auto;	
 }
 
 .keysWrap {
@@ -297,7 +299,7 @@
 	width: 80px;
 	height: 57px;
 	border-radius: 5px;
-	background-color: #ed7d31;
+	background-color: #c0c0c0;
 	position: relative;
 }
 

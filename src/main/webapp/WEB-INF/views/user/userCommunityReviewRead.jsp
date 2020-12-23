@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
+
 <style>
-	.wrapStyle {
-		border-top: 1px solid #545454;
+	.wrapStyle {		
 		border-bottom: 1px solid #545454;
 		padding: 15px;
 	}
@@ -429,24 +427,28 @@
 		margin-right: 0;
 	}
 </style>	
-	<div class="content subPageContent">
+<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자료실 글</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자료실 글</li>
+				</ol><!--breadcrum end-->
+			</div>	
+			
+		 <div class="content subPageContent">
 		<!-- 서브페이지 콘텐츠 -->
-		<div class="contentArea">
-			<!-- 서브페이지 공통적인 타이틀 -->
-			<h2 class="subPageTitle">
-				<span class="title">생생 카페 탐방기</span>
-				<span class="subTit grayB"> | 여러분의 소중한 탐방기를 들려주세요!</span>
-			</h2>
+		<div class="contentArea">			
 			<!-- title 영역 -->
 			<div class="detaliCafeR_title_wrap bgLightGray wrapStyle">
-				<div class="d_cafeR_titleTop clearfix">
-					<div class="zoneOrangeIconSmall keyword">${board.zoneNo.zoneName }</div>
-					<div class="themeKeySmall keyword themeName">#${board.themeNo.themeName }</div>
-					<!-- 테마 순위 리스트 -->
-					<c:forEach var="theme" items="${themeRank}">
-						<div class="themeKeySmall keyword themeName">#${theme.themeName }</div>
-					</c:forEach>
-					
+				<div class="d_cafeR_titleTop clearfix">					
 					<div class="regDate">
 						등록일 : <fmt:formatDate value="${board.registrationDate }" pattern="yyyy/MM/dd"/>
 						<c:if test="${board.registrationDate != board.updateDate}">
@@ -566,82 +568,10 @@
 						<ul id="pagination" class="pagination"></ul>
 					</div>
 				</div>
-			</div>
-			
-			<!-- 같은 카페의 다른 포스트 list -->
-			<div class="cafeR_sameList">
-				<c:if test="${sameCnt > 0 }">
-					<div class="cafeR_sameTitle bottomLine clearfix">
-							<p class="f_left"><span class="blue bold">${board.cafeNo.cafeName }</span>에 대한 <span class="orange bold"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sameCnt }"/></span>개의 <span class="red bold">탐방기</span>가 더 있어요!</p>
-						<c:if test="${sameCnt > 2 }">
-							<div class="sameListBtn f_right">
-								<div class="f_left orange"><span class="pageNum">1</span> / <span class="pageTotal">0</span></div>
-								<div id="prevBtn" class="sameBtn f_left"><i class="fas fa-angle-left"></i></div>
-								<div id="nextBtn" class="sameBtn f_left"><i class="fas fa-angle-right"></i></div>
-							</div>
-						</c:if>
-					</div>
-				</c:if>
-				<div class="cafeR_List clearfix mb30">
-					<c:forEach var="sameItem" items="${sameBoard }">
-					<a href="${pageContext.request.contextPath }/user/community/cafeReview/read?boardNo=${sameItem.boardNo}&page=${cri.page}&searchZone=${cri.searchZone }&searchTheme=${cri.searchTheme }&searchType=${cri.searchType }&keyword=${cri.keyword}" class="a_cafeReview">
-						<div class="cafeR_box">
-							<div class="cafeR_titleBox">
-								<div class="cafeR_titleImg">	
-									<div class="bg"></div>						
-									<img class="titleImg" src="" alt="카페대표이미지" />
-									<script>
-										// 같은 카페 다른 탐방기 list 대표이미지
-										var imgPath = '${pageContext.request.contextPath }/user/displayFile?filename=';
-										var sImgName = '${sameItem.files[0].imageName}';
-										var imgName = sImgName.replace("s_", "");
-										
-										$(".cafeR_sameList .titleImg").attr("src", imgPath+imgName);
-									</script>
-								</div>
-								<div class="cafeR_titleTop clearfix" >
-									<div class="cafeR_writer clearfix">
-										<img src="${pageContext.request.contextPath }/resources/images/${sameItem.userNo.userGrade.userGradeImage }" alt="등급아이콘" />
-										<span class="cafeR_name bold">${sameItem.userNo.nick }</span>
-										<span class="cafeR_id bold">(${sameItem.userNo.userId })</span>
-									</div>
-									<div class="cafeR_recomCnt bgRed">${sameItem.voteNumber }</div>						
-								</div>
-								<h2 class="classSec cafe_title">${sameItem.writingTitle }</h2>
-								<div class="cafeR_date bold"><fmt:formatDate value="${sameItem.registrationDate }" pattern="yyyy/MM/dd"/></div>
-							</div>
-							<div class="cafeR_infoBox">
-								<div class="cafeR_infoTop clearfix">
-									<div class="zoneBtn zoneOrangeIconSmall">${sameItem.cafeNo.zoneNo.zoneName }</div>
-									<div class="themeKeySmall themeName">#${sameItem.cafeNo.themeNo.themeName }</div>
-									<h2>${sameItem.cafeNo.cafeName }</h2>
-								</div>
-								<%-- <p class="cafeR_text">
-									${item.writingContent }
-								</p> --%>
-							</div>
-							<div class="cafeR_replyCdt clearfix">
-								<div class="cafeR_replyCdtWrap">
-									<div class="cafeR_btns">
-										<img src="${pageContext.request.contextPath }/resources/images/icon_reply.png" alt="icon" />
-										<span class="cafeR_replyCnt">${sameItem.replyCnt }</span>
-									</div>
-									<div class="cafeR_btns">
-										<img src="${pageContext.request.contextPath }/resources/images/icon_view.png" alt="icon" />
-										<span class="cafeR_viewCnt">${sameItem.viewNumber }</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-		<!-- 서브페이지 콘텐츠 end -->
+			</div>			
+		</div>	
 	</div>
-	
-<%-- 지우면 안됨 subMenu.jsp에 container 시작 태그 있음 --%>
+	</div>
 </div>
 <!-- container end -->
 

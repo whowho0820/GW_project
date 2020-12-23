@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/jquery-ui.css"> 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.min.js"></script>
 <style>
@@ -131,16 +130,31 @@
 		color: navy;
 	}	
 </style>
-	
-<div class="content subPageContent">
-	<!-- 서브페이지 콘텐츠 -->
-	<div class="contentArea">
+
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자료실</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자료실</li>
+				</ol><!--breadcrum end-->
+			</div>	
+			
+		 <div class="content subPageContent">
+			<!-- 서브페이지 콘텐츠 -->
+			<div class="contentArea">	
 		<!-- 서브페이지 공통적인 타이틀 -->
 		<h2 class="subPageTitle">
 			<span class="title">MuKKa人 추천 카페</span>
 			<span class="subTit grayB"> | <span id="bestMark">BEST</span><span class="tab-info">추천카페 <span class="red"><b><u>종합</u></b></span> <b>베스트 10</b>을 소개해 드립니다</span></span>
 		</h2>
-
 			<!-- 베스트 리스트  -->
 			<div id="tabWrap">
 				<div id="tabs">
@@ -396,6 +410,8 @@
 				
 	</div><!-- div class="contentArea" -->
 </div><!-- div class="content subPageContent" -->
+</div>
+</div>
 
 <!-- 자바스크립트 & 제이쿼리 -->
 <script>
@@ -444,8 +460,5 @@ $(".tabs-li a").eq(3).click(function(){
 	$("span.tab-info").html("추천카페 <span class='red'><b>당월 <u>댓글순</u> 기준 </b></span><b>베스트 10</b> 을 소개해 드립니다.");
 })
 </script>
-<%-- 지우면 안됨 subMenu.jsp에 container 시작 태그 있음 --%>
-</div>
-<!-- container end -->
 
 <%@ include file="../userInclude/footer.jsp" %>

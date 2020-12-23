@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 
 <!-- CKEditor -->
 <script src="//cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script>
@@ -162,27 +160,39 @@
 	}
 	
 </style>
-	<div class="content subPageContent">
-		<!-- 서브페이지 콘텐츠 -->
-		<div class="contentArea">
-			<!-- 서브페이지 공통적인 타이틀 -->
-			<h2 class="subPageTitle cafeRTitle">
-				<span class="title">생생 카페 탐방기&nbsp;&nbsp;&nbsp;<i class="fas fa-greater-than" style="color:black;"></i>&nbsp;&nbsp;</span>
-				<span class="red">글쓰기</span>
-			</h2>
+
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자료실 글쓰기</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자료실 글쓰기</li>
+				</ol><!--breadcrum end-->
+			</div>	
+			
+		 <div class="content subPageContent">
+			<!-- 서브페이지 콘텐츠 -->
+			<div class="contentArea">					
 			<div class="cafeRForm">
 				<form action="register" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="boardNo2.boardNo" value="1"/>
 					<input type="hidden" name="userNo.userNo" value="${AuthNo }" />
-					<div class="cafeR_search cafeR_groub clearfix">
+					<!-- <div class="cafeR_search cafeR_groub clearfix">
 						<label>카페</label>
 						<button type="button" class="cafeSearchBtn orangeBtn">카페찾기</button>
 						<input class="cafeName" type="text" placeholder="　☜　카페를 찾아주세요." readonly="readonly"/>
 						<input class="cafeNo" type="hidden" name="cafeNo.cafeNo"/>
-					</div>
+					</div> -->
 					<div class="cafeR_TitleForm cafeR_groub clearfix">
 						<label>제목</label>
-						<input type="text" name="writingTitle" placeholder="탐방기 제목을 작성해주세요."/>
+						<input type="text" name="writingTitle" placeholder="제목을 작성해주세요."/>
 					</div>
 					<div class="cafeR_textForm cafeR_groub clearfix">
 						<textarea name="writingContent" id="p_content" class="form-control"></textarea>
@@ -196,7 +206,7 @@
 					</div>
 					<div class="cafeR_submit">
 						<button type="button" class="blueBtn">등록 취소</button>
-						<input type="submit" value="탐방기 등록" class="orangeBtn"/>
+						<input type="submit" value="자료등록" class="orangeBtn"/>
 					</div>
 				</form>
 				<div class="cafeSearchWrap">
@@ -218,6 +228,8 @@
 				
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 	
 <script id="cafeRes" type="text/x-handlebars-tamplate">

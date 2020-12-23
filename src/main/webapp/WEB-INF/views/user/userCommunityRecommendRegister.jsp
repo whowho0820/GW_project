@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 
 <style>
 	/* 등록카페 확인버튼 */
@@ -260,13 +258,29 @@
 		border-radius: 2px;
 	}					
 </style>
-<div class="content subPageContent">
-	<!-- 서브페이지 콘텐츠 -->
-	<div class="contentArea">
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자료실</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자료실</li>
+				</ol><!--breadcrum end-->
+			</div>	
+			
+		 <div class="content subPageContent">
+			<!-- 서브페이지 콘텐츠 -->
+			<div class="contentArea">	
 		<!-- 서브페이지 공통적인 타이틀 -->
 		<div class="subTitleandBtn">
 			<h2 class="subPageTitle">
-				<span class="title">MuKKa人 추천 카페&nbsp;&nbsp;&nbsp;<i class="fas fa-greater-than" style="color:black;"></i>&nbsp;&nbsp;</span>
+				<span class="title">&nbsp;&nbsp;&nbsp;<i class="fas fa-greater-than" style="color:black;"></i>&nbsp;&nbsp;</span>
 				<span class="red">글쓰기</span>
 				<button type="button" class="searchPoint orangeBtn">등록카페 확인</button>			
 			</h2>
@@ -384,6 +398,8 @@
 		<!-- /검색박스 -->			
 		</div>
 	</div>
+</div>
+</div>
 </div>
 <!-- <div id="map" style="width:100%;height:400px;"></div> -->
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=82c67a5c009ecc3de6e3c10d398c0061&libraries=services"></script> -->
@@ -877,10 +893,5 @@
 		$("div.map_wrap").slideToggle(1200);
 	})
 </script>
-
-
-<%-- 지우면 안됨 subMenu.jsp에 container 시작 태그 있음 --%>
-</div>if
-<!-- container end -->
 
 <%@ include file="../userInclude/footer.jsp" %>

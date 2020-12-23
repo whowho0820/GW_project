@@ -491,25 +491,13 @@
 				</ol><!--breadcrum end-->
 			</div>
 
-<%-- 		<div class="content subPageContent">
+ 		<div class="content subPageContent">
 			<div class="contentArea">
-				<!-- 서브페이지 공통적인 타이틀 -->
-				<h2 class="subPageTitle">
-					<span class="title">MuKKa의 전당</span>
-					<span class="subTit grayB"> | 두둥! 당신이 바로 주인공입니다!</span>
-				</h2>
-				
-				<!-- 파워링크 배너(슬라이드처리) -->
-				<div class="powerLink">
-					<div class="powerLink_dummy">
-						<p class="dummy_text"><i>The best way to start the day is with a nice warm cup of joe.</i></p>
-						<h1 class="dummy_title">Commuity</h1>
-					</div>
-				</div>	
+				<!-- 서브페이지 공통적인 타이틀 -->				
 					
 				<!-- 카페탐방기 베스트 -->
 				<div class="cafeReviewBest mb30">
-					<h3 class="bottomLine communityTitle">생생 카페 탐방기 <span class="fs16"> <span class="bestTitle">BEST</span>|&nbsp;&nbsp; <span class="red">많이 사랑받은 탐방기 ♥</span></span></h3>
+					<h3 class="bottomLine communityTitle">공지사항 <span class="fs16"> <span class="bestTitle">BEST</span>|&nbsp;&nbsp; <span class="red"></span></span></h3>
 					<c:forEach var="rvBestlist" items="${rvBestlist}" begin="0" end="0" varStatus="status"> 
 						<div class="best1">
 							<div class="RV_bestPoint">BEST</div>
@@ -562,21 +550,7 @@
 						</div>
 					</c:forEach>
 					</div>
-				</div>
-				<div class="userWriteAdd">
-					<ul class="writeGoWrap">
-						<li id="goReview">
-								<p><i>들려주세요, 당신이 느낌 감성 그대로</i></p>
-								<h1><i>생생 카페 탐방기</i></h1>
-								<span class="viewpoint-first"><i>Let's Go!</i>　<img src="${pageContext.request.contextPath }/resources/images/viewpoint.png" id="viewpoint_right"></span>
-						</li>
-						<li id="goRecommend">
-								<p><i>나 혼자만 알기 아까운 바로 그 카페</i></p>
-								<h1><i>MuKKa人 추천 카페</i></h1>
-								<span class="viewpoint-second"><img src="${pageContext.request.contextPath }/resources/images/viewpoint.png">　<i>Let's Go!</i></span>
-						</li>
-					</ul>					
-				</div>		
+				</div>				
 			
 				<!-- 추천 카페 베스트 -->
 				<div class="recommendBest mb30">
@@ -599,94 +573,8 @@
 							</c:forEach>
 						</ul>
 					</div>
-				</div>
-				<div class="recommendRand mb30">
-					<h3 class="bottomLine  communityTitle">
-						<span class="recommendZoneOrangeIcon">${ranRecommend.zoneNo.zoneName}</span> <span class="keyword_box">#${ranRecommend.themeNo.themeName}</span> 추 천 카 페  <span class="fs16"> &nbsp;|&nbsp;&nbsp; <span class="orange">오늘 어디갈지 고민이라면?!</span></span></h3>
-					<ul class="recommendRandWrap">
-						<li>
-							<c:forEach var="file" items="${ranRecommend.files}" begin="0" end="0" varStatus="status">	
-								<input type="hidden" class="readImgName" value="${file.imageName}">
-							</c:forEach>								
-							<div class="readImgBox">
-							</div>
-						</li>
-						<li>
-							<h2 id="RC_cafeName">${ranRecommend.writingTitle}</h2>
-							<img src="${pageContext.request.contextPath }/resources/images/${ranRecommend.userNo.userGrade.userGradeImage}" alt="등급아이콘" class="rcRandGrade">
-							<span class="bold">${ranRecommend.userNo.nick }(${ranRecommend.userNo.userId })</span>
-							<p class="ranCnt bold">
-							조회 <span class="red"><fmt:formatNumber type="number" maxFractionDigits="3" value="${ranRecommend.viewNumber}"/></span>
-							추천 <span class="red"><fmt:formatNumber type="number" maxFractionDigits="3" value="${ranRecommend.voteNumber}"/></span>
-							댓글 <span class="red"><fmt:formatNumber type="number" maxFractionDigits="3" value="${ranRecommend.replyCnt}"/></span>
-							</p>
-							<div class="clickBtn">
-								<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${ranRecommend.boardNo}">
-								 <span class="viewMoreText">추천카페 자세히 보기</span> <span class="orange bold">></span>
-								</a>
-							</div>
-						</li>
-						<li>
-							<span class="mapTitle">지도</span> | <span id="RC_address">${ranRecommend.address}</span>
-							<div id="map"></div>
-						</li>
-					</ul>
-				</div>
-				
-							
-				<div class="bestWriter mb30">
-					<h3 class="bottomLine  communityTitle">열혈 MuKKa人 3인방 <span class="fs16"> &nbsp;|&nbsp;&nbsp; <span class="blue">열혈작가들의 최신글 만나보기</span></span></h3>
-					<ul class="bestUserInfo">
-						<c:forEach var="bestUserAll" items="${bestUserAll}" begin="0" end="2" varStatus="status">	
-							<li>
-								<span class="bold rankTitle"></span>
-								<br>
-								<img src="${pageContext.request.contextPath}/resources/images/${bestUserAll.userNo.userGrade.userGradeImage}" class="bestUserGrade"> 
-								<span class="bold"><span class="realBlue yellow">${bestUserAll.userNo.nick}</span>(${bestUserAll.userNo.userId})</span>
-							</li>
-						</c:forEach>
-					</ul>
-					<ul class="bestUserBoardInfo">
-						<c:forEach var="bestUserBoardInfo" items="${bestUserBoardInfo}">
-							<li>
-							<c:if test="${bestUserBoardInfo.boardNo2.boardNo == 1}">
-								<a href="${pageContext.request.contextPath}/user/community/cafeReview/read?boardNo=${bestUserBoardInfo.boardNo}">
-									<c:forEach var="bestUserBoardImg" items="${bestUserBoardImg}">			
-											<c:if test="${bestUserBoardImg.boardNo.boardNo == bestUserBoardInfo.boardNo }">
-												<img src="${pageContext.request.contextPath }/user/displayFile?filename=${bestUserBoardImg.imageName}" class="thumbNailImg bestUserBoardImg" alt="카페대표이미지"
-													onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'"><br>
-													<div class="bold classOne bestWriteTitle">
-														<c:if test="${bestUserBoardInfo.boardNo2.boardNo == 1}">
-															<span class="blue">[탐방기]</span>
-														</c:if>
-													${bestUserBoardInfo.writingTitle}</div>
-											</c:if>
-									</c:forEach>
-								</a>					
-							</c:if>
-							<c:if test="${bestUserBoardInfo.boardNo2.boardNo == 2}">
-								<a href="${pageContext.request.contextPath}/user/community/cafeRecommend/read?boardNo=${bestUserBoardInfo.boardNo}">
-									<c:forEach var="bestUserBoardImg" items="${bestUserBoardImg}">			
-											<c:if test="${bestUserBoardImg.boardNo.boardNo == bestUserBoardInfo.boardNo }">
-												<img src="${pageContext.request.contextPath }/user/displayFile?filename=${bestUserBoardImg.imageName}" class="thumbNailImg bestUserBoardImg" alt="카페대표이미지"
-													onerror="this.src='${pageContext.request.contextPath}/resources/images/rc_noImg.png'"><br>
-													<div class="bold classOne bestWriteTitle">
-													<span class="red">[추천카페]</span>
-													${bestUserBoardInfo.writingTitle}</div>
-											</c:if>
-									</c:forEach>
-								</a>					
-							</c:if>												
-		
-							</li>
-						</c:forEach>
-					</ul>
 				</div>				
-			</div>
-		</div>
-			
-		
-		지우면 안됨 subMenu.jsp에 container 시작 태그 있음
+			</div>		
 		</div>
 		<!-- container end -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=82c67a5c009ecc3de6e3c10d398c0061&libraries=services"></script>
@@ -809,7 +697,7 @@
 				$(".rankTitle").eq(0).html("<h3><i class='fab fa-angellist'></i> <i>내가 바로 이 구역의 <span class='red'><u>MuKKa人</u></span>이야~</i><span class='orange'> > </span></h3>");
 				$(".rankTitle").eq(1).html("<h3><i class='fab fa-angellist'></i> <i>넌 내 <span class='blue'><u>탐방기</u></span>를 읽으면 눈물이 날껄?!</i><span class='orange'> > </span></h3>");
 				$(".rankTitle").eq(2).html("<h3><i class='fab fa-angellist'></i> <i>널위해 한글자 한글자 <span class='green'><u>정성</u></span>을 담아 썼어</i><span class='orange'> > </span></h3>");
-		</script> --%>
+		</script> 
 		</div>
 	</div>
 <%@ include file="../userInclude/footer.jsp" %>

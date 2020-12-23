@@ -188,6 +188,54 @@
 	.pagination-sm > li:last-child > span {
 		border-top-right-radius: 3px;
 		border-bottom-right-radius: 3px;
+	}
+	.btn {
+	    width: auto;
+	    min-width: 125px;
+	    height: 2.667em;
+	    padding: 0 1em;
+	    font-size: 1em;
+	    line-height: 2.5em;
+	    text-align: center;
+	    box-sizing: border-box;
+	    white-space: nowrap;
+	    outline: none;
+	    border: 1px solid #555;
+	    color: #555;
+	    background-color: transparent;
+	    overflow: hidden;
+	    -webkit-transition: background-color .2s ease-in-out, -webkit-transform .3s ease-out;
+	    -moz-transition: background .2s ease-in-out, -moz-transform .3s ease-out;
+	    -ms-transition: background .2s ease-in-out, -ms-transform .3s ease-out;
+	    -o-transition: background .2s ease-in-out, -o-transform .3s ease-out;
+	    transition: background .2s ease-in-out, transform .3s ease-out;
+	}
+	a.btn {
+	    display: inline-block;
+	}
+	.btn.radius20 {
+	    border-radius: 1.333em;
+	}
+	.btn.shadow {
+	    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.14);
+	}
+	.btn.green {
+	    border: 1px solid #00bf6f;
+	    color: #fff;
+	    background-color: #00bf6f;
+	}
+	
+	.btn_group.margin > .btn {
+	    margin: 0.2em;
+	}
+	.btn_group.margin >.btn:first-child {
+	    margin-left: 0;
+	}
+	.btn_group.margin >.btn:last-child {
+	    margin-right: 0;
+	}		
 </style>
 
 	<!--content area start-->
@@ -247,8 +295,8 @@
 					<div class="RC_titleWrap clearfix">
 						<h3 class="RC_title">오늘 작성한 글 | <span class="red cafeRCnt">${todayCnt}개</span></h3>
 						<div class="RC_topBtns">
-							<div class="RC_Best grayLineBtn"><a href="${pageContext.request.contextPath}/user/community/cafeRecommend/bestAll"><span class="red bold">베스트 글</span> 전체 보기</a></div>
-							<button class="navyBtn" id="RC_Register" style="cursor: pointer">게시글 쓰기</button>
+							<div class="RC_Best grayLineBtn btn radius20 shadow green" ><a href="${pageContext.request.contextPath}/user/community/cafeRecommend/bestAll" style="color:#fff">베스트</a></div>
+							<button class="btn radius20 shadow green" id="RC_Register">게시글 쓰기</button>
 						</div>
 					</div>
 				
