@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 
 <style>
 	.cafeLocationSearch {
@@ -308,27 +306,27 @@
 		for(var i=0; i<themeNos.length; i++){
 			switch (themeNos[i]) {
 			case "1":
-				themeNames += "데이트.";
+				themeNames += "성격유형.";
 				$("#searchTheme").append("<option value='1' ${cri.searchTheme=='1'? 'selected':''}>#데이트</option>");
 				break;
 			case "2":
-				themeNames += "뷰.";
+				themeNames += "사랑유형.";
 				$("#searchTheme").append("<option value='2' ${cri.searchTheme=='2'? 'selected':''}>#뷰</option>");
 				break;
 			case "3":
-				themeNames += "착한아메.";
+				themeNames += "스트레스.";
 				$("#searchTheme").append("<option value='3' ${cri.searchTheme=='3'? 'selected':''}>#착한아메</option>");
 				break;
 			case "4":
-				themeNames += "디저트.";
+				themeNames += "우울.";
 				$("#searchTheme").append("<option value='4' ${cri.searchTheme=='4'? 'selected':''}>#디저트</option>");
 				break;
 			case "5":
-				themeNames += "댕댕이.";
+				themeNames += "불안.";
 				$("#searchTheme").append("<option value='5' ${cri.searchTheme=='5'? 'selected':''}>#댕댕이</option>");
 				break;
 			case "6":
-				themeNames += "작업.";
+				themeNames += "자살.";
 				$("#searchTheme").append("<option value='6' ${cri.searchTheme=='6'? 'selected':''}>#작업</option>");
 				break;
 			default:
@@ -351,12 +349,24 @@
 		})
 	})
 </script>
+	<!--content area start-->
+	<div id="content" class="pmd-content inner-page">
+	<!--tab start-->
+	    <div class="container-fluid full-width-container value-added-detail-page">
+			<div>				
+				<!-- Title -->
+				<h1 class="section-title subPageTitle" id="services">
+					<span>자가검진</span>
+				</h1><!-- End Title -->
+				<!--breadcrum start-->
+				<ol class="breadcrumb text-left">
+				  <li><a href="${pageContext.request.contextPath }/admin/">Works</a></li>
+				  <li class="active">자가검진</li>
+				</ol><!--breadcrum end-->
+			</div>	
 
-	<div class="content subPageContent">
-		<!-- 서브페이지 콘텐츠 -->
-		<div class="contentArea">
 			<h2 class="subPageTitle">
-				<span class="title">카페 검색 결과 </span>
+				<span class="title">검색 결과 </span>
 				<span class="subTit grayB"> 
 					> 
 					<c:if test="${zoneNo != 0 }">

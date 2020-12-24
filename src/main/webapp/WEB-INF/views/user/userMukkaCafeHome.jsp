@@ -22,14 +22,14 @@
 		//영업중으로 등록된 카페 총 개수
 		var cafeAllInfo = "${cafeAllInfo}";
 		//등록된 탐방기 총 개수
-		var cafeReviewAllCnt = "${cafeReviewAllCnt}";
+		var cafeReviewAllCnt = "${cafeReviewAllCnt}";				
 		
-		if(url[5] == "") {
-			$(".mainSearchBox").addClass("open");
+		if(url[4] == "") {
+			$(".mainSearchBox").addClass("close");
 			$(".mainSearchBtn a").html('<span class="cafeSearchBtn">검색 닫기</span> <i class="fas fa-angle-up"></i>');
 			$(".activeTotalCnt").html('현재 <span class="actTotal">'+cafeAllInfo+'</span>개의 <b class="blue">정보</b>와 <span class="actTotal">'+cafeReviewAllCnt+'</span>개의 <b class="blue">탐방기</b>가 있습니다.');
 		} else {
-			$(".mainSearchBox").addClass("close");
+			$(".mainSearchBox").addClass("open");
 			$(".mainSearchBtn a").html('<span class="cafeSearchBtn">검색 열기</span> <i class="fas fa-angle-down"></i>');
 			$(".activeTotalCnt").empty();
 		}
@@ -116,7 +116,7 @@
 			
 			return false;
 		})	
-//	})
+	})
 </script>
 
 	<!--content area start-->
@@ -140,7 +140,7 @@
 				<div class="mainSearch">
 					<div class="keysWrap">
 						<ul class="keys">
-							<li data-keyword="데이트" data-themeNo="1" data-key="date" data-onImg="key1_1.png" data-Img="key1.png">
+							<li data-keyword="성격유형" data-themeNo="1" data-key="date" data-onImg="key1_1.png" data-Img="key1.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key1.png" alt="keyIcon" />
 								</div>
@@ -149,7 +149,7 @@
 									<span class="keyword blue">#성격유형</span>자가검진
 								</div>
 							</li>
-							<li data-keyword="뷰" data-themeNo="2" data-key="view" data-onImg="key2_2.png" data-Img="key2.png">
+							<li data-keyword="사랑유형" data-themeNo="2" data-key="view" data-onImg="key2_2.png" data-Img="key2.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key2.png" alt="keyIcon" />
 								</div>
@@ -158,7 +158,7 @@
 									<span class="keyword blue">#사랑유형</span>자가검진
 								</div>
 							</li>
-							<li data-keyword="착한아메" data-themeNo="3" data-key="ame" data-onImg="key3_3.png" data-Img="key3.png">
+							<li data-keyword="스트레스" data-themeNo="3" data-key="ame" data-onImg="key3_3.png" data-Img="key3.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key3.png" alt="keyIcon" />
 								</div>
@@ -167,7 +167,7 @@
 									<span class="keyword blue">#스트레스</span>자가검진
 								</div>
 							</li>
-							<li data-keyword="디저트" data-themeNo="4" data-key="dessert" data-onImg="key4_4.png" data-Img="key4.png">
+							<li data-keyword="우울" data-themeNo="4" data-key="dessert" data-onImg="key4_4.png" data-Img="key4.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key4.png" alt="keyIcon" />
 								</div>
@@ -176,7 +176,7 @@
 									<span class="keyword blue">#우울</span>자가검진
 								</div>
 							</li>
-							<li data-keyword="댕댕이" data-themeNo="5" data-key="dog" data-onImg="key5_5.png" data-Img="key5.png">
+							<li data-keyword="불안" data-themeNo="5" data-key="dog" data-onImg="key5_5.png" data-Img="key5.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key5.png" alt="keyIcon" />
 								</div>
@@ -185,7 +185,7 @@
 									<span class="keyword blue">#불안</span>자가검진
 								</div>
 							</li>
-							<li data-keyword="작업" data-themeNo="6" data-key="work" data-onImg="key6_6.png" data-Img="key6.png">
+							<li data-keyword="자살" data-themeNo="6" data-key="work" data-onImg="key6_6.png" data-Img="key6.png">
 								<div class="keyIcon keyItem">
 									<img src="${pageContext.request.contextPath }/resources/images/key6.png" alt="keyIcon" />
 								</div>
@@ -202,7 +202,7 @@
 							<input type="hidden" name="zoneName" id="zone"/>
 							<div class="zoneBarBox barBox">
 								<img src="${pageContext.request.contextPath }/resources/images/point.png" alt="icon" />
-								<span class="zoneTitle">유형별 추천</span>
+								<span class="zoneTitle">위치별 추천</span>
 							</div>							
 							<div class="zoneList" style="z-index: 9;">
 								<ul>

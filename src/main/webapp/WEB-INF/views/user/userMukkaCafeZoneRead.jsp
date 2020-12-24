@@ -762,44 +762,44 @@
 			<!-- 카페 테마 아이콘 관련 코드 -->
 			<c:choose>
 				<c:when test="${cafe.themeNo.themeNo == 1 }">
-					<div class="themeIcon keyword" style="background-color: #b038fa;">#데이트</div>
+					<div class="themeIcon keyword" style="background-color: #b038fa;">#성격유형</div>
 				</c:when>
 				<c:when test="${cafe.themeNo.themeNo == 2 }">
-					<div class="themeIcon keyword" style="background-color: #528236;">#뷰</div>
+					<div class="themeIcon keyword" style="background-color: #528236;">#사랑유형</div>
 				</c:when>
 				<c:when test="${cafe.themeNo.themeNo == 3 }">
-					<div class="themeIcon keyword" style="background-color: #96814c;">#착한아메</div>
+					<div class="themeIcon keyword" style="background-color: #96814c;">#스트레스</div>
 				</c:when>
 				<c:when test="${cafe.themeNo.themeNo == 4 }">
-					<div class="themeIcon keyword" style="background-color: #f2486f;">#디저트</div>
+					<div class="themeIcon keyword" style="background-color: #f2486f;">#우울</div>
 				</c:when>
 				<c:when test="${cafe.themeNo.themeNo == 5 }">
-					<div class="themeIcon keyword" style="background-color: #FFB232;">#댕댕이</div>
+					<div class="themeIcon keyword" style="background-color: #FFB232;">#불안</div>
 				</c:when>
 				<c:when test="${cafe.themeNo.themeNo == 6 }">
-					<div class="themeIcon keyword" style="background-color: #0170c2;">#작업</div>
+					<div class="themeIcon keyword" style="background-color: #0170c2;">#자살</div>
 				</c:when>
 			</c:choose>
 			<c:forEach var="theme" items="${themeRank }">
 				<c:if test="${cafe.themeNo.themeNo != theme.themeNo}">
 					<c:choose>
 						<c:when test="${theme.themeNo == 1 }">
-							<div class="themeIcon keyword" style="background-color: #b038fa;">#데이트</div>
+							<div class="themeIcon keyword" style="background-color: #b038fa;">#성격유형</div>
 						</c:when>
 						<c:when test="${theme.themeNo == 2 }">
-							<div class="themeIcon keyword" style="background-color: #528236;">#뷰</div>
+							<div class="themeIcon keyword" style="background-color: #528236;">#사랑유형</div>
 						</c:when>
 						<c:when test="${theme.themeNo == 3 }">
-							<div class="themeIcon keyword" style="background-color: #96814c;">#착한아메</div>
+							<div class="themeIcon keyword" style="background-color: #96814c;">#스트레스</div>
 						</c:when>
 						<c:when test="${theme.themeNo == 4 }">
-							<div class="themeIcon keyword" style="background-color: #f2486f;">#디저트</div>
+							<div class="themeIcon keyword" style="background-color: #f2486f;">#우울</div>
 						</c:when>
 						<c:when test="${theme.themeNo == 5 }">
-							<div class="themeIcon keyword" style="background-color: #FFB232;">#댕댕이</div>
+							<div class="themeIcon keyword" style="background-color: #FFB232;">#불안</div>
 						</c:when>
 						<c:when test="${theme.themeNo == 6 }">
-							<div class="themeIcon keyword" style="background-color: #0170c2;">#작업</div>
+							<div class="themeIcon keyword" style="background-color: #0170c2;">#자살</div>
 						</c:when>
 					</c:choose>
 				</c:if>
@@ -1046,12 +1046,12 @@
 					<div style="margin: 0px 30px;font-size: 18px;margin-bottom: 15px;">${cafe.cafeName }의 키워드를 선택해주세요! <span style="color: red;font-size: 14px;">중복 선택 불가</span></div>
 					<div class="w3-container">
 						<div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #b038fa;border: 2px solid;margin-left: 15px; cursor: pointer;">#데이트</div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #528236;border: 2px solid;cursor: pointer;">#뷰</div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #96814c;border: 2px solid;cursor: pointer;">#착한아메</div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #f2486f;border: 2px solid;cursor: pointer;">#디저트</div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #FFB232;border: 2px solid;cursor: pointer;">#댕댕이</div>
-							<div class="themeIcon keyword changeColor" style="background-color: white;color: #0170c2;border: 2px solid;cursor: pointer;">#작업</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #b038fa;border: 2px solid;margin-left: 15px; cursor: pointer;">#성격유형</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #528236;border: 2px solid;cursor: pointer;">#사랑유형</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #96814c;border: 2px solid;cursor: pointer;">#스트레스</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #f2486f;border: 2px solid;cursor: pointer;">#우울</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #FFB232;border: 2px solid;cursor: pointer;">#불안</div>
+							<div class="themeIcon keyword changeColor" style="background-color: white;color: #0170c2;border: 2px solid;cursor: pointer;">#자살</div>
 						</div>
 						<input type="hidden" id="hiddenTheme">
 						<div style="width: 540px;border-bottom: 1px solid #ccc;margin: 0px 15px 10px;height: 20px;"></div>
@@ -1607,7 +1607,7 @@
 	// 테마분류 색상 설정
 	$(".themeName").each(function(i, obj){
 		var name = $(this).text();
-		var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
+		var keywordK = ["#성격유형", "#사랑유형", "#스트레스", "#우울", "#불안", "#자살"];
 		var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
 		
 		for(var i=0; i<keyword.length; i++){

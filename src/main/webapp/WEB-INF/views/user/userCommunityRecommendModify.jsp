@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../userInclude/header.jsp" %>
-<%@ include file="../userInclude/subMenu.jsp" %>
 
 <style>
 	button{
@@ -301,8 +299,7 @@
 				<span class="title">MuKKa人 추천 카페&nbsp;&nbsp;&nbsp;<i class="fas fa-greater-than" style="color:black;"></i>&nbsp;&nbsp;</span>
 				<span class="red">수정하기</span>
 				<button type="button" class="searchPoint orangeBtn">등록카페 확인</button>			
-			</h2>
-			
+			</h2>			
 		</div>	
 		<h3 id="RC_line"></h3>
 		<!-- 등록폼 -->

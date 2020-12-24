@@ -628,7 +628,7 @@
 			$(".keyword_box").each(function(i, obj){
 				var name = $(this).text();
 				console.log(name);
-				var keywordK = ["#데이트", "#뷰", "#착한아메", "#디저트", "#댕댕이", "#작업"];
+				var keywordK = ["#성격유형", "#사랑유형", "#스트레스", "#우울", "#불안", "#자살"];
 				var keyword = ["date", "view", "ame", "dessert", "dog", "work"];
 				
 				for(var i=0; i<keyword.length; i++){
