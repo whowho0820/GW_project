@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <meta name="description" content="Propeller Admin Dashboard">
 <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
 
-<title>Coffee Mukka - admin</title>
+<title>admin</title>
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/6f2f0f2d95.js"></script>
 
@@ -37,14 +37,10 @@
 
 <!-- adminCommon css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/adminCommon.css" />
-
-
-
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="/resources/assets/css/metisMenu.min.css" rel="stylesheet"/>
 <link href="/resources/assets/css/sb-admin-2.css" rel="stylesheet"/>
 <link href="/resources/assets/css/sb-admin/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -52,20 +48,17 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-
 <script src="/resources/assets/js/jquery-2.2.3.min.js"></script>
 <script src="/resources/assets/js/jquery-ui.js"></script>
 <script src="/resources/assets/js/bootstrap.min.js"></script>
 <script src="/resources/assets/js/metisMenu.min.js"></script>
 <script src="/resources/assets/js/sb-admin-2.js"></script>
-
 <script src="/resources/assets/js/dynatree/jquery.dynatree.js"></script>
 <link href="/resources/assets/js/dynatree/ui.dynatree.css" rel="stylesheet"/>
-
 <script src="/resources/assets/js/project9.js"></script>  
 
 <!-- 구글 차트 api -->
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!-- 메뉴 포커스 -->
 <script>
@@ -253,9 +246,9 @@
 					<div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
 				</a> 
 				<ul class="dropdown-menu">
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">자료실 관리</a></li>
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr">공지사항 관리</a></li>
 					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/cafeRecomMgr">자유게시판 관리</a></li>
-					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">공지사항 관리</a></li>					
+					<li><a class="boardMgrSub menu" href="${pageContext.request.contextPath}/admin/boardMgr/noticeMgr">자료실 관리</a></li>					
 				</ul>
 			</li>
 						
@@ -267,7 +260,7 @@
 				</a> 
 				<ul class="dropdown-menu">
 					<li><a class="calendarMgrSub menu" href="${pageContext.request.contextPath}/admin/noticeMgr/gwcalendarMgr">전체 일정</a></li>
-					<li><a class="calendarMgrSub menu" href="${pageContext.request.contextPath}/admin/noticeMgr/gwcalendarMgr2">일정 리스트</a></li>
+					<%-- <li><a class="calendarMgrSub menu" href="${pageContext.request.contextPath}/admin/noticeMgr/gwcalendarMgr2">일정 리스트</a></li> --%>
 				</ul>
 			</li>
 			<li> 

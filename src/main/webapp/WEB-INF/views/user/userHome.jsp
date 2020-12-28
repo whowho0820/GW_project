@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>gw</title>
+<title>마음:TACT</title>
 <!-- user css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/userCommon.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/userHeaderFooterMenu.css" />
@@ -34,8 +34,7 @@
 
 <script>
 /* 아이디 중복 체크 */
-$( function() {
-	  
+$( function() {	  
 
 	$("#btnDuplCheckId").click(function() {				
 		var userId = $("input[name='duplCheckId']").val();
@@ -63,8 +62,7 @@ $( function() {
 				}
 			}
 		})
-	})	  
-	
+	})	  	
 
 	/* 로그인, 아이디 찾기, 비번찾기, 회원가입 전환시 작동 */		
 	$(".login").click(function() {
@@ -301,11 +299,8 @@ $( function() {
 				}
 			}
 		})			
-	})	 	
-	
-	
-});
-	
+	})
+});	
 
 /* 주소 검색 */
 function openDaumZipAddress() {
@@ -333,8 +328,6 @@ function loginShow() {
 	$('#joinModal').addClass("fade");
 	$('#loginModal').addClass("fade");
 }
-	
-
 </script>
 
 <style>
@@ -383,7 +376,6 @@ function loginShow() {
 	    padding-left: 0px;
 	    z-index: 1;
 	}	
-
 	.swiper-wrapper{
 		position: relative;
 	    width: 100%;
@@ -761,167 +753,166 @@ function loginShow() {
 	</div>
  </section>
 </div>
-		<!-- 로그인 modal start -->
-		<div class="modal fade" id="loginModal">
-			<div class="modal-dialog modal-dialog-scrollable">
-				<div class="modal-content">
-				    
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h3 class="modal-title">로그인</h3>
-					</div>
+<!-- 로그인 modal start -->
+<div class="modal fade" id="loginModal">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content modal-magin">
+		    
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">로그인</h3>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form id="loginForm" action="${pageContext.request.contextPath }/user/" method="post">							
+					<h3 style="color:#85cc28; margin:10px;"></h3>
+					<input class="inputRegi" type="text" name="userId" placeholder="아이디" style="margin-bottom: 20px;"><br>
+					<input class="inputRegi" type="password" name="password" autocomplete="on" placeholder="비밀번호" style="margin-bottom: 5px;"><br>
 					
-					<!-- Modal body -->
-					<div class="modal-body">
-						<form id="loginForm" action="${pageContext.request.contextPath }/user/" method="post">
-							<%-- <img src="${pageContext.request.contextPath }/resources/images/h.jpg" style="width: 460px;"> --%>
-							<h3 style="color: #85cc28;margin: 10px;"></h3>
-							<input class="inputRegi" type="text" name="userId" placeholder="아이디" style="margin-bottom: 20px;"><br>
-							<input class="inputRegi" type="password" name="password" autocomplete="on" placeholder="비밀번호" style="margin-bottom: 5px;"><br>
-							
-							<div class="checkbox">
-                              <label>
-                                  <input name="remember" type="checkbox" value="Y"  <c:if test='${userid != null && userid != ""}'>checked</c:if>> 로그인유지
-                              </label>
-                             </div>                             
+					<div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Y"  <c:if test='${userid != null && userid != ""}'>checked</c:if>> 로그인유지
+                            </label>
+                           </div>                             
 
-							<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
-							<a href="#" id="findId" style="color:64CD3C;margin-left: 150px;">아이디 찾기</a>
-							<a href="#" id="findPass" style="color:64CD3C;margin-left: 10px;">비밀번호 찾기</a><br>
-						</form>
-					</div>
-					
-					<!-- Modal footer -->
-					<div style="border-top: 1px solid #ccc;">
-						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
-						</div>
-					</div>
-				    
+					<input type="submit" class="btn btn-primary" style="margin-top: 5px;width: 337px;cursor: pointer;" value="로그인">
+					<a href="#" id="findId" style="color:64CD3C;margin-left: 150px;">아이디 찾기</a>
+					<a href="#" id="findPass" style="color:64CD3C;margin-left: 10px;">비밀번호 찾기</a><br>
+				</form>
+			</div>
+			
+			<!-- Modal footer -->
+			<div style="border-top: 1px solid #ccc;">
+				<div style="text-align: center;margin: 16px;">
+					<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#2dbda0;">회원가입</a>
+				</div>
+			</div>
+		    
+		</div>
+	</div>
+</div>
+<!-- 로그인 modal end -->
+
+<!-- 아이디찾기 modal start -->
+<div class="modal fade" id="findIdModal">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content modal-magin">
+		    
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">마음:TACT 아이디 찾기</h3>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div>
+					<input type="radio" name="userType" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
+					<input type="radio" name="userType" value="1"> <label>사업자 회원</label>
+					<input class="inputRegi" type="text" name="name" placeholder="이름" style="margin-bottom: 20px;"><br>
+					<input class="inputRegi" type="email" name="email" placeholder="이메일" style="margin-bottom: 30px;"><br>
+					<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
+					<input type="button" class="btn btn-primary" id="btnFindId" style="margin-top: 5px;width: 167px;cursor: pointer;" value="아이디 찾기">
+				</div>
+			</div>
+			
+			<!-- Modal footer -->
+			<div style="border-top: 1px solid #ccc;">
+				<div style="text-align: center;margin: 16px;">
+					<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#2dbda0;">회원가입</a>
+				</div>
+			</div>
+		    
+		</div>
+	</div>
+</div>
+<!-- 아이디찾기 modal end -->
+
+<!-- 비밀번호 찾기 modal start -->
+<div class="modal fade" id="findPassModal">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content modal-magin">
+		    
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">마음:TACT 비밀번호 찾기</h3>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div>
+					<input type="radio" name="userTypePw" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
+					<input type="radio" name="userTypePw" value="1"> <label>사업자 회원</label>
+					<input class="inputRegi" type="text" name="userIdPw" placeholder="아이디" style="margin-bottom: 20px;"><br>
+					<input class="inputRegi" type="email" name="emailPw" placeholder="이메일" style="margin-bottom: 30px;"><br>
+					<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
+					<input type="button" id="btnFindPass"class="btn btn-primary" style="margin-top: 5px;width: 167px;cursor: pointer;" value="비밀번호 찾기">
+				</div>
+			</div>
+			
+			<!-- Modal footer -->
+			<div style="border-top: 1px solid #ccc;">
+				<div style="text-align: center;margin: 16px;">
+					<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#2dbda0;">회원가입</a>
 				</div>
 			</div>
 		</div>
-		<!-- 로그인 modal end -->
-		
-		<!-- 아이디찾기 modal start -->
-		<div class="modal fade" id="findIdModal">
-			<div class="modal-dialog modal-dialog-scrollable">
-				<div class="modal-content">
-				    
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h3 class="modal-title">마음:TACT 아이디 찾기</h3>
-					</div>
-					
-					<!-- Modal body -->
-					<div class="modal-body">
-						<div>
-							<input type="radio" name="userType" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
-							<input type="radio" name="userType" value="1"> <label>사업자 회원</label>
-							<input class="inputRegi" type="text" name="name" placeholder="이름" style="margin-bottom: 20px;"><br>
-							<input class="inputRegi" type="email" name="email" placeholder="이메일" style="margin-bottom: 30px;"><br>
-							<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
-							<input type="button" class="btn btn-primary" id="btnFindId" style="margin-top: 5px;width: 167px;cursor: pointer;" value="아이디 찾기">
-						</div>
-					</div>
-					
-					<!-- Modal footer -->
-					<div style="border-top: 1px solid #ccc;">
-						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#64CD3C;">회원가입</a>
-						</div>
-					</div>
-				    
-				</div>
+	</div>
+</div>
+<!-- 비밀번호 찾기 modal end -->
+
+<!-- 회원가입 modal start -->
+<div class="modal fade" id="joinModal">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+		    
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">마음:TACT 회원 가입</h3>
 			</div>
-		</div>
-		<!-- 아이디찾기 modal end -->
-		
-		<!-- 비밀번호 찾기 modal start -->
-		<div class="modal fade" id="findPassModal">
-			<div class="modal-dialog modal-dialog-scrollable">
-				<div class="modal-content">
-				    
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h3 class="modal-title">마음:TACT 비밀번호 찾기</h3>
-					</div>
-					
-					<!-- Modal body -->
-					<div class="modal-body">
-						<div>
-							<input type="radio" name="userTypePw" value="2" style="margin-bottom: 25px;"> <label style="margin-right:30px;">개인 회원</label>
-							<input type="radio" name="userTypePw" value="1"> <label>사업자 회원</label>
-							<input class="inputRegi" type="text" name="userIdPw" placeholder="아이디" style="margin-bottom: 20px;"><br>
-							<input class="inputRegi" type="email" name="emailPw" placeholder="이메일" style="margin-bottom: 30px;"><br>
-							<input type="button" class="btn btn-danger login" style="margin-top: 5px;width: 167px;margin-right: -15px;cursor: pointer;" value="돌아가기">
-							<input type="button" id="btnFindPass"class="btn btn-primary" style="margin-top: 5px;width: 167px;cursor: pointer;" value="비밀번호 찾기">
-						</div>
-					</div>
-					
-					<!-- Modal footer -->
-					<div style="border-top: 1px solid #ccc;">
-						<div style="text-align: center;margin: 16px;">
-							<span>아이디가 없으신가요?</span> <a href="#" class="join" style="color:#2dbda0;">회원가입</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 비밀번호 찾기 modal end -->
-		
-		<!-- 회원가입 modal start -->
-		<div class="modal fade" id="joinModal">
-			<div class="modal-dialog modal-dialog-scrollable">
-				<div class="modal-content">
-				    
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h3 class="modal-title">마음:TACT 회원 가입</h3>
-					</div>
-					
-					<!-- Modal body -->
-					<div class="modal-body">
-						<input class="inputRegi1" type="text" name="duplCheckId" id="duplCheckId" placeholder="아이디">
-						<input type="hidden" id="flagId" value="false">
-						<button class="btnCheck" id="btnDuplCheckId" onclick="btnDuplCheckId();"  style="cursor: pointer;">중복확인</button><br>
-						<form>
-							<input class="inputRegi" type="password" id="pass1" autocomplete="on" placeholder="비밀번호"><br>
-							<input class="inputRegi" type="password" id="pass2" autocomplete="on" placeholder="비밀번호 확인"><br>
-						</form>
-						<input class="inputRegi" type="text" id="joinName" placeholder="이름"><br>
-						<input class="inputRegi1" type="text" name="duplCheckNick" id="duplCheckNick" placeholder="닉네임">
-						<button class="btnCheck"  id="btnDuplCheckNick" style="cursor: pointer;">중복확인</button><br>
-						<input type="hidden" id="flagNick" value="false">
-						<select class="inputRegi" name="gender"style="height: 42px;width: 337px;color: #949494;">
-							<option selected="selected">성별</option>
-							<option value="MALE">남자</option>
-							<option value="FEMALE">여자</option>
-						</select>
-						<input class="inputRegi" type="date" id="joinBirth" placeholder="생년월일" style="color: #949494;"><br>
-						<input class="inputRegi" type="text" id="joinTel" placeholder="전화번호"><br>
-						<input class="inputRegi1" type="text" name ="address" id="address" placeholder="주소">
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<input class="inputRegi1" type="text" name="duplCheckId" id="duplCheckId" placeholder="아이디">
+				<input type="hidden" id="flagId" value="false">
+				<button class="btnCheck" id="btnDuplCheckId" onclick="btnDuplCheckId();"  style="cursor: pointer;">중복확인</button><br>
+				<form>
+					<input class="inputRegi" type="password" id="pass1" autocomplete="on" placeholder="비밀번호"><br>
+					<input class="inputRegi" type="password" id="pass2" autocomplete="on" placeholder="비밀번호 확인"><br>
+				</form>
+				<input class="inputRegi" type="text" id="joinName" placeholder="이름"><br>
+				<input class="inputRegi1" type="text" name="duplCheckNick" id="duplCheckNick" placeholder="닉네임">
+				<button class="btnCheck"  id="btnDuplCheckNick" style="cursor: pointer;">중복확인</button><br>
+				<input type="hidden" id="flagNick" value="false">
+				<select class="inputRegi" name="gender"style="height: 42px;width: 337px;color: #949494;">
+					<option selected="selected">성별</option>
+					<option value="MALE">남자</option>
+					<option value="FEMALE">여자</option>
+				</select>
+				<input class="inputRegi" type="date" id="joinBirth" placeholder="생년월일" style="color: #949494;"><br>
+				<input class="inputRegi" type="text" id="joinTel" placeholder="전화번호"><br>
+				<input class="inputRegi1" type="text" name ="address" id="address" placeholder="주소">
 
 
 
-						<input type="button" value="주소검색" class="btnCheck"  id="btnSearchAddr" onclick="openDaumZipAddress();" style="cursor: pointer;"><br>
-						<input class="inputRegi" type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
-						<input class="inputRegi" type="email" id="joinEmail" placeholder="이메일"><br>
-						<input type="radio" name="joinUserType" id="joinUserType" value="2"> <span class="chgColorSpan">개인회원</span>
-						<input type="radio" name="joinUserType" id="joinUserType" value="1" style="margin-left:20px;"> <span class="chgColorSpan">관리자</span><br>
-						<button type="button" class="btn btn-primary" id="btnJoin" style="cursor: pointer;">가입하기</button>
-					</div>
-					
-					<!-- Modal footer -->
-					<div style="border-top: 1px solid #ccc;">
-						<div style="text-align: center;margin: 16px;">
-							<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#2dbda0;">로그인</a>
-						</div>
-					</div>
-				    
+				<input type="button" value="주소검색" class="btnCheck"  id="btnSearchAddr" onclick="openDaumZipAddress();" style="cursor: pointer;"><br>
+				<input class="inputRegi" type="text" name="detailAddress" id="detailAddress" placeholder="상세주소">
+				<input class="inputRegi" type="email" id="joinEmail" placeholder="이메일"><br>
+				<input type="radio" name="joinUserType" id="joinUserType" value="2"> <span class="chgColorSpan">개인회원</span>
+				<input type="radio" name="joinUserType" id="joinUserType" value="1" style="margin-left:20px;"> <span class="chgColorSpan">관리자</span><br>
+				<button type="button" class="btn btn-primary" id="btnJoin" style="cursor: pointer;">가입하기</button>
+			</div>
+			
+			<!-- Modal footer -->
+			<div style="border-top: 1px solid #ccc;">
+				<div style="text-align: center;margin: 16px;">
+					<span>이미 가입하셨나요?</span> <a href="#" class="login" style="color:#2dbda0;">로그인</a>
 				</div>
 			</div>
+		    
 		</div>
-		<!-- 회원가입 modal end -->
+	</div>
+</div>
+<!-- 회원가입 modal end -->
 </body>
 </html>

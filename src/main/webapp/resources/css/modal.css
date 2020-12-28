@@ -58,7 +58,11 @@
 
 .modal-dialog-scrollable .modal-content {
   max-height: calc(100vh - 1rem);
-  overflow: hidden;
+  overflow: hidden;  
+}
+
+.modal-magin {
+  margin-top: 200px;
 }
 
 .modal-dialog-scrollable .modal-header,
@@ -296,8 +300,8 @@
 
 .btn-primary {
   color: #fff;
-  background-color: #ed7d31;
-  border-color: #ed7d31;
+  background-color: #2dbda0;
+  border-color: #2dbda0;
   width: 315px;
   margin: 15px;
 }

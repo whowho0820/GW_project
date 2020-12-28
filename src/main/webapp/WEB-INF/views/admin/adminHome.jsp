@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../adminInclude/header.jsp"%>
 
 <style>
@@ -114,20 +112,20 @@ $(function(){
 			 <!-- 신규 현황 start -->
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager" class="quickBtn">결재받을 문서 > </a></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/cafeMgn/newCafeManager" class="quickBtn">결재받을 문서 ></a></div>
 			 		<div class="pmd-card-body pmd-display3 tCenter">${cafeWaitingCnt} <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>		
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr" class="quickBtn">신규 게시글 > </a></div>
-			 		<div class="pmd-card-body pmd-display3 tCenter">${yesterDayCafeReviewCnt } <span class="smallFont">건</span> / ${todayCafeReviewCnt } <span class="smallFont">건</span></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/boardMgr/cafeReviewMgr" class="quickBtn">신규 게시글 ></a></div>
+			 		<div class="pmd-card-body pmd-display3 tCenter">${todayCafeReviewCnt } <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>		
 			 <div class="col-lg-4 col-sm-4 col-xs-12">
 			 	<div class="pmd-card pmd-z-depth">
-			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}admin/noticeMgr/gwcalendarMgr" class="quickBtn">신규 일정 ></a></div>
-			 		<div class="pmd-card-body pmd-display3 tCenter">${yesterDayRecommendCnt} <span class="smallFont">건</span> / ${todayRecommendCnt} <span class="smallFont">건</span></div>
+			 		<div class="pmd-card-title"><a href="${pageContext.request.contextPath}/admin/noticeMgr/gwcalendarMgr" class="quickBtn">신규 일정 ></a></div>
+			 		<div class="pmd-card-body pmd-display3 tCenter">${todayRecommendCnt} <span class="smallFont">건</span></div>
 			 	</div>
 			 </div>	
 			 <!-- 신규 현황 end -->	
@@ -135,7 +133,7 @@ $(function(){
 			 <!-- 그래프 start -->
 			 <div class="col-xs-12 col-sm-12 col-md-6">
 			 	<div class="pmd-card pmd-z-depth">			 	
-				 	<div class="pmd-card-title">카페등록 그래프</div>
+				 	<div class="pmd-card-title">자가검진 갯수 그래프</div>
 				 	<div class="pmd-card-body">
 				 		<div id="chart_div1"></div>
 				 	</div>
@@ -143,48 +141,13 @@ $(function(){
 			 </div>
 			 <div class="col-xs-12 col-sm-12 col-md-6">
 			 	<div class="pmd-card pmd-z-depth">
-				 	<div class="pmd-card-title">탐방기, 추천글 갯수 그래프</div>
+				 	<div class="pmd-card-title">공지사항,자유게시판 갯수 그래프</div>
 				 	<div class="pmd-card-body">
 				 		<div id="chart_div2"></div>
 				 	</div>
 			 	</div>
 			 </div>
 			 <!-- 그래프 end  -->
-			 
-			 <!-- Q&A 답변대기 start -->
-			 <!-- <div class="col-xs-12 col-sm-12 col-md-12">
-			 	<div class="component-box">
-				 	<div class="pmd-card pmd-z-depth pmd-card-custom-view">
-				 		<div class="pmd-card-title">Q&A 답변대기</div>
-				 		<div class="table-responsive tableWrap">
-				 			<table class="table pmd-table table-striped table-mc-red">
-				 				<tr>
-				 					<th>no</th>
-				 					<th>제목</th>
-				 					<th>작성자</th>
-				 					<th>등록인</th>
-				 					<th>답변</th>
-				 				</tr>
-				 				<tr>
-				 					<td>1</td>
-				 					<td>test</td>
-				 					<td>user</td>
-				 					<td>2020/05/02</td>
-				 					<td><button type="button" class="btn pmd-ripple-effect btn-primary">답변달기</button></td>
-				 				</tr>
-				 				<tr>
-				 					<td>2</td>
-				 					<td>test</td>
-				 					<td>user</td>
-				 					<td>2020/05/02</td>
-				 					<td><button type="button" class="btn pmd-ripple-effect btn-primary">답변달기</button></td>
-				 				</tr>
-				 			</table>
-				 		</div>	
-				 	</div>
-			 	</div>
-			 </div> -->
-			 <!-- Q&A 답변대기 end -->
 		</div>
 	</div>
 	
